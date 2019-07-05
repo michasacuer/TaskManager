@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E6120E85-9B4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{ECD4705D-FFE3-4E71-9EAA-8FC54431422C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Api", "TaskManager.Api\TaskManager.Api.csproj", "{EDCDA53D-32AD-4FF9-8889-D6CAAF57DAB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api", "TaskManager.Api\TaskManager.Api.csproj", "{EDCDA53D-32AD-4FF9-8889-D6CAAF57DAB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{6FF0EB5D-0D8C-4CDA-9226-45770DA5905D}"
 EndProject
@@ -17,15 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrasctructure", "Infrasct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F228A9C0-A801-4FC4-B011-ECCE3098A919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Tests", "TaskManager.Tests\TaskManager.Tests.csproj", "{521E338E-576F-4A0E-976C-1D159847721A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Tests", "TaskManager.Tests\TaskManager.Tests.csproj", "{521E338E-576F-4A0E-976C-1D159847721A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{86B91BF1-FA1F-42E8-A2E2-531EBDD503A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Domain", "TaskManager.Domain\TaskManager.Domain.csproj", "{93930526-40E1-4F3F-980C-C9C3A26720A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Domain", "TaskManager.Domain\TaskManager.Domain.csproj", "{93930526-40E1-4F3F-980C-C9C3A26720A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Persistence", "TaskManager.Persistence\TaskManager.Persistence.csproj", "{79E12112-4479-4114-A3A4-3FC05E6045FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Persistence", "TaskManager.Persistence\TaskManager.Persistence.csproj", "{79E12112-4479-4114-A3A4-3FC05E6045FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Application", "TaskManager.Application\TaskManager.Application.csproj", "{D6BF13B6-A983-4447-961A-E54ABF42035D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Application", "TaskManager.Application\TaskManager.Application.csproj", "{D6BF13B6-A983-4447-961A-E54ABF42035D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Infrastructure", "TaskManager.Infrastructure\TaskManager.Infrastructure.csproj", "{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{D6BF13B6-A983-4447-961A-E54ABF42035D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6BF13B6-A983-4447-961A-E54ABF42035D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BF13B6-A983-4447-961A-E54ABF42035D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,10 +69,11 @@ Global
 		{8E499209-85CC-47DC-A378-4DCD9C57BA4C} = {E6120E85-9B4F-4213-AFF3-BF7D43637236}
 		{48D7B215-5D4B-45DA-9EF8-FD88F2AE0425} = {E6120E85-9B4F-4213-AFF3-BF7D43637236}
 		{521E338E-576F-4A0E-976C-1D159847721A} = {F228A9C0-A801-4FC4-B011-ECCE3098A919}
-		{86B91BF1-FA1F-42E8-A2E2-531EBDD503A2} = {6FF0EB5D-0D8C-4CDA-9226-45770DA5905D}
+		{86B91BF1-FA1F-42E8-A2E2-531EBDD503A2} = {E6120E85-9B4F-4213-AFF3-BF7D43637236}
 		{93930526-40E1-4F3F-980C-C9C3A26720A7} = {8E499209-85CC-47DC-A378-4DCD9C57BA4C}
 		{79E12112-4479-4114-A3A4-3FC05E6045FF} = {48D7B215-5D4B-45DA-9EF8-FD88F2AE0425}
 		{D6BF13B6-A983-4447-961A-E54ABF42035D} = {8E499209-85CC-47DC-A378-4DCD9C57BA4C}
+		{995D7CFD-67E7-4F60-BF37-1C6A9C8CC19A} = {48D7B215-5D4B-45DA-9EF8-FD88F2AE0425}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72D2256E-CAE4-4890-960F-FBC256540482}
