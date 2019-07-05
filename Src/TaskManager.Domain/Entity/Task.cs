@@ -1,8 +1,8 @@
 ﻿namespace TaskManager.Domain.Entity
 {
     using System;
-    using TaskManager.Domain.Enum;
     using TaskManager.Domain.Entity.Base;
+    using TaskManager.Domain.Enum;
 
     public class Task : BaseEntity<int>
     {
@@ -12,11 +12,11 @@
 
         public int ProjectId { get; set; }
 
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string Name { get; set; }
 
@@ -27,7 +27,5 @@
         public int? StoryPoints { get; set; }
 
         public DateTime? StartTime { get; set; }
-
-        public DateTime? EndTime { get; set; }
     }
 }

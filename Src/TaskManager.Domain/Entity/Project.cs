@@ -1,14 +1,13 @@
-﻿namespace TaskManager.Domain.Entity.Base
+﻿namespace TaskManager.Domain.Entity
 {
     using System.Collections.Generic;
+    using TaskManager.Domain.Entity.Base;
 
-    public class Project
+    public class Project : BaseEntity<int>
     {
         public Project()
         {
         }
-
-        public int Id { get; set; }
 
         public string Tag { get; set; }
 
