@@ -1,8 +1,9 @@
 ﻿namespace TaskManager.Domain.Entity
 {
     using System;
+    using TaskManager.Domain.Entity.Base;
 
-    public class EndedTask : Task
+    public class EndedTask : BaseTask
     {
         public EndedTask()
         {
