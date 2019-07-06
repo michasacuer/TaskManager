@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Persistence.Infrastructure
+﻿    namespace TaskManager.Persistence.Infrastructure
 {
     using System;
     using System.IO;

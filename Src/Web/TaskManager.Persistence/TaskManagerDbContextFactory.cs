@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Persistence
+﻿    namespace TaskManager.Persistence
 {
     using Microsoft.EntityFrameworkCore;
     using TaskManager.Persistence.Infrastructure;

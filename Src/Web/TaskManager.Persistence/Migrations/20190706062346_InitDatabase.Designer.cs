@@ -10,8 +10,8 @@ using TaskManager.Persistence;
 namespace TaskManager.Persistence.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20190705181120_Init_Database")]
-    partial class Init_Database
+    [Migration("20190706062346_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
