@@ -49,11 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Desktop\TaskManager.Contracts\TaskManager.Contracts.csproj">
+      <Project>{71157d02-b73e-4914-8965-9e0b2c832927}</Project>
+      <Name>TaskManager.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Desktop\TaskManager.WPF\TaskManager.WPF.csproj">
+      <Project>{e601b9f8-2243-402e-9da8-062139e4aae3}</Project>
+      <Name>TaskManager.WPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
