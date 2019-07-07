@@ -14,31 +14,25 @@
 
     public class TokenService : ITokenService
     {
-        private readonly string userName;
-
-        private readonly ApplicationUser user;
-
         private readonly IConfiguration configuration;
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        public TokenService(string userName, ApplicationUser user, IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        public TokenService(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
-            this.userName = userName;
-            this.user = user;
             this.configuration = configuration;
             this.userManager = userManager;
         }
 
-        public async Task<object> Generate()
+        public async Task<string> Generate(ApplicationUser user)
         {
-            var userRole = await this.userManager.GetRolesAsync(this.user);
+            var userRole = await this.userManager.GetRolesAsync(user);
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, this.userName),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, this.user.Id),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Role, userRole[0])
             };
 
@@ -53,7 +47,9 @@
                 expires: expires,
                 signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var bearer = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return (string)bearer;
         }
     }
 }

@@ -33,7 +33,9 @@
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMediatR(typeof(RegisterUserCommand.Handler).GetTypeInfo().Assembly);
+            services.AddSingleton(Configuration);
+
+            services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
 
             services.AddTransient<ITokenService, TokenService>();
 

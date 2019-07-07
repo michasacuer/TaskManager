@@ -4,7 +4,7 @@
 
     public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
-        public RegisterUserCommandValidator()
+        public RegisterCommandValidator()
         {
             this.RuleFor(x => x.UserName).NotEmpty();
             this.RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
