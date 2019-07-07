@@ -2,7 +2,7 @@
 {
     using FluentValidation;
 
-    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+    public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
         public RegisterUserCommandValidator()
         {

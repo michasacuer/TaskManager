@@ -8,7 +8,7 @@
     using TaskManager.Domain.Entity;
     using TaskManager.Domain.Enum;
 
-    public class RegisterUserCommand : IRequest
+    public class RegisterCommand : IRequest
     {
         public string UserName { get; set; }
 
@@ -22,7 +22,7 @@
 
         public Role Role { get; set; }
 
-        public class Handler : IRequestHandler<RegisterUserCommand>
+        public class Handler : IRequestHandler<RegisterCommand>
         {
             private readonly SignInManager<ApplicationUser> signInManager;
 
@@ -40,9 +40,9 @@
                 this.roleManager = roleManager;
             }
 
-            public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
-                new RegisterUserCommandValidator().ValidateAndThrow(request);
+                new RegisterCommandValidator().ValidateAndThrow(request);
 
                 var user = new ApplicationUser
                 {

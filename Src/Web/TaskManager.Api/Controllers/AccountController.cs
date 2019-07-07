@@ -7,7 +7,7 @@
     public class AccountController : BaseController
     {
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody]RegisterUserCommand command)
+        public async Task<IActionResult> Register([FromBody]RegisterCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
