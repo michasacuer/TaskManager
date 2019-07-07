@@ -12,8 +12,6 @@
 
         public string Role { get; set; }
 
-        public string Email { get; set; }
-
         public string Bearer { get; set; }
     }
 }
