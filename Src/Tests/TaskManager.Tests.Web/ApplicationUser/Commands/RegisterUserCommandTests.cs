@@ -1,18 +1,24 @@
-﻿namespace TaskManager.Tests.Web.ApplicationUser.Commands
+﻿namespace TaskManager.Tests.Web
 {
-    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Moq;
+    using TaskManager.Tests.Infrastructure;
     using Xunit;
 
     [Collection("DatabaseTestCollection")]
     public class RegisterUserCommandTests
     {
-        public RegisterUserCommandTests()
-        {
-        }
+        private readonly Mock<UserManager<Domain.Entity.ApplicationUser>> mockUserManager;
 
-        [Fact]
-        public async Task Is_User_Register_Properly()
+        private readonly Mock<RoleManager<Domain.Entity.ApplicationUser>> mockRoleManager;
+
+        private readonly Mock<SignInManager<Domain.Entity.ApplicationUser>> mockSignInManager;
+
+        public RegisterUserCommandTests(DatabaseFixture fixture)
         {
+            mockUserManager = fixture.MockUserManager;
+            mockRoleManager = fixture.MockRoleManager;
+            mockSignInManager = fixture.MockSignInManager;
         }
     }
 }

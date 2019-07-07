@@ -12,8 +12,6 @@
     <ProjectReference Include="..\..\Web\TaskManager.Domain\TaskManager.Domain.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Persistence\TaskManager.Persistence.csproj" />
-    <ProjectReference Include="..\TaskManager.Tests.Desktop\TaskManager.Tests.Desktop.csproj" />
-    <ProjectReference Include="..\TaskManager.Tests.Web\TaskManager.Tests.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,10 @@
-﻿namespace TaskManager.Application
+﻿namespace TaskManager.Application.Commands
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
-    using TaskManager.Application.Interfaces;
     using TaskManager.Domain.Entity;
     using TaskManager.Domain.Enum;
 
@@ -32,27 +30,41 @@
 
             private readonly RoleManager<IdentityRole> roleManager;
 
-            private readonly IConfiguration configuration;
-
-            private readonly ITokenService tokenService;
-
             public Handler(
                 SignInManager<ApplicationUser> signInManager,
                 UserManager<ApplicationUser> userManager,
-                RoleManager<IdentityRole> roleManager,
-                IConfiguration configuration,
-                ITokenService tokenService)
+                RoleManager<IdentityRole> roleManager)
             {
                 this.signInManager = signInManager;
                 this.userManager = userManager;
                 this.roleManager = roleManager;
-                this.configuration = configuration;
-                this.tokenService = tokenService;
             }
 
-            public Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                new RegisterUserCommandValidator().ValidateAndThrow(request);
+
+                var user = new ApplicationUser
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName
+                };
+
+                var result = await this.userManager.CreateAsync(user, request.Password);
+
+                var roleName = request.Role.ToString();
+                if (!await this.roleManager.RoleExistsAsync(roleName))
+                {
+                    var role = new IdentityRole(roleName);
+                    await this.roleManager.CreateAsync(role);
+                }
+
+                await this.userManager.AddToRoleAsync(user, roleName);
+                await this.signInManager.SignInAsync(user, false);
+
+                return Unit.Value;
             }
         }
     }
