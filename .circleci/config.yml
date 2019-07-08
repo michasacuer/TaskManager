@@ -1,0 +1,37 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+    - image: mcr.microsoft.com/dotnet/core/sdk:2.2.300
+    steps:
+    - checkout
+    - run:
+        name: Restore Api packages
+        command: dotnet restore Src/Web/TaskManager.Api
+    - run:
+        name: Restore Application packages
+        command: dotnet restore Src/Web/TaskManager.Application
+    - run:
+        name: Restore Domain packages
+        command: dotnet restore Src/Web/TaskManager.Domain
+    - run:
+        name: Restore Infrastructure packages
+        command: dotnet restore Src/Web/TaskManager.Infrastructure
+    - run:
+        name: Restore Persistence packages
+        command: dotnet restore Src/Web/TaskManager.Persistence
+    - run:
+        name: Build Api
+        command: dotnet build Src/Web/TaskManager.Api
+    - run:
+        name: Build Application
+        command: dotnet build Src/Web/TaskManager.Application
+    - run:
+        name: Build Domain
+        command: dotnet build Src/Web/TaskManager.Domain
+    - run:
+        name: Build Infrastructure
+        command: dotnet build Src/Web/TaskManager.Infrastructure
+    - run:
+        name: Build Persistence
+        command: dotnet build Src/Web/TaskManager.Persistence
