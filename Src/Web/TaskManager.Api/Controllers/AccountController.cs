@@ -1,7 +1,7 @@
 ﻿namespace TaskManager.Api.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
     using TaskManager.Api.Models;
     using TaskManager.Application.Commands;
     using TaskManager.Application.Queries;

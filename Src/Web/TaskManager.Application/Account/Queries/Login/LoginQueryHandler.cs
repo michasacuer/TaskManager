@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
+    using TaskManager.Application.Exceptions;
     using TaskManager.Application.Interfaces;
     using TaskManager.Domain.Entity;
 
@@ -14,8 +14,6 @@
         private readonly SignInManager<ApplicationUser> signInManager;
 
         private readonly UserManager<ApplicationUser> userManager;
-
-        private readonly RoleManager<IdentityRole> roleManager;
 
         private readonly ITokenService tokenService;
 
@@ -27,7 +25,6 @@
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
-            this.roleManager = roleManager;
             this.tokenService = tokenService;
         }
 
@@ -55,7 +52,7 @@
             }
             else
             {
-                throw new System.Exception();
+                throw new EntityNotFoundException();
             }
         }
     }
