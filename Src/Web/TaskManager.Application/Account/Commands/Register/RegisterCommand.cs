@@ -61,8 +61,8 @@
                     await this.roleManager.CreateAsync(role);
                 }
 
+                await this.userManager.UpdateSecurityStampAsync(user);
                 await this.userManager.AddToRoleAsync(user, roleName);
-                await this.signInManager.SignInAsync(user, false);
 
                 return Unit.Value;
             }

@@ -35,3 +35,6 @@ jobs:
     - run:
         name: Build Persistence
         command: dotnet build Src/Web/TaskManager.Persistence
+    - run:
+        name: Run Web Tests
+        command: dotnet test Src\Tests\TaskManager.Tests.Web
