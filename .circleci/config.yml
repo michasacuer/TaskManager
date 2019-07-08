@@ -2,18 +2,20 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:2.2
+      - image: mcr.microsoft.com/dotnet/core/sdk:2.2.300
     steps:
       - checkout
       - run:
-        name: Restore packages
-        command:
-          dotnet restore
+          name: Restore packages
+          command: dotnet restore Src/Web/TaskManager.Api
+          command: dotnet restore Src/Web/TaskManager.Application
+          command: dotnet restore Src/Web/TaskManager.Domain
+          command: dotnet restore Src/Web/TaskManager.Infrastructure
+          command: dotnet restore Src/Web/TaskManager.Persistence
       - run:
-        name: Build App
-        command:
-          dotnet build
-      - run:
-        name: Run App
-        command:
-          dotnet run 
+          name: Build
+          command: dotnet build Src/Web/TaskManager.Api
+          command: dotnet build Src/Web/TaskManager.Application
+          command: dotnet build Src/Web/TaskManager.Domain
+          command: dotnet build Src/Web/TaskManager.Infrastructure
+          command: dotnet build Src/Web/TaskManager.Persistence
