@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Desktop\TaskManager.Contracts\TaskManager.Contracts.csproj" />
-    <ProjectReference Include="..\..\Desktop\TaskManager.WPF\TaskManager.WPF.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Api\TaskManager.Api.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Application\TaskManager.Application.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Domain\TaskManager.Domain.csproj" />
