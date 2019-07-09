@@ -2,8 +2,11 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using FluentValidation;
     using MediatR;
+    using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Common.Exceptions;
 
     public class CreateProjectCommand : IRequest
     {
@@ -22,7 +25,23 @@
 
             public async Task<Unit> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
             {
-                throw new System.NotImplementedException();
+                new CreateProjectCommandValidator().ValidateAndThrow(request);
+
+                var project = await this.context.Projects.FirstOrDefaultAsync(p => p.Name.Equals(request.Name));
+                if (project != null)
+                {
+                    throw new EntityAlreadyExistsException();
+                }
+
+                this.context.Projects.Add(new Domain.Entity.Project
+                {
+                    Name = request.Name,
+                    Description = request.Description
+                });
+
+                await this.context.SaveChangesAsync(cancellationToken);
+
+                return Unit.Value;
             }
         }
     }
