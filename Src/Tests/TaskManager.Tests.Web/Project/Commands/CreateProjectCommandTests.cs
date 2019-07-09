@@ -16,9 +16,9 @@
     {
         private readonly TaskManagerDbContext context;
 
-        public CreateProjectCommandTests(DatabaseFixture fixture)
+        public CreateProjectCommandTests()
         {
-            this.context = fixture.Context;
+            this.context = DatabaseContextFactory.Create();
         }
 
         [Fact]
@@ -26,7 +26,7 @@
         {
             var command = new CreateProjectCommand
             {
-                Name = "Project1",
+                Name = "Project",
                 Description = "Description"
             };
 
@@ -76,13 +76,13 @@
         {
             var command = new CreateProjectCommand
             {
-                Name = "Project1",
+                Name = "Project0",
                 Description = "Description"
             };
 
             var commandHandler = new CreateProjectCommand.Handler(this.context);
 
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
+            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityAlreadyExistsException>();
         }
     }
 }
