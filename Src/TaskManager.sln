@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.156
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E6120E85-9B4F-4213-AFF3-BF7D43637236}"
 EndProject
@@ -41,7 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{6A97
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{874F5332-05FF-4D67-8D2C-A1B9884A6BEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Tests.Infrastructure", "Tests\TaskManager.Tests.Infrastructure\TaskManager.Tests.Infrastructure.csproj", "{428E1527-B54A-4F1F-9D75-E46D976C63B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Tests.Infrastructure", "Tests\TaskManager.Tests.Infrastructure\TaskManager.Tests.Infrastructure.csproj", "{428E1527-B54A-4F1F-9D75-E46D976C63B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Common", "Web\TaskManager.Common\TaskManager.Common\TaskManager.Common.csproj", "{36607D49-A0C2-47D5-862B-B4162734D1D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{6A97F6DD-9C9E-47DE-BBA1-E1682547488D} = {4E912EFF-D17E-415A-BED4-C7D323DB087A}
 		{874F5332-05FF-4D67-8D2C-A1B9884A6BEC} = {4E912EFF-D17E-415A-BED4-C7D323DB087A}
 		{428E1527-B54A-4F1F-9D75-E46D976C63B0} = {874F5332-05FF-4D67-8D2C-A1B9884A6BEC}
+		{36607D49-A0C2-47D5-862B-B4162734D1D3} = {86B91BF1-FA1F-42E8-A2E2-531EBDD503A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72D2256E-CAE4-4890-960F-FBC256540482}

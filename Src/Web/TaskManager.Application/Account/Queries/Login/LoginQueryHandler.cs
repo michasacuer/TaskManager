@@ -5,8 +5,8 @@
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.AspNetCore.Identity;
-    using TaskManager.Application.Exceptions;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
 
     public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginModel>
