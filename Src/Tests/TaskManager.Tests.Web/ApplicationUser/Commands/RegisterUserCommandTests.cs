@@ -1,6 +1,5 @@
 ﻿namespace TaskManager.Tests.Web
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
@@ -9,32 +8,21 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands;
-    using TaskManager.Persistence;
+    using TaskManager.Tests.Infrastructure;
 
     public class RegisterUserCommandTests
     {
+        private ServiceCollection Services { get; set; }
 
         public RegisterUserCommandTests()
         {
+            this.Services = ServicesFactory.Create();
         }
 
         [Fact]
         public async Task RegisterUser()
         {
-            var services = new ServiceCollection();
-
-            services.AddDbContext<TaskManagerDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
-            services.AddIdentity<Domain.Entity.ApplicationUser, IdentityRole>(options =>
-            {
-                options.Password.RequiredLength = 6;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireDigit = false;
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<TaskManagerDbContext>();
-
-            var provider = services.BuildServiceProvider();
+            var provider = this.Services.BuildServiceProvider();
 
             using (var scope = provider.CreateScope())
             {
