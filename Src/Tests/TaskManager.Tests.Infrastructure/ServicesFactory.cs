@@ -4,6 +4,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+    using TaskManager.Application.Interfaces;
+    using TaskManager.Infrastructure.Implementations;
     using TaskManager.Persistence;
 
     public class ServicesFactory
@@ -22,6 +24,8 @@
                 options.Password.RequireDigit = false;
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<TaskManagerDbContext>();
+
+            services.AddTransient<ITokenService, TokenService>();
 
             return services;
         }

@@ -24,5 +24,9 @@
     <ProjectReference Include="..\TaskManager.Tests.Infrastructure\TaskManager.Tests.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Project\Queries\" />
+  </ItemGroup>
+
 </Project>
     

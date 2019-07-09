@@ -1,10 +1,10 @@
-﻿namespace TaskManager.Application.Exceptions
+﻿namespace TaskManager.Common.Exceptions
 {
     using System;
 
     public class EntityNotFoundException : Exception
     {
-        public EntityNotFoundException()
+        public EntityNotFoundException() 
             : base()
         {
         }
