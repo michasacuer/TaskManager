@@ -21,4 +21,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Web\TaskManager.Api\TaskManager.Api.csproj" />
+    <ProjectReference Include="..\..\Web\TaskManager.Persistence\TaskManager.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

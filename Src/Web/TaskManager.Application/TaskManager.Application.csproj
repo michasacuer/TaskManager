@@ -29,8 +29,4 @@
     <ProjectReference Include="..\TaskManager.Domain\TaskManager.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Project\Queries\" />
-  </ItemGroup>
-
 </Project>
