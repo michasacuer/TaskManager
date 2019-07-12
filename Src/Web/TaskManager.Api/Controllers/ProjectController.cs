@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using TaskManager.Application.Commands;
+    using TaskManager.Application.Commands.CreateProject;
     using TaskManager.Application.Project.Queries.GetAllProjects;
 
     public class ProjectController : BaseController

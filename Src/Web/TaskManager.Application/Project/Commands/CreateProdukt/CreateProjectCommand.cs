@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Commands
+﻿namespace TaskManager.Application.Commands.CreateProject
 {
     using System.Threading;
     using System.Threading.Tasks;

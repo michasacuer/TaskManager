@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Tests.Web.Project.Queries
+﻿namespace TaskManager.Tests.Web
 {
     using System.Linq;
     using System.Threading;
@@ -14,9 +14,9 @@
     {
         private readonly TaskManagerDbContext context;
 
-        public GetAllProjectsQueryHandlerTests()
+        public GetAllProjectsQueryHandlerTests(DatabaseFixture fixture)
         {
-            this.context = DatabaseContextFactory.Create();
+            this.context = fixture.Context;
         }
 
         [Fact]
@@ -27,7 +27,7 @@
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<ProjectsListViewModel>();
-            result.Projects.ToList().Count.ShouldBe(2);
+            result.Projects.ToList().Count.ShouldBe(3);
         }
     }
 }

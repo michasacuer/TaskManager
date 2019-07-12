@@ -6,7 +6,7 @@
     using Microsoft.EntityFrameworkCore;
     using Shouldly;
     using Xunit;
-    using TaskManager.Application.Commands;
+    using TaskManager.Application.Commands.CreateProject;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
@@ -16,9 +16,9 @@
     {
         private readonly TaskManagerDbContext context;
 
-        public CreateProjectCommandTests()
+        public CreateProjectCommandTests(DatabaseFixture fixture)
         {
-            this.context = DatabaseContextFactory.Create();
+            this.context = fixture.Context;
         }
 
         [Fact]

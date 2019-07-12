@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E6120E85-9B4F-4213-AFF3-BF7D43637236}"
 EndProject
@@ -39,13 +39,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Tests.Desktop",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{6A97F6DD-9C9E-47DE-BBA1-E1682547488D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{874F5332-05FF-4D67-8D2C-A1B9884A6BEC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Tests.Infrastructure", "Tests\TaskManager.Tests.Infrastructure\TaskManager.Tests.Infrastructure.csproj", "{428E1527-B54A-4F1F-9D75-E46D976C63B0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Common", "Web\TaskManager.Common\TaskManager.Common\TaskManager.Common.csproj", "{36607D49-A0C2-47D5-862B-B4162734D1D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Tests.WebFunctional", "Tests\TaskManager.Tests.WebFunctional\TaskManager.Tests.WebFunctional.csproj", "{8C79362F-9DF4-480F-80A0-25392219E227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Tests.WebFunctional", "Tests\TaskManager.Tests.WebFunctional\TaskManager.Tests.WebFunctional.csproj", "{8C79362F-9DF4-480F-80A0-25392219E227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +85,6 @@ Global
 		{AB27EA6B-0E3A-4146-A05E-A3464DA14DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB27EA6B-0E3A-4146-A05E-A3464DA14DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB27EA6B-0E3A-4146-A05E-A3464DA14DB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{428E1527-B54A-4F1F-9D75-E46D976C63B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36607D49-A0C2-47D5-862B-B4162734D1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,8 +113,6 @@ Global
 		{71157D02-B73E-4914-8965-9E0B2C832927} = {ECD4705D-FFE3-4E71-9EAA-8FC54431422C}
 		{AB27EA6B-0E3A-4146-A05E-A3464DA14DB7} = {6A97F6DD-9C9E-47DE-BBA1-E1682547488D}
 		{6A97F6DD-9C9E-47DE-BBA1-E1682547488D} = {4E912EFF-D17E-415A-BED4-C7D323DB087A}
-		{874F5332-05FF-4D67-8D2C-A1B9884A6BEC} = {4E912EFF-D17E-415A-BED4-C7D323DB087A}
-		{428E1527-B54A-4F1F-9D75-E46D976C63B0} = {874F5332-05FF-4D67-8D2C-A1B9884A6BEC}
 		{36607D49-A0C2-47D5-862B-B4162734D1D3} = {86B91BF1-FA1F-42E8-A2E2-531EBDD503A2}
 		{8C79362F-9DF4-480F-80A0-25392219E227} = {F40BD21F-79EE-477D-B1B6-291540D8B09E}
 	EndGlobalSection
