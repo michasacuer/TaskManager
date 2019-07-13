@@ -3,6 +3,7 @@
     using System;
     using Microsoft.EntityFrameworkCore;
     using TaskManager.Domain.Entity;
+    using TaskManager.Domain.Enum;
     using TaskManager.Persistence;
 
     public class DatabaseContextFactory
@@ -17,6 +18,8 @@
             var context = new TaskManagerDbContext(options);
 
             context.Projects.AddRange(AddProjectsToDatabase());
+            context.Tasks.AddRange(AddTasksToDatabase());
+
             context.SaveChanges();
 
             return context;
@@ -43,6 +46,39 @@
             }
 
             return projects;
+        }
+
+        private static Task[] AddTasksToDatabase()
+        {
+            int tasksCount = 5;
+            var tasks = new Task[tasksCount];
+
+            for (int i = 0; i < tasksCount; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    tasks[i] = new Task
+                    {
+                        Name = $"Task{i}",
+                        Description = $"Desc{i}",
+                        Priority = Priority.Low,
+                        ProjectId = 6,
+                        StoryPoints = 20
+                    };
+                }
+                else
+                {
+                    tasks[i] = new Task
+                    {
+                        Name = $"Task{i}",
+                        Description = $"Desc{i}",
+                        Priority = Priority.High,
+                        ProjectId = 6
+                    };
+                }
+            }
+
+            return tasks;
         }
     }
 }

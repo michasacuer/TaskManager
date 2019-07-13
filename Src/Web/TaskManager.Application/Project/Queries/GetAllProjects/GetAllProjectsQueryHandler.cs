@@ -17,7 +17,7 @@
 
         public async Task<ProjectsListViewModel> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
-            var projects = await this.context.Projects.ToListAsync();
+            var projects = await this.context.Projects.Include(t => t.Tasks).ToListAsync();
 
             return new ProjectsListViewModel
             {

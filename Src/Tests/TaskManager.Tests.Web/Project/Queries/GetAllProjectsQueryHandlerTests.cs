@@ -29,5 +29,18 @@
             result.ShouldBeOfType<ProjectsListViewModel>();
             result.Projects.ToList().Count.ShouldBe(7);
         }
+
+        [Fact]
+        public async Task EnsureThatProjectsHaveIncludedTasks()
+        {
+            var queryHandler = new GetAllProjectsQueryHandler(this.context);
+
+            var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
+
+            result.ShouldBeOfType<ProjectsListViewModel>();
+            var projects = result.Projects.ToList();
+
+            projects[5].Tasks.ShouldNotBeNull();
+        }
     }
 }
