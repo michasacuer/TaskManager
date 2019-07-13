@@ -45,7 +45,7 @@
         {
             var command = new CreateProjectCommand
             {
-                Name = "Project2",
+                Name = "ProjectTest",
             };
 
             var commandHandler = new CreateProjectCommand.Handler(this.context);

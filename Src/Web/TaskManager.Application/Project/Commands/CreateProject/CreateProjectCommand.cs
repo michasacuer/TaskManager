@@ -25,7 +25,7 @@
 
             public async Task<Unit> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
             {
-                new CreateProjectCommandValidator().ValidateAndThrow(request);
+                await new CreateProjectCommandValidator().ValidateAndThrowAsync(request);
 
                 var project = await this.context.Projects.FirstOrDefaultAsync(p => p.Name.Equals(request.Name));
                 if (project != null)

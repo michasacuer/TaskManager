@@ -30,7 +30,7 @@
 
         public static Project[] AddProjectsToDatabase()
         {
-            int projectsCount = 2;
+            int projectsCount = 6;
             var projects = new Project[projectsCount];
 
             for (int i = 0; i < projectsCount; i++)
