@@ -6,7 +6,7 @@
     using FluentValidation;
     using Shouldly;
     using Xunit;
-    using TaskManager.Application.Task.Commands;
+    using TaskManager.Application.Task.Commands.CreateTask;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;

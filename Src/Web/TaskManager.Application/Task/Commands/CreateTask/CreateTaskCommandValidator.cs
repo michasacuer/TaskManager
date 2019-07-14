@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Task.Commands
+﻿namespace TaskManager.Application.Task.Commands.CreateTask
 {
     using FluentValidation;
 
