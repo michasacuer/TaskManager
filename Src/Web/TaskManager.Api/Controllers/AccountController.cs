@@ -11,13 +11,13 @@
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody]RegisterCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await base.Mediator.Send(command));
         }
 
         [HttpPost("Login")]
         public async Task<ActionResult<LoginModel>> Login([FromBody]LoginViewModel model)
         {
-            return Ok(await Mediator.Send(new LoginQuery
+            return Ok(await base.Mediator.Send(new LoginQuery
             {
                 UserName = model.UserName,
                 Password = model.Password

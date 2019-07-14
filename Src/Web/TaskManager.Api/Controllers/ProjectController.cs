@@ -10,13 +10,13 @@
         [HttpPost]
         public async Task<IActionResult> CreateProject([FromBody]CreateProjectCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await base.Mediator.Send(command));
         }
 
         [HttpGet]
         public async Task<ActionResult<ProjectsListModel>> GetAllProjects()
         {
-            return Ok(await Mediator.Send(new GetAllProjectsQuery()));
+            return Ok(await base.Mediator.Send(new GetAllProjectsQuery()));
         }
     }
 }
