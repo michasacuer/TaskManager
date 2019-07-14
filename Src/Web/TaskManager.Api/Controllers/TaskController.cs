@@ -13,10 +13,10 @@
             return Ok(await base.Mediator.Send(command));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteTask([FromBody]DeleteTaskCommand command)
+        [HttpDelete("taskId")]
+        public async Task<IActionResult> DeleteTask(int taskId)
         {
-            return Ok(await base.Mediator.Send(command));
+            return Ok(await base.Mediator.Send(new DeleteTaskCommand { TaskId = taskId }));
         }
     }
 }
