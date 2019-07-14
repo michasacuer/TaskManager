@@ -6,7 +6,7 @@
     using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
 
-    public class GetAllProjectsQueryHandler : IRequestHandler<GetAllProjectsQuery, ProjectsListViewModel>
+    public class GetAllProjectsQueryHandler : IRequestHandler<GetAllProjectsQuery, ProjectsListModel>
     {
         private readonly ITaskManagerDbContext context;
 
@@ -15,11 +15,11 @@
             this.context = context;
         }
 
-        public async Task<ProjectsListViewModel> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
+        public async Task<ProjectsListModel> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
             var projects = await this.context.Projects.Include(t => t.Tasks).ToListAsync();
 
-            return new ProjectsListViewModel
+            return new ProjectsListModel
             {
                 Projects = projects
             };

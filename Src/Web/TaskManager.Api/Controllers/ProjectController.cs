@@ -14,7 +14,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult<ProjectsListViewModel>> GetAllProjects()
+        public async Task<ActionResult<ProjectsListModel>> GetAllProjects()
         {
             return Ok(await Mediator.Send(new GetAllProjectsQuery()));
         }

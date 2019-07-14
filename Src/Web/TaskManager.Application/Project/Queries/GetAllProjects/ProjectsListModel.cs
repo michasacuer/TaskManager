@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using TaskManager.Domain.Entity;
 
-    public class ProjectsListViewModel
+    public class ProjectsListModel
     {
         public IEnumerable<Project> Projects { get; set; }
     }

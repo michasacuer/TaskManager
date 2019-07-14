@@ -26,7 +26,7 @@
 
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
-            result.ShouldBeOfType<ProjectsListViewModel>();
+            result.ShouldBeOfType<ProjectsListModel>();
             result.Projects.ToList().Count.ShouldBe(7);
         }
 
@@ -37,7 +37,7 @@
 
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
-            result.ShouldBeOfType<ProjectsListViewModel>();
+            result.ShouldBeOfType<ProjectsListModel>();
             var projects = result.Projects.ToList();
 
             projects[5].Tasks.ShouldNotBeNull();

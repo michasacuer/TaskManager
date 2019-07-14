@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public class GetAllProjectsQuery : IRequest<ProjectsListViewModel>
+    public class GetAllProjectsQuery : IRequest<ProjectsListModel>
     {
     }
 }
