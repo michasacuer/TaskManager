@@ -3,7 +3,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
+    using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Common.Exceptions;
 
     public class GetProjectQueryHandler : IRequestHandler<GetProjectQuery, ProjectModel>
     {
@@ -14,9 +16,15 @@
             this.context = context;
         }
 
-        public Task<ProjectModel> Handle(GetProjectQuery request, CancellationToken cancellationToken)
+        public async Task<ProjectModel> Handle(GetProjectQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var project = await this.context.Projects.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == request.ProjectId)
+                ?? throw new EntityNotFoundException();
+
+            return new ProjectModel
+            {
+                Project = project
+            };
         }
     }
 }

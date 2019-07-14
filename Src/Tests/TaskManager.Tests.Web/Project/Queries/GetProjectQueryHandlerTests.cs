@@ -2,7 +2,6 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using FluentValidation;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Project.Queries.GetProject;
@@ -25,7 +24,7 @@
         {
             var command = new GetProjectQuery
             {
-                ProjectId = 2
+                ProjectId = 3
             };
 
             var queryHandler = new GetProjectQueryHandler(this.context);
@@ -54,7 +53,7 @@
         {
             var queryHandler = new GetProjectQueryHandler(this.context);
 
-            await queryHandler.Handle(new GetProjectQuery(), CancellationToken.None).ShouldThrowAsync<ValidationException>();
+            await queryHandler.Handle(new GetProjectQuery(), CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }
