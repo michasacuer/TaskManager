@@ -20,7 +20,6 @@
         public LoginQueryHandler(
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager,
             ITokenService tokenService)
         {
             this.signInManager = signInManager;

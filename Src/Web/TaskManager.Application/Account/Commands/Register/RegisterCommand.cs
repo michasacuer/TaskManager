@@ -52,7 +52,7 @@
                     LastName = request.LastName
                 };
 
-                var result = await this.userManager.CreateAsync(user, request.Password);
+                await this.userManager.CreateAsync(user, request.Password);
 
                 var roleName = request.Role.ToString();
                 if (!await this.roleManager.RoleExistsAsync(roleName))

@@ -17,6 +17,7 @@
 
             var context = new TaskManagerDbContext(options);
 
+            context.Users.AddRange(AddUsersToDatabase());
             context.Projects.AddRange(AddProjectsToDatabase());
             context.Tasks.AddRange(AddTasksToDatabase());
 
@@ -29,6 +30,23 @@
         {
             context.Database.EnsureDeleted();
             context.Dispose();
+        }
+
+        public static ApplicationUser[] AddUsersToDatabase()
+        {
+            int usersCount = 2;
+            var users = new ApplicationUser[usersCount];
+
+            for (int i = 0; i < usersCount; i++)
+            {
+                users[i] = new ApplicationUser
+                {
+                    FirstName = $"First{i}",
+                    LastName = $"Name{i}"
+                };
+            }
+
+            return users;
         }
 
         public static Project[] AddProjectsToDatabase()
