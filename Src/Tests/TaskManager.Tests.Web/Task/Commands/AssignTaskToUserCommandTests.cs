@@ -3,26 +3,28 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Task.Commands.AssignTaskToUser;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.Identity;
 
     [Collection("DatabaseTestCollection")]
     public class AssignTaskToUserCommandTests
     {
         private readonly TaskManagerDbContext context;
 
-        private ServiceCollection Services { get; set; }
+        private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
+
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AssignTaskToUserCommandTests(DatabaseFixture fixture)
         {
             this.context = fixture.Context;
-            this.Services = ServicesFactory.Create();
+            this.userManager = fixture.UserManager;
+            this.roleManager = fixture.RoleManager;
         }
 
         [Fact]
@@ -34,32 +36,25 @@
 
             this.context.SaveChanges();
 
-            var provider = this.Services.BuildServiceProvider();
-            using (var scope = provider.CreateScope())
+            var user = this.context.Users.FirstOrDefault();
+            await this.userManager.UpdateSecurityStampAsync(user);
+
+            var role = new IdentityRole("Developer");
+            await this.roleManager.CreateAsync(role);
+
+            await userManager.AddToRoleAsync(user, "Developer");
+
+            var command = new AssignTaskToUserCommand
             {
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Domain.Entity.ApplicationUser>>();
-                var user = this.context.Users.FirstOrDefault();
-                await userManager.UpdateSecurityStampAsync(user);
+                TaskId = 3,
+                ApplicationUserId = user.Id
+            };
 
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            await commandHandler.Handle(command, CancellationToken.None);
 
-                var role = new IdentityRole("Developer");
-                await roleManager.CreateAsync(role);
-
-                await userManager.AddToRoleAsync(user, "Developer");
-
-                var command = new AssignTaskToUserCommand
-                {
-                    TaskId = 3,
-                    ApplicationUserId = user.Id
-                };
-
-                var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
-                await commandHandler.Handle(command, CancellationToken.None);
-
-                var task = await this.context.Tasks.FindAsync(3);
-                task.ApplicationUserId.ShouldBe(user.Id);
-            }
+            var task = await this.context.Tasks.FindAsync(3);
+            task.ApplicationUserId.ShouldBe(user.Id);
         }
 
         [Fact]
@@ -71,16 +66,8 @@
                 TaskId = 4
             };
 
-            var provider = this.Services.BuildServiceProvider();
-            using (var scope = provider.CreateScope())
-            {
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Domain.Entity.ApplicationUser>>();
-
-                var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
-                await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<UserNotFoundException>();
-            }
-
-        
+            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, this.userManager);
+            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<UserNotFoundException>();
         }
     }
 }
