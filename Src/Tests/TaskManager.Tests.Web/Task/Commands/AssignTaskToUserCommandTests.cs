@@ -10,6 +10,7 @@
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
+    using Microsoft.EntityFrameworkCore;
 
     [Collection("DatabaseTestCollection")]
     public class AssignTaskToUserCommandTests
@@ -30,19 +31,7 @@
         [Fact]
         public async Task AssignTaskToUserCommandAssignUserIdToTask()
         {
-            this.context.Users.Add(new Domain.Entity.ApplicationUser
-            {
-            });
-
-            this.context.SaveChanges();
-
-            var user = this.context.Users.FirstOrDefault();
-            await this.userManager.UpdateSecurityStampAsync(user);
-
-            var role = new IdentityRole("Developer");
-            await this.roleManager.CreateAsync(role);
-
-            await userManager.AddToRoleAsync(user, "Developer");
+            var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
 
             var command = new AssignTaskToUserCommand
             {

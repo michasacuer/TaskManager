@@ -18,10 +18,12 @@
         {
             this.Context = DatabaseContextFactory.Create();
 
-            var scope = ServicesFactory.Create().BuildServiceProvider().CreateScope();
+            var services = ServicesFactory.Create().BuildServiceProvider().CreateScope();
 
-            this.UserManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            this.RoleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            this.UserManager = services.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            this.RoleManager = services.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            DataSeeding.AddRolesToUsers(this.Context, this.RoleManager, this.UserManager);
         }
 
         [CollectionDefinition("DatabaseTestCollection")]
