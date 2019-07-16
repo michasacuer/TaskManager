@@ -5,7 +5,6 @@
     using FluentValidation;
     using MediatR;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
