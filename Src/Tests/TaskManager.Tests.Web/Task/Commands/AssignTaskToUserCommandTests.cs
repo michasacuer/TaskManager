@@ -4,13 +4,13 @@
     using System.Threading.Tasks;
     using FluentValidation;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Task.Commands.AssignTaskToUser;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
-    using Microsoft.EntityFrameworkCore;
 
     [Collection("ServicesTestCollection")]
     public class AssignTaskToUserCommandTests
