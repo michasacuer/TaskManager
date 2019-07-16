@@ -10,46 +10,39 @@
     using TaskManager.Application.Commands;
     using TaskManager.Tests.Infrastructure;
 
+    [Collection("DatabaseTestCollection")]
     public class RegisterUserCommandTests
     {
-        private ServiceCollection Services { get; set; }
+        private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public RegisterUserCommandTests()
+        public RegisterUserCommandTests(DatabaseFixture fixture)
         {
-            this.Services = ServicesFactory.Create();
+            this.userManager = fixture.UserManager;
+            this.roleManager = fixture.RoleManager;
         }
 
         [Fact]
         public async Task RegisterUser()
         {
-            var provider = this.Services.BuildServiceProvider();
-
-            using (var scope = provider.CreateScope())
+            var command = new RegisterCommand
             {
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Domain.Entity.ApplicationUser>>();
+                UserName = "test",
+                FirstName = "test",
+                LastName = "test",
+                Password = "test11",
+                Email = "test@wp.pl",
+                Role = Domain.Enum.Role.Manager
+            };
 
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                var signInManager = scope.ServiceProvider.GetRequiredService<SignInManager<Domain.Entity.ApplicationUser>>();
+            var commandHandler = new RegisterCommand.Handler(userManager, roleManager);
 
-                var command = new RegisterCommand
-                {
-                    UserName = "test",
-                    FirstName = "test",
-                    LastName = "test",
-                    Password = "test11",
-                    Email = "test@wp.pl",
-                    Role = Domain.Enum.Role.Manager
-                };
+            await commandHandler.Handle(command, CancellationToken.None);
 
-                var commandHandler = new RegisterCommand.Handler(signInManager, userManager, roleManager);
+            var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName == command.UserName);
 
-                await commandHandler.Handle(command, CancellationToken.None);
-
-                var user = await userManager.Users.FirstOrDefaultAsync(u => u.UserName == command.UserName);
-
-                user.ShouldNotBeNull();
-                user.UserName.ShouldBe(command.UserName);
-            }
+            user.ShouldNotBeNull();
+            user.UserName.ShouldBe(command.UserName);
         }
     }
 }

@@ -24,18 +24,12 @@
 
         public class Handler : IRequestHandler<RegisterCommand>
         {
-            private readonly SignInManager<ApplicationUser> signInManager;
-
             private readonly UserManager<ApplicationUser> userManager;
 
             private readonly RoleManager<IdentityRole> roleManager;
 
-            public Handler(
-                SignInManager<ApplicationUser> signInManager,
-                UserManager<ApplicationUser> userManager,
-                RoleManager<IdentityRole> roleManager)
+            public Handler(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
             {
-                this.signInManager = signInManager;
                 this.userManager = userManager;
                 this.roleManager = roleManager;
             }
