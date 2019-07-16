@@ -4,19 +4,18 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("DatabaseTestCollection")]
+    [Collection("ServicesTestCollection")]
     public class RegisterUserCommandTests
     {
         private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public RegisterUserCommandTests(DatabaseFixture fixture)
+        public RegisterUserCommandTests(ServicesFixture fixture)
         {
             this.userManager = fixture.UserManager;
             this.roleManager = fixture.RoleManager;

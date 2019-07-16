@@ -12,26 +12,23 @@
     using TaskManager.Tests.Infrastructure;
     using Microsoft.EntityFrameworkCore;
 
-    [Collection("DatabaseTestCollection")]
+    [Collection("ServicesTestCollection")]
     public class AssignTaskToUserCommandTests
     {
         private readonly TaskManagerDbContext context;
 
         private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
 
-        private readonly RoleManager<IdentityRole> roleManager;
-
-        public AssignTaskToUserCommandTests(DatabaseFixture fixture)
+        public AssignTaskToUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.userManager = fixture.UserManager;
-            this.roleManager = fixture.RoleManager;
         }
 
         [Fact]
         public async Task AssignTaskToUserCommandAssignUserIdToTask()
         {
-            var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
+            var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name2");
 
             var command = new AssignTaskToUserCommand
             {

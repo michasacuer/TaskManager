@@ -10,12 +10,12 @@
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("DatabaseTestCollection")]
+    [Collection("ServicesTestCollection")]
     public class DeleteProjectCommandTests
     {
         private readonly TaskManagerDbContext context;
 
-        public DeleteProjectCommandTests(DatabaseFixture fixture)
+        public DeleteProjectCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
         }

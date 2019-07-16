@@ -5,11 +5,16 @@
     using TaskManager.Domain.Enum;
     using TaskManager.Persistence;
 
-    public class DataSeeding
+    public class ContextDataSeeding
     {
-        public static void Run(TaskManagerDbContext context)
+        public static void Run(
+            TaskManagerDbContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
             context.Users.AddRange(AddUsersToDatabase());
+            AddRolesToUsers(context, roleManager, userManager);
+
             context.Projects.AddRange(AddProjectsToDatabase());
             context.Tasks.AddRange(AddTasksToDatabase());
 

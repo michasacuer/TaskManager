@@ -11,12 +11,12 @@
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("DatabaseTestCollection")]
+    [Collection("ServicesTestCollection")]
     public class CreateProjectCommandTests
     {
         private readonly TaskManagerDbContext context;
 
-        public CreateProjectCommandTests(DatabaseFixture fixture)
+        public CreateProjectCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
         }

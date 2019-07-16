@@ -9,12 +9,12 @@
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("DatabaseTestCollection")]
+    [Collection("ServicesTestCollection")]
     public class GetProjectQueryHandlerTests
     {
         private readonly TaskManagerDbContext context;
 
-        public GetProjectQueryHandlerTests(DatabaseFixture fixture)
+        public GetProjectQueryHandlerTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
         }

@@ -6,7 +6,7 @@
     using TaskManager.Domain.Entity;
     using TaskManager.Persistence;
 
-    public class DatabaseFixture
+    public class ServicesFixture
     {
         public TaskManagerDbContext Context { get; private set; }
 
@@ -14,20 +14,20 @@
 
         public RoleManager<IdentityRole> RoleManager { get; private set; }
 
-        public DatabaseFixture()
+        public ServicesFixture()
         {
-            this.Context = DatabaseContextFactory.Create();
-
             var services = ServicesFactory.Create().BuildServiceProvider().CreateScope();
 
+            this.Context = services.ServiceProvider.GetRequiredService<TaskManagerDbContext>();
             this.UserManager = services.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             this.RoleManager = services.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            DataSeeding.AddRolesToUsers(this.Context, this.RoleManager, this.UserManager);
+            ContextDataSeeding.Run(this.Context, this.RoleManager, this.UserManager);
+            ContextDataSeeding.AddRolesToUsers(this.Context, this.RoleManager, this.UserManager);
         }
 
-        [CollectionDefinition("DatabaseTestCollection")]
-        public class QueryCollection : ICollectionFixture<DatabaseFixture>
+        [CollectionDefinition("ServicesTestCollection")]
+        public class QueryCollection : ICollectionFixture<ServicesFixture>
         {
         }
     }
