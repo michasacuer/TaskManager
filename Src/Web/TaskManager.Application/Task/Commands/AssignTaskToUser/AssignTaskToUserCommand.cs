@@ -35,14 +35,15 @@
                 var user = await this.context.Users.FindAsync(request.ApplicationUserId)
                     ?? throw new UserNotFoundException();
 
-                if (await this.userManager.IsInRoleAsync(user, "Manager")
-                    || await this.userManager.IsInRoleAsync(user, "Developer"))
+                if (await this.userManager.IsInRoleAsync(user, "Manager") || await this.userManager.IsInRoleAsync(user, "Developer"))
                 {
-                  var task = await this.context.Tasks.FindAsync(request.TaskId)
+                    var task = await this.context.Tasks.FindAsync(request.TaskId)
                       ?? throw new EntityNotFoundException();
 
-                  task.ApplicationUserId = user.Id;
-                  await this.context.SaveChangesAsync(cancellationToken);
+                    await new TaskApplicationUserIdValidator().ValidateAndThrowAsync(task);
+
+                    task.ApplicationUserId = user.Id;
+                    await this.context.SaveChangesAsync(cancellationToken);
                 }
                 else
                 {

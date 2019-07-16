@@ -1,8 +1,8 @@
 ﻿namespace TaskManager.Tests.Web
 {
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using FluentValidation;
     using Microsoft.AspNetCore.Identity;
     using Shouldly;
     using Xunit;
@@ -48,12 +48,54 @@
         {
             var command = new AssignTaskToUserCommand
             {
-                ApplicationUserId = "dddddd",
-                TaskId = 4
+                TaskId = 4,
+                ApplicationUserId = "dddddd"
             };
 
             var commandHandler = new AssignTaskToUserCommand.Handler(this.context, this.userManager);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<UserNotFoundException>();
+        }
+
+        [Fact]
+        public async Task AssignTaskToUserShouldThrowExceptionWhenTaskIsAlredyAssignToAnotherUser()
+        {
+            var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
+
+            var command = new AssignTaskToUserCommand
+            {
+                TaskId = 3,
+                ApplicationUserId = user.Id
+            };
+
+            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
+        }
+
+        [Fact]
+        public async Task AssignTaskToUserShouldThrowExceptionWhenApplicationUserIdIsEmpty()
+        {
+            var command = new AssignTaskToUserCommand
+            {
+                TaskId = 3
+            };
+
+            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
+        }
+
+        [Fact]
+        public async Task AssignTaskToUserShouldThrowExceptionWhenTaskNotFound()
+        {
+            var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
+
+            var command = new AssignTaskToUserCommand
+            {
+                TaskId = 33213123,
+                ApplicationUserId = user.Id
+            };
+
+            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }
