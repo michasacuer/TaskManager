@@ -1,9 +1,13 @@
 ﻿namespace TaskManager.Application.Task.Commands.EndTaskByUser
 {
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using FluentValidation;
     using MediatR;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
 
     public class EndTaskByUserCommand : IRequest
     {
@@ -20,9 +24,31 @@
                 this.context = context;
             }
 
-            public Task<Unit> Handle(EndTaskByUserCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(EndTaskByUserCommand request, CancellationToken cancellationToken)
             {
-                throw new System.NotImplementedException();
+                await new EndTaskByUserCommandValidator().ValidateAndThrowAsync(request);
+
+                var task = await this.context.Tasks.FindAsync(request.TaskId)
+                    ?? throw new EntityNotFoundException();
+
+                await new EndTaskByUserCommandValidator(task).ValidateAndThrowAsync(request);
+
+                var endedTask = new EndedTask
+                {
+                    Name = task.Name,
+                    Description = task.Description,
+                    ProjectId = task.ProjectId,
+                    ApplicationUserId = task.ApplicationUserId,
+                    Priority = task.Priority,
+                    StartTime = task.StartTime,
+                    EndTime = DateTime.UtcNow
+                };
+
+                this.context.EndedTasks.Add(endedTask);
+                this.context.Tasks.Remove(task);
+                await this.context.SaveChangesAsync(cancellationToken);
+
+                return Unit.Value;
             }
         }
     }

@@ -1,11 +1,11 @@
-﻿namespace TaskManager.Application.Task.Commands.AssignTaskToUser
+﻿namespace TaskManager.Application.Task.Commands.TakeTaskByUser
 {
     using FluentValidation;
     using TaskManager.Domain.Entity;
 
-    public class AssignTaskToUserValidator : AbstractValidator<AssignTaskToUserCommand>
+    public class TakeTaskByUserCommandValidator : AbstractValidator<TakeTaskByUserCommand>
     {
-        public AssignTaskToUserValidator()
+        public TakeTaskByUserCommandValidator()
         {
             RuleFor(x => x.ApplicationUserId).NotEmpty();
         }

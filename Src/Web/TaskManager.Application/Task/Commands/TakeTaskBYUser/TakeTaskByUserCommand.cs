@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Task.Commands.AssignTaskToUser
+﻿namespace TaskManager.Application.Task.Commands.TakeTaskByUser
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -9,13 +9,13 @@
     using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
 
-    public class AssignTaskToUserCommand : IRequest
+    public class TakeTaskByUserCommand : IRequest
     {
         public int TaskId { get; set; }
 
         public string ApplicationUserId { get; set; }
 
-        public class Handler : IRequestHandler<AssignTaskToUserCommand>
+        public class Handler : IRequestHandler<TakeTaskByUserCommand>
         {
             private readonly ITaskManagerDbContext context;
 
@@ -27,9 +27,9 @@
                 this.userManager = userManager;
             }
 
-            public async Task<Unit> Handle(AssignTaskToUserCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(TakeTaskByUserCommand request, CancellationToken cancellationToken)
             {
-                await new AssignTaskToUserValidator().ValidateAndThrowAsync(request);
+                await new TakeTaskByUserCommandValidator().ValidateAndThrowAsync(request);
 
                 var user = await this.context.Users.FindAsync(request.ApplicationUserId)
                     ?? throw new UserNotFoundException();
@@ -42,6 +42,8 @@
                     await new TaskApplicationUserIdValidator().ValidateAndThrowAsync(task);
 
                     task.ApplicationUserId = user.Id;
+                    this.context.Tasks.Update(task);
+
                     await this.context.SaveChangesAsync(cancellationToken);
                 }
                 else

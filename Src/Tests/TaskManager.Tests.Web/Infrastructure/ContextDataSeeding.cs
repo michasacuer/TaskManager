@@ -113,6 +113,18 @@
                         StoryPoints = 20
                     };
                 }
+                if (i == 2 || i == 4)
+                {
+                    tasks[i] = new Task
+                    {
+                        Name = $"Task{i}",
+                        Description = $"Desc{i}",
+                        Priority = Priority.Low,
+                        ProjectId = 6,
+                        StoryPoints = 20,
+                        ApplicationUserId = "NotEmpty"
+                    };
+                }
                 else
                 {
                     tasks[i] = new Task

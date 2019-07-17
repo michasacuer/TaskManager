@@ -7,94 +7,94 @@
     using Microsoft.EntityFrameworkCore;
     using Shouldly;
     using Xunit;
-    using TaskManager.Application.Task.Commands.AssignTaskToUser;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
+    using TaskManager.Application.Task.Commands.TakeTaskByUser;
 
     [Collection("ServicesTestCollection")]
-    public class AssignTaskToUserCommandTests
+    public class TakeTaskByUserCommandTests
     {
         private readonly TaskManagerDbContext context;
 
         private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
 
-        public AssignTaskToUserCommandTests(ServicesFixture fixture)
+        public TakeTaskByUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.userManager = fixture.UserManager;
         }
 
         [Fact]
-        public async Task AssignTaskToUserCommandAssignUserIdToTask()
+        public async Task TakeTaskByUserCommandAssignUserIdToTask()
         {
             var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name2");
 
-            var command = new AssignTaskToUserCommand
+            var command = new TakeTaskByUserCommand
             {
-                TaskId = 3,
+                TaskId = 4,
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
             await commandHandler.Handle(command, CancellationToken.None);
 
-            var task = await this.context.Tasks.FindAsync(3);
+            var task = await this.context.Tasks.FindAsync(4);
             task.ApplicationUserId.ShouldBe(user.Id);
         }
 
         [Fact]
-        public async Task AssignTaskToUserShouldThrowExceptionWhenApplicationUserNotFound()
+        public async Task TakeTaskByUserShouldThrowExceptionWhenApplicationUserNotFound()
         {
-            var command = new AssignTaskToUserCommand
+            var command = new TakeTaskByUserCommand
             {
                 TaskId = 4,
                 ApplicationUserId = "dddddd"
             };
 
-            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, this.userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, this.userManager);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<UserNotFoundException>();
         }
 
         [Fact]
-        public async Task AssignTaskToUserShouldThrowExceptionWhenTaskIsAlredyAssignToAnotherUser()
+        public async Task TakeTaskByUserShouldThrowExceptionWhenTaskIsAlredyAssignToAnotherUser()
         {
             var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
 
-            var command = new AssignTaskToUserCommand
+            var command = new TakeTaskByUserCommand
             {
-                TaskId = 3,
+                TaskId = 5,
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
         [Fact]
-        public async Task AssignTaskToUserShouldThrowExceptionWhenApplicationUserIdIsEmpty()
+        public async Task TakeTaskByUserShouldThrowExceptionWhenApplicationUserIdIsEmpty()
         {
-            var command = new AssignTaskToUserCommand
+            var command = new TakeTaskByUserCommand
             {
-                TaskId = 3
+                TaskId = 4
             };
 
-            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
         [Fact]
-        public async Task AssignTaskToUserShouldThrowExceptionWhenTaskNotFound()
+        public async Task TakeTaskByUserShouldThrowExceptionWhenTaskNotFound()
         {
             var user = await this.context.Users.FirstOrDefaultAsync(u => u.LastName == "Name1");
 
-            var command = new AssignTaskToUserCommand
+            var command = new TakeTaskByUserCommand
             {
                 TaskId = 33213123,
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new AssignTaskToUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
