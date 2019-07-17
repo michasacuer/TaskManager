@@ -10,7 +10,7 @@
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("ServicesTestCollection")]
+    [Collection("Services1TestCollection")]
     public class DeleteTaskCommandTests
     {
         private readonly TaskManagerDbContext context;
