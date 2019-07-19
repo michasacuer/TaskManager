@@ -31,7 +31,14 @@
             this.tokenService = tokenService;
         }
 
-        public async Task<LoginModel> Login(string requestUserName, string requestPassword)
+        public async Task<ApplicationUser> GetByIdAsync(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id) ?? throw new UserNotFoundException();
+
+            return user;
+        }
+
+        public async Task<LoginModel> LoginAsync(string requestUserName, string requestPassword)
         {
             var result = await this.signInManager
                 .PasswordSignInAsync(requestUserName, requestPassword, false, false);
@@ -60,7 +67,7 @@
             }
         }
 
-        public async Task Register(RegisterCommand request)
+        public async Task RegisterAsync(RegisterCommand request)
         {
             var user = new ApplicationUser
             {
@@ -81,6 +88,11 @@
 
             await this.userManager.UpdateSecurityStampAsync(user);
             await this.userManager.AddToRoleAsync(user, roleName);
+        }
+
+        public async Task<bool> UserInRoleAsync(ApplicationUser user, string roleName)
+        {
+            return await this.userManager.IsInRoleAsync(user, roleName);
         }
     }
 }

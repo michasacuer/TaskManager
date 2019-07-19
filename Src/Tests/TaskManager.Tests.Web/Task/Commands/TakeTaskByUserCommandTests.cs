@@ -3,26 +3,34 @@
     using System.Threading;
     using System.Threading.Tasks;
     using FluentValidation;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Shouldly;
     using Xunit;
+    using TaskManager.Application.Task.Commands.TakeTaskByUser;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Persistence.Repository;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
-    using TaskManager.Application.Task.Commands.TakeTaskByUser;
 
     [Collection("ServicesTestCollection")]
     public class TakeTaskByUserCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly ApplicationUserRepository applicationUserRepository;
 
-        private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
+        private readonly TaskRepository taskRepository;
+
+        private readonly TaskManagerDbContext context;
 
         public TakeTaskByUserCommandTests(ServicesFixture fixture)
         {
+            this.applicationUserRepository = new ApplicationUserRepository(
+                fixture.UserManager,
+                fixture.RoleManager,
+                fixture.SignInManager,
+                fixture.TokenService);
+
+            this.taskRepository = new TaskRepository(fixture.Context);
             this.context = fixture.Context;
-            this.userManager = fixture.UserManager;
         }
 
         [Fact]
@@ -36,7 +44,7 @@
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.applicationUserRepository, this.taskRepository);
             await commandHandler.Handle(command, CancellationToken.None);
 
             var task = await this.context.Tasks.FindAsync(4);
@@ -52,7 +60,7 @@
                 ApplicationUserId = "dddddd"
             };
 
-            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, this.userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.applicationUserRepository, this.taskRepository);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<UserNotFoundException>();
         }
 
@@ -67,7 +75,7 @@
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.applicationUserRepository, this.taskRepository);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
@@ -79,7 +87,7 @@
                 TaskId = 4
             };
 
-            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.applicationUserRepository, this.taskRepository);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
@@ -94,7 +102,7 @@
                 ApplicationUserId = user.Id
             };
 
-            var commandHandler = new TakeTaskByUserCommand.Handler(this.context, userManager);
+            var commandHandler = new TakeTaskByUserCommand.Handler(this.applicationUserRepository, this.taskRepository);
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }

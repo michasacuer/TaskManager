@@ -3,11 +3,16 @@
     using System.Threading.Tasks;
     using TaskManager.Application.Commands;
     using TaskManager.Application.Queries;
+    using TaskManager.Domain.Entity;
 
     public interface IApplicationUserRepository
     {
-        Task Register(RegisterCommand request);
+        Task RegisterAsync(RegisterCommand request);
 
-        Task<LoginModel> Login(string requestUserName, string requestPassword);
+        Task<LoginModel> LoginAsync(string requestUserName, string requestPassword);
+
+        Task<ApplicationUser> GetByIdAsync(string id);
+
+        Task<bool> UserInRoleAsync(ApplicationUser user, string roleName);
     }
 }

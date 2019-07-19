@@ -4,10 +4,8 @@
     using System.Threading.Tasks;
     using FluentValidation;
     using MediatR;
-    using Microsoft.AspNetCore.Identity;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
-    using TaskManager.Domain.Entity;
 
     public class TakeTaskByUserCommand : IRequest
     {
@@ -17,34 +15,34 @@
 
         public class Handler : IRequestHandler<TakeTaskByUserCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly IApplicationUserRepository applicationUserRepository;
 
-            private readonly UserManager<ApplicationUser> userManager;
+            private readonly ITaskRepository taskRepository;
 
-            public Handler(ITaskManagerDbContext context, UserManager<ApplicationUser> userManager)
+            public Handler(IApplicationUserRepository applicationUserRepository, ITaskRepository taskRepository)
             {
-                this.context = context;
-                this.userManager = userManager;
+                this.applicationUserRepository = applicationUserRepository;
+                this.taskRepository = taskRepository;
             }
 
             public async Task<Unit> Handle(TakeTaskByUserCommand request, CancellationToken cancellationToken)
             {
                 await new TakeTaskByUserCommandValidator().ValidateAndThrowAsync(request);
 
-                var user = await this.context.Users.FindAsync(request.ApplicationUserId)
-                    ?? throw new UserNotFoundException();
+                var user = await this.applicationUserRepository.GetByIdAsync(request.ApplicationUserId)
+                    ?? throw new EntityNotFoundException();
 
-                if (await this.userManager.IsInRoleAsync(user, "Manager") || await this.userManager.IsInRoleAsync(user, "Developer"))
+                if (await this.applicationUserRepository.UserInRoleAsync(user, "Manager")
+                    || await this.applicationUserRepository.UserInRoleAsync(user, "Developer"))
                 {
-                    var task = await this.context.Tasks.FindAsync(request.TaskId)
-                      ?? throw new EntityNotFoundException();
+                    var task = await this.taskRepository.GetByIdAsync(request.TaskId)
+                        ?? throw new EntityNotFoundException();
 
                     await new TaskApplicationUserIdValidator().ValidateAndThrowAsync(task);
 
                     task.ApplicationUserId = user.Id;
-                    this.context.Tasks.Update(task);
-
-                    await this.context.SaveChangesAsync(cancellationToken);
+                    this.taskRepository.Update(task);
+                    await this.taskRepository.SaveAsync(cancellationToken);
                 }
                 else
                 {

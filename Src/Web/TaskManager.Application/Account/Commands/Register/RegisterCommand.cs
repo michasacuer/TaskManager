@@ -36,7 +36,7 @@
             {
                 new RegisterCommandValidator().ValidateAndThrow(request);
 
-                await this.applicationUserRepository.Register(request);
+                await this.applicationUserRepository.RegisterAsync(request);
 
                 return Unit.Value;
             }
