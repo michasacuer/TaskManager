@@ -1,6 +1,8 @@
 ﻿namespace TaskManager.Application.Interfaces
 {
-    public interface IProjectRepository : IRepository<Domain.Entity.Project>
+    using TaskManager.Domain.Entity;
+
+    public interface IProjectRepository : IRepository<Project>
     {
     }
 }

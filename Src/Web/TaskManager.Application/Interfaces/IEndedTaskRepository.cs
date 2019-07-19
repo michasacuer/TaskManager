@@ -1,6 +1,8 @@
 ﻿namespace TaskManager.Application.Interfaces
 {
-    public interface IEndedTaskRepository : IRepository<Domain.Entity.EndedTask>
+    using TaskManager.Domain.Entity;
+
+    public interface IEndedTaskRepository : IRepository<EndedTask>
     {
     }
 }

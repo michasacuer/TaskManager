@@ -41,6 +41,7 @@
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
 

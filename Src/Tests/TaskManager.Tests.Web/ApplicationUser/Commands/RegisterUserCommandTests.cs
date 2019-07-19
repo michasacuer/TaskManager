@@ -7,18 +7,26 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands;
+    using TaskManager.Domain.Entity;
+    using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
     [Collection("ServicesTestCollection")]
     public class RegisterUserCommandTests
     {
-        private readonly UserManager<Domain.Entity.ApplicationUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly ApplicationUserRepository applicationUserRepository;
+
+        private readonly UserManager<ApplicationUser> userManager;
 
         public RegisterUserCommandTests(ServicesFixture fixture)
         {
+            this.applicationUserRepository = new ApplicationUserRepository(
+                fixture.UserManager,
+                fixture.RoleManager,
+                fixture.SignInManager,
+                fixture.TokenService);
+
             this.userManager = fixture.UserManager;
-            this.roleManager = fixture.RoleManager;
         }
 
         [Fact]
@@ -34,7 +42,7 @@
                 Role = Domain.Enum.Role.Manager
             };
 
-            var commandHandler = new RegisterCommand.Handler(userManager, roleManager);
+            var commandHandler = new RegisterCommand.Handler(this.applicationUserRepository);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
