@@ -8,39 +8,39 @@
     public class Repository<T> : IRepository<T> 
         where T : class
     {
-        protected readonly TaskManagerDbContext _context;
+        protected readonly TaskManagerDbContext Context;
 
         public Repository(TaskManagerDbContext context)
         {
-            _context = context;
+            this.Context = context;
         }
 
         public async Task Add(T item)
         {
-            await _context.Set<T>().AddAsync(item);
-            await _context.SaveChangesAsync();
+            await this.Context.Set<T>().AddAsync(item);
+            await this.Context.SaveChangesAsync();
         }
 
         public async Task Delete(T item)
         {
-            _context.Set<T>().Remove(item);
-            await _context.SaveChangesAsync();
+            this.Context.Set<T>().Remove(item);
+            await this.Context.SaveChangesAsync();
         }
 
         public async Task<List<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await this.Context.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await this.Context.Set<T>().FindAsync(id);
         }
 
         public async Task Update(T item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            this.Context.Entry(item).State = EntityState.Modified;
+            await this.Context.SaveChangesAsync();
         }
     }
 }
