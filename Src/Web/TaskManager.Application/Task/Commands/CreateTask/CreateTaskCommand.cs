@@ -6,6 +6,7 @@
     using MediatR;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
     using TaskManager.Domain.Enum;
 
     public class CreateTaskCommand : IRequest
@@ -39,7 +40,7 @@
                 var project = await this.projectRepository.GetByIdAsync(request.ProjectId)
                     ?? throw new EntityNotFoundException();
 
-                var task = new Domain.Entity.Task
+                var task = new ToDoTask
                 {
                     Name = request.Name,
                     Description = request.Description,

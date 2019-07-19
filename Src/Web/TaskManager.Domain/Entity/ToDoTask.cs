@@ -2,10 +2,7 @@
 {
     using TaskManager.Domain.Entity.Base;
 
-    public class Task : BaseTask
+    public class ToDoTask : BaseTask
     {
-        public Task()
-        {
-        }
     }
 }

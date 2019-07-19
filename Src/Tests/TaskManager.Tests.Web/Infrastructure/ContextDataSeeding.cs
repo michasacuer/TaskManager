@@ -95,16 +95,16 @@
             return projects;    
         }
 
-        private static Task[] AddTasksToDatabase()
+        private static ToDoTask[] AddTasksToDatabase()
         {
             int tasksCount = 5;
-            var tasks = new Task[tasksCount];
+            var tasks = new ToDoTask[tasksCount];
 
             for (int i = 0; i < tasksCount; i++)
             {
                 if (i % 2 == 0)
                 {
-                    tasks[i] = new Task
+                    tasks[i] = new ToDoTask
                     {
                         Name = $"Task{i}",
                         Description = $"Desc{i}",
@@ -115,7 +115,7 @@
                 }
                 if (i == 2 || i == 4)
                 {
-                    tasks[i] = new Task
+                    tasks[i] = new ToDoTask
                     {
                         Name = $"Task{i}",
                         Description = $"Desc{i}",
@@ -127,7 +127,7 @@
                 }
                 else
                 {
-                    tasks[i] = new Task
+                    tasks[i] = new ToDoTask
                     {
                         Name = $"Task{i}",
                         Description = $"Desc{i}",

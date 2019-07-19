@@ -11,7 +11,7 @@
             RuleFor(x => x.TaskId).NotEmpty();
         }
 
-        public EndTaskByUserCommandValidator(Task task)
+        public EndTaskByUserCommandValidator(ToDoTask task)
         {
             RuleFor(x => x.ApplicationUserId).Equal(task.ApplicationUserId);
         }

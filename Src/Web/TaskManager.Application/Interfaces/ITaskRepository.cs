@@ -1,6 +1,8 @@
 ﻿namespace TaskManager.Application.Interfaces
 {
-    public interface ITaskRepository : IRepository<Domain.Entity.Task>
+    using TaskManager.Domain.Entity;
+
+    public interface ITaskRepository : IRepository<ToDoTask>
     {
     }
 }

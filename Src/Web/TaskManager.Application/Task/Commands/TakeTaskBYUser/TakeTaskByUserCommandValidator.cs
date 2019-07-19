@@ -11,7 +11,7 @@
         }
     }
 
-    public class TaskApplicationUserIdValidator : AbstractValidator<Task>
+    public class TaskApplicationUserIdValidator : AbstractValidator<ToDoTask>
     {
         public TaskApplicationUserIdValidator()
         {

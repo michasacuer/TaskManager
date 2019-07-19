@@ -4,18 +4,19 @@
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using TaskManager.Domain.Entity;
 
     public interface ITaskManagerDbContext
     {
-        DbSet<Domain.Entity.Project> Projects { get; set; }
+        DbSet<Project> Projects { get; set; }
 
-        DbSet<Domain.Entity.Task> Tasks { get; set; }
+        DbSet<ToDoTask> Tasks { get; set; }
 
-        DbSet<Domain.Entity.EndedTask> EndedTasks { get; set; }
+        DbSet<EndedTask> EndedTasks { get; set; }
 
-        DbSet<Domain.Entity.Notification> Notifications { get; set; }
+        DbSet<Notification> Notifications { get; set; }
 
-        DbSet<Domain.Entity.ApplicationUser> Users { get; set; }
+        DbSet<ApplicationUser> Users { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

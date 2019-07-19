@@ -5,10 +5,6 @@
 
     public class EndedTask : BaseTask
     {
-        public EndedTask()
-        {
-        }
-
         public int? SpentStoryPoints { get; set; }
 
         public DateTime? EndTime { get; set; }
