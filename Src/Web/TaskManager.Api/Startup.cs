@@ -19,6 +19,7 @@
     using TaskManager.Domain.Entity;
     using TaskManager.Infrastructure.Implementations;
     using TaskManager.Persistence;
+    using TaskManager.Persistence.Repository;
 
     public class Startup
     {
@@ -37,7 +38,11 @@
 
             services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
 
-            services.AddTransient<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
 
             services.AddDbContext<TaskManagerDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TaskManagerDatabase")));

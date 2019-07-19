@@ -8,15 +8,22 @@
     using TaskManager.Application.Task.Commands.EndTaskByUser;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
+    using TaskManager.Persistence.Repository;
 
     [Collection("ServicesTestCollection")]
     public class EndTaskByUserCommandTests
     {
         private readonly TaskManagerDbContext context;
 
+        private readonly TaskRepository taskRepository;
+
+        private readonly EndedTaskRepository endedTaskRepository;
+
         public EndTaskByUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
+            this.taskRepository = new TaskRepository(this.context);
+            this.endedTaskRepository = new EndedTaskRepository(this.context);
         }
 
         [Fact]
@@ -32,7 +39,7 @@
                 ApplicationUserId = "NotEmpty"
             };
 
-            var commandHandler = new EndTaskByUserCommand.Handler(this.context);
+            var commandHandler = new EndTaskByUserCommand.Handler(this.taskRepository, this.endedTaskRepository);
 
             await commandHandler.Handle(command, CancellationToken.None);
 

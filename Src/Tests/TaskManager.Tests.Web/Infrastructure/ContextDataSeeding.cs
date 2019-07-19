@@ -92,7 +92,7 @@
                 };
             }
 
-            return projects;
+            return projects;    
         }
 
         private static Task[] AddTasksToDatabase()

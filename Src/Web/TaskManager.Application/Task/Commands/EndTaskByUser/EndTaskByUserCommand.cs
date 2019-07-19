@@ -17,18 +17,21 @@
 
         public class Handler : IRequestHandler<EndTaskByUserCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly ITaskRepository taskRepository;
 
-            public Handler(ITaskManagerDbContext context)
+            private readonly IEndedTaskRepository endedTaskRepository;
+
+            public Handler(ITaskRepository taskRepository, IEndedTaskRepository endedTaskRepository)
             {
-                this.context = context;
+                this.taskRepository = taskRepository;
+                this.endedTaskRepository = endedTaskRepository;
             }
 
             public async Task<Unit> Handle(EndTaskByUserCommand request, CancellationToken cancellationToken)
             {
                 await new EndTaskByUserCommandValidator().ValidateAndThrowAsync(request);
 
-                var task = await this.context.Tasks.FindAsync(request.TaskId)
+                var task = await this.taskRepository.GetByIdAsync(request.TaskId)
                     ?? throw new EntityNotFoundException();
 
                 await new EndTaskByUserCommandValidator(task).ValidateAndThrowAsync(request);
@@ -44,9 +47,9 @@
                     EndTime = DateTime.UtcNow
                 };
 
-                this.context.EndedTasks.Add(endedTask);
-                this.context.Tasks.Remove(task);
-                await this.context.SaveChangesAsync(cancellationToken);
+                await this.endedTaskRepository.AddAsync(endedTask);
+                this.taskRepository.Delete(task);
+                await this.endedTaskRepository.SaveAsync(cancellationToken);
 
                 return Unit.Value;
             }

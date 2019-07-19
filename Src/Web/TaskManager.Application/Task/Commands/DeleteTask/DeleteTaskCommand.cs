@@ -12,20 +12,20 @@
 
         public class Handler : IRequestHandler<DeleteTaskCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly ITaskRepository taskRepository;
 
-            public Handler(ITaskManagerDbContext context)
+            public Handler(ITaskRepository taskRepository)
             {
-                this.context = context;
+                this.taskRepository = taskRepository;
             }
 
             public async Task<Unit> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
             {
-                var task = await this.context.Tasks.FindAsync(request.TaskId)
+                var task = await this.taskRepository.GetByIdAsync(request.TaskId)
                     ?? throw new EntityNotFoundException();
 
-                this.context.Tasks.Remove(task);
-                await this.context.SaveChangesAsync(cancellationToken);
+                this.taskRepository.Delete(task);
+                await this.taskRepository.SaveAsync(cancellationToken);
 
                 return Unit.Value;
             }

@@ -22,18 +22,21 @@
 
         public class Handler : IRequestHandler<CreateTaskCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly ITaskRepository taskRepository;
 
-            public Handler(ITaskManagerDbContext context)
+            private readonly IProjectRepository projectRepository;
+
+            public Handler(ITaskRepository taskRepository, IProjectRepository projectRepository)
             {
-                this.context = context;
+                this.taskRepository = taskRepository;
+                this.projectRepository = projectRepository;
             }
 
             public async Task<Unit> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
             {
                 await new CreateTaskCommandValidator().ValidateAndThrowAsync(request);
 
-                var project = await this.context.Projects.FindAsync(request.ProjectId)
+                var project = await this.projectRepository.GetByIdAsync(request.ProjectId)
                     ?? throw new EntityNotFoundException();
 
                 var task = new Domain.Entity.Task
@@ -44,8 +47,8 @@
                     ProjectId = request.ProjectId
                 };
 
-                this.context.Tasks.Add(task);
-                await this.context.SaveChangesAsync(cancellationToken);
+                await this.taskRepository.AddAsync(task);
+                await this.taskRepository.SaveAsync(cancellationToken);
 
                 return Unit.Value;
             }

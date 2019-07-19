@@ -8,6 +8,7 @@
     using TaskManager.Application.Task.Commands.DeleteTask;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
+    using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
     [Collection("ServicesTestCollection")]
@@ -15,9 +16,12 @@
     {
         private readonly TaskManagerDbContext context;
 
+        private readonly TaskRepository taskRepository;
+
         public DeleteTaskCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
+            this.taskRepository = new TaskRepository(this.context);
         }
 
         [Fact]
@@ -26,7 +30,7 @@
             var task = await this.context.Tasks.FindAsync(1);
 
             var command = new DeleteTaskCommand { TaskId = task.Id };
-            var commandHandler = new DeleteTaskCommand.Handler(this.context);
+            var commandHandler = new DeleteTaskCommand.Handler(this.taskRepository);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
@@ -38,7 +42,7 @@
         public async Task DeleteTaskShouldThrowWhenProjectNotFound()
         {
             var command = new DeleteTaskCommand { TaskId = 2323223 };
-            var commandHandler = new DeleteTaskCommand.Handler(this.context);
+            var commandHandler = new DeleteTaskCommand.Handler(this.taskRepository);
 
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }

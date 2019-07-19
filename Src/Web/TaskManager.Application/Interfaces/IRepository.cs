@@ -1,19 +1,22 @@
 ﻿namespace TaskManager.Application.Interfaces
 {
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IRepository<T>
         where T : class
     {
-        Task<T> GetById(int id);
+        Task<T> GetByIdAsync(int id);
 
-        Task<List<T>> GetAll();
+        Task<List<T>> GetAllAsync();
 
-        Task Add(T item);
+        Task AddAsync(T item);
 
-        Task Update(T item);
+        void Update(T item);
+        
+        void Delete(T item);
 
-        Task Delete(T item);
+        Task SaveAsync(CancellationToken cancellationToken = default);
     }
 }
