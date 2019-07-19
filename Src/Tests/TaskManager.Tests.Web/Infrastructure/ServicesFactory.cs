@@ -43,7 +43,7 @@
             string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
 
             var basePath 
-                = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("Tests")) + @"\Web\TaskManager.Api";
+                = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("Tests")) + "Web\\TaskManager.Api";
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
