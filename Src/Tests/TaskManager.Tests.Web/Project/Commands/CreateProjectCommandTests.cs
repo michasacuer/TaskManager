@@ -9,6 +9,7 @@
     using TaskManager.Application.Commands.CreateProject;
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
+    using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
     [Collection("ServicesTestCollection")]
@@ -16,9 +17,12 @@
     {
         private readonly TaskManagerDbContext context;
 
+        private readonly ProjectRepository projectRepository;
+
         public CreateProjectCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
+            this.projectRepository = new ProjectRepository(fixture.Context);
         }
 
         [Fact]
@@ -30,7 +34,7 @@
                 Description = "Description"
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.context);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
@@ -48,7 +52,7 @@
                 Name = "ProjectTest",
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.context);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
@@ -66,23 +70,9 @@
                 Description = "Description of project without name"
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.context);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
 
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
-        }
-
-        [Fact]
-        public async Task CreateProjectWithSameNameAsAnotherShouldThrowException()
-        {
-            var command = new CreateProjectCommand
-            {
-                Name = "Project0",
-                Description = "Description"
-            };
-
-            var commandHandler = new CreateProjectCommand.Handler(this.context);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityAlreadyExistsException>();
         }
     }
 }

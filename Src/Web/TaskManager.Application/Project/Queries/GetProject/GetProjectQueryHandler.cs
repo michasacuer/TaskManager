@@ -3,22 +3,21 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
-    using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
 
     public class GetProjectQueryHandler : IRequestHandler<GetProjectQuery, ProjectModel>
     {
-        private readonly ITaskManagerDbContext context;
+        private readonly IProjectRepository projectRepository;
 
-        public GetProjectQueryHandler(ITaskManagerDbContext context)
+        public GetProjectQueryHandler(IProjectRepository projectRepository)
         {
-            this.context = context;
+            this.projectRepository = projectRepository;
         }
 
         public async Task<ProjectModel> Handle(GetProjectQuery request, CancellationToken cancellationToken)
         {
-            var project = await this.context.Projects.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == request.ProjectId)
+            var project = await this.projectRepository.GetProjectWithTasksAsync(request.ProjectId)
                 ?? throw new EntityNotFoundException();
 
             return new ProjectModel

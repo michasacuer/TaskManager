@@ -1,8 +1,8 @@
 ﻿namespace TaskManager.Persistence.Repository
 {
-    using Microsoft.AspNetCore.Identity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
     using TaskManager.Application.Commands;
     using TaskManager.Application.Interfaces;
     using TaskManager.Application.Queries;

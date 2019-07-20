@@ -8,15 +8,19 @@
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
+    using TaskManager.Persistence.Repository;
 
     [Collection("ServicesTestCollection")]
     public class GetProjectQueryHandlerTests
     {
         private readonly TaskManagerDbContext context;
 
+        private readonly ProjectRepository projectRepository;
+
         public GetProjectQueryHandlerTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
+            this.projectRepository = new ProjectRepository(fixture.Context);
         }
 
         [Fact]
@@ -27,7 +31,7 @@
                 ProjectId = 3
             };
 
-            var queryHandler = new GetProjectQueryHandler(this.context);
+            var queryHandler = new GetProjectQueryHandler(this.projectRepository);
 
             var result = await queryHandler.Handle(command, CancellationToken.None);
 
@@ -43,7 +47,7 @@
                 ProjectId = 32132134
             };
 
-            var queryHandler = new GetProjectQueryHandler(this.context);
+            var queryHandler = new GetProjectQueryHandler(this.projectRepository);
 
             await queryHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
@@ -51,7 +55,7 @@
         [Fact]
         public async Task GetProjectThrowExceptionWhenProjectIdIsEmpty()
         {
-            var queryHandler = new GetProjectQueryHandler(this.context);
+            var queryHandler = new GetProjectQueryHandler(this.projectRepository);
 
             await queryHandler.Handle(new GetProjectQuery(), CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }

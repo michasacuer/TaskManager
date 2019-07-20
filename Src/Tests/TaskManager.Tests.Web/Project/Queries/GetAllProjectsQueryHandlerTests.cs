@@ -7,6 +7,7 @@
     using Xunit;
     using TaskManager.Application.Project.Queries.GetAllProjects;
     using TaskManager.Persistence;
+    using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
     [Collection("ServicesTestCollection")]
@@ -14,15 +15,18 @@
     {
         private readonly TaskManagerDbContext context;
 
+        private readonly ProjectRepository projectRepository;
+
         public GetAllProjectsQueryHandlerTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
+            this.projectRepository = new ProjectRepository(fixture.Context);
         }
 
         [Fact]
         public async Task GetAllProjectsShouldGetAllProjectsFromDb()
         {
-            var queryHandler = new GetAllProjectsQueryHandler(this.context);
+            var queryHandler = new GetAllProjectsQueryHandler(this.projectRepository);
 
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
@@ -33,7 +37,7 @@
         [Fact]
         public async Task EnsureThatProjectsHaveIncludedTasks()
         {
-            var queryHandler = new GetAllProjectsQueryHandler(this.context);
+            var queryHandler = new GetAllProjectsQueryHandler(this.projectRepository);
 
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
