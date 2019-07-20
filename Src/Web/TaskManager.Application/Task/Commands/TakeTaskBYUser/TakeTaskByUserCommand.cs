@@ -19,7 +19,7 @@
 
             private readonly ITaskRepository taskRepository;
 
-            public Handler(IApplicationUserRepository applicationUserRepository, ITaskRepository taskRepository)
+            public Handler(IApplicationUserRepository   applicationUserRepository, ITaskRepository taskRepository)
             {
                 this.applicationUserRepository = applicationUserRepository;
                 this.taskRepository = taskRepository;

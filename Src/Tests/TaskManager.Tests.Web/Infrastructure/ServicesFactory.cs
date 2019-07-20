@@ -1,7 +1,6 @@
 ﻿namespace TaskManager.Tests.Infrastructure
 {
     using System;
-    using System.IO;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
