@@ -4,9 +4,8 @@
     using System.Threading.Tasks;
     using FluentValidation;
     using MediatR;
-    using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
-    using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
 
     public class CreateProjectCommand : IRequest
     {
@@ -16,30 +15,24 @@
 
         public class Handler : IRequestHandler<CreateProjectCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly IProjectRepository projectRepository;
 
-            public Handler(ITaskManagerDbContext context)
+            public Handler(IProjectRepository projectRepository)
             {
-                this.context = context;
+                this.projectRepository = projectRepository;
             }
 
             public async Task<Unit> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
             {
                 await new CreateProjectCommandValidator().ValidateAndThrowAsync(request);
 
-                var project = await this.context.Projects.FirstOrDefaultAsync(p => p.Name.Equals(request.Name));
-                if (project != null)
-                {
-                    throw new EntityAlreadyExistsException();
-                }
-
-                this.context.Projects.Add(new Domain.Entity.Project
+                await this.projectRepository.AddAsync(new Project
                 {
                     Name = request.Name,
                     Description = request.Description
                 });
 
-                await this.context.SaveChangesAsync(cancellationToken);
+                await this.projectRepository.SaveAsync(cancellationToken);
 
                 return Unit.Value;
             }

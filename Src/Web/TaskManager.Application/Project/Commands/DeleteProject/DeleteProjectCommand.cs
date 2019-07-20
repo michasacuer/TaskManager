@@ -12,20 +12,20 @@
 
         public class Handler : IRequestHandler<DeleteProjectCommand>
         {
-            private readonly ITaskManagerDbContext context;
+            private readonly IProjectRepository projectRepository;
 
-            public Handler(ITaskManagerDbContext context)
+            public Handler(IProjectRepository projectRepository)
             {
-                this.context = context;
+                this.projectRepository = projectRepository;
             }
 
             public async Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
             {
-                var project = await this.context.Projects.FindAsync(request.ProjectId)
+                var project = await this.projectRepository.GetByIdAsync(request.ProjectId)
                     ?? throw new EntityNotFoundException();
 
-                this.context.Projects.Remove(project);
-                await this.context.SaveChangesAsync(cancellationToken);
+                this.projectRepository.Delete(project);
+                await this.projectRepository.SaveAsync(cancellationToken);
 
                 return Unit.Value;
             }
