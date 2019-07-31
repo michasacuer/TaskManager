@@ -28,7 +28,7 @@
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<ProjectsListModel>();
-            result.Projects.ToList().Count.ShouldBe(7);
+            result.Projects.ShouldNotBeEmpty();
         }
 
         [Fact]
