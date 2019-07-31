@@ -7,17 +7,17 @@
 
     public class TestConnection : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
-        private readonly HttpClient _client;
+        private readonly HttpClient client;
 
         public TestConnection(CustomWebApplicationFactory<TestStartup> factory)
         {
-            _client = factory.CreateClient();
+            client = factory.CreateClient();
         }
 
         [Fact]
         public async Task Check_If_Api_Works()
         {
-            var response = await _client.GetAsync("/api/test");
+            var response = await this.client.GetAsync("/api/test");
             response.EnsureSuccessStatusCode();
         }
     }
