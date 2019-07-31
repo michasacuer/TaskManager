@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using TaskManager.Tests.Web.Infrastructure.Hubs;
 
     public class TestStartup
     {
@@ -18,6 +19,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,6 +32,7 @@
             app.UseAuthentication();
             app.UseMvc();
             app.UseHttpsRedirection();
+            app.UseSignalR(routes => routes.MapHub<NotificationTestHub>("/Notifications"));
         }
     }
 }

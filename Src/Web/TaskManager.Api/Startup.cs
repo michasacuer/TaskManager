@@ -17,6 +17,7 @@
     using TaskManager.Application.Commands;
     using TaskManager.Application.Interfaces;
     using TaskManager.Domain.Entity;
+    using TaskManager.Infrastructure.Hubs;
     using TaskManager.Infrastructure.Implementations;
     using TaskManager.Persistence;
     using TaskManager.Persistence.Repository;
@@ -33,12 +34,11 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddSingleton(Configuration);
-
             services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
-
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddSignalR();
 
             services.AddScoped<ITaskManagerDbContext, TaskManagerDbContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -61,25 +61,25 @@
             .AddDefaultTokenProviders();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            services
-                .AddAuthentication(options =>
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = this.Configuration["JwtIssuer"],
-                        ValidAudience = this.Configuration["JwtIssuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtKey"])),
-                        ClockSkew = TimeSpan.Zero
-                    };
-                });
+                    ValidIssuer = this.Configuration["JwtIssuer"],
+                    ValidAudience = this.Configuration["JwtIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JwtKey"])),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -90,10 +90,10 @@
             }
 
             app.UseAuthentication();
-            app.UseHttpsRedirection();
             app.UseMvc();
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyHeader().AllowAnyOrigin());
             app.UseHttpsRedirection();
+            app.UseSignalR(routes => routes.MapHub<NotificationHub>("/Notifications"));
         }
     }
 }
