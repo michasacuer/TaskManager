@@ -64,7 +64,8 @@
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<TaskManagerDbContext>();
+            })
+            .AddEntityFrameworkStores<TaskManagerDbContext>();
 
             return services;
         }

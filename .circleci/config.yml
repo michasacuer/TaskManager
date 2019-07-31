@@ -38,3 +38,6 @@ jobs:
     - run:
         name: Run Web Tests
         command: dotnet test Src/Tests/TaskManager.Tests.Web
+    - run:
+        name: Run Functional Tests
+        command: dotnet test Src/Tests/TaskManager.Tests.WebFunctional

@@ -40,6 +40,7 @@
 
             services.AddScoped<ITokenService, TokenService>();
 
+            services.AddScoped<ITaskManagerDbContext, TaskManagerDbContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
@@ -56,8 +57,8 @@
                 options.Password.RequireDigit = false;
                 options.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<TaskManagerDbContext>()
-                .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<TaskManagerDbContext>()
+            .AddDefaultTokenProviders();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services
