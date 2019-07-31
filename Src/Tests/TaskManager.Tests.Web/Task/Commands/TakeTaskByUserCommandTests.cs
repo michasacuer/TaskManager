@@ -7,7 +7,9 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Task.Commands.TakeTaskByUser;
+    using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
     using TaskManager.Persistence.Repository;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
@@ -17,7 +19,7 @@
     {
         private readonly ApplicationUserRepository applicationUserRepository;
 
-        private readonly TaskRepository taskRepository;
+        private readonly IRepository<ToDoTask> taskRepository;
 
         private readonly TaskManagerDbContext context;
 
@@ -29,7 +31,7 @@
                 fixture.SignInManager,
                 fixture.TokenService);
 
-            this.taskRepository = new TaskRepository(fixture.Context);
+            this.taskRepository = new Repository<ToDoTask>(fixture.Context);
             this.context = fixture.Context;
         }
 

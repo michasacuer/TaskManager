@@ -17,11 +17,11 @@
 
         public class Handler : IRequestHandler<EndTaskByUserCommand>
         {
-            private readonly ITaskRepository taskRepository;
+            private readonly IRepository<ToDoTask> taskRepository;
 
-            private readonly IEndedTaskRepository endedTaskRepository;
+            private readonly IRepository<EndedTask> endedTaskRepository;
 
-            public Handler(ITaskRepository taskRepository, IEndedTaskRepository endedTaskRepository)
+            public Handler(IRepository<ToDoTask> taskRepository, IRepository<EndedTask> endedTaskRepository)
             {
                 this.taskRepository = taskRepository;
                 this.endedTaskRepository = endedTaskRepository;

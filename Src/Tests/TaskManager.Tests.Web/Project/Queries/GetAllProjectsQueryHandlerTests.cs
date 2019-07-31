@@ -13,13 +13,10 @@
     [Collection("ServicesTestCollection")]
     public class GetAllProjectsQueryHandlerTests
     {
-        private readonly TaskManagerDbContext context;
-
         private readonly ProjectRepository projectRepository;
 
         public GetAllProjectsQueryHandlerTests(ServicesFixture fixture)
         {
-            this.context = fixture.Context;
             this.projectRepository = new ProjectRepository(fixture.Context);
         }
 

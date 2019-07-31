@@ -5,8 +5,10 @@
     using System.Threading.Tasks;
     using Shouldly;
     using Xunit;
+    using TaskManager.Application.Interfaces;
     using TaskManager.Application.Task.Commands.DeleteTask;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
     using TaskManager.Persistence;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
@@ -16,12 +18,12 @@
     {
         private readonly TaskManagerDbContext context;
 
-        private readonly TaskRepository taskRepository;
+        private readonly IRepository<ToDoTask> taskRepository;
 
         public DeleteTaskCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
-            this.taskRepository = new TaskRepository(this.context);
+            this.taskRepository = new Repository<ToDoTask>(this.context);
         }
 
         [Fact]

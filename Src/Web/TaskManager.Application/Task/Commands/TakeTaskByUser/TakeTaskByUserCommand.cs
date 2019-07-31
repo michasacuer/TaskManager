@@ -6,6 +6,7 @@
     using MediatR;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
 
     public class TakeTaskByUserCommand : IRequest
     {
@@ -17,9 +18,9 @@
         {
             private readonly IApplicationUserRepository applicationUserRepository;
 
-            private readonly ITaskRepository taskRepository;
+            private readonly IRepository<ToDoTask> taskRepository;
 
-            public Handler(IApplicationUserRepository applicationUserRepository, ITaskRepository taskRepository)
+            public Handler(IApplicationUserRepository applicationUserRepository, IRepository<ToDoTask> taskRepository)
             {
                 this.applicationUserRepository = applicationUserRepository;
                 this.taskRepository = taskRepository;

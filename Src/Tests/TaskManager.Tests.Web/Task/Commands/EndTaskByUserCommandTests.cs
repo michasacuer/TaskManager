@@ -9,21 +9,23 @@
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
     using TaskManager.Persistence.Repository;
+    using TaskManager.Domain.Entity;
+    using TaskManager.Application.Interfaces;
 
     [Collection("ServicesTestCollection")]
     public class EndTaskByUserCommandTests
     {
         private readonly TaskManagerDbContext context;
 
-        private readonly TaskRepository taskRepository;
+        private readonly IRepository<ToDoTask> taskRepository;
 
-        private readonly EndedTaskRepository endedTaskRepository;
+        private readonly IRepository<EndedTask> endedTaskRepository;
 
         public EndTaskByUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
-            this.taskRepository = new TaskRepository(this.context);
-            this.endedTaskRepository = new EndedTaskRepository(this.context);
+            this.taskRepository = new Repository<ToDoTask>(this.context);
+            this.endedTaskRepository = new Repository<EndedTask>(this.context);
         }
 
         [Fact]

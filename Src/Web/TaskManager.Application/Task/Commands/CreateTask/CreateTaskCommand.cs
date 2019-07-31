@@ -23,11 +23,11 @@
 
         public class Handler : IRequestHandler<CreateTaskCommand>
         {
-            private readonly ITaskRepository taskRepository;
+            private readonly IRepository<ToDoTask> taskRepository;
 
             private readonly IProjectRepository projectRepository;
 
-            public Handler(ITaskRepository taskRepository, IProjectRepository projectRepository)
+            public Handler(IRepository<ToDoTask> taskRepository, IProjectRepository projectRepository)
             {
                 this.taskRepository = taskRepository;
                 this.projectRepository = projectRepository;

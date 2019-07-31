@@ -5,6 +5,7 @@
     using MediatR;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
 
     public class DeleteTaskCommand : IRequest
     {
@@ -12,9 +13,9 @@
 
         public class Handler : IRequestHandler<DeleteTaskCommand>
         {
-            private readonly ITaskRepository taskRepository;
+            private readonly IRepository<ToDoTask> taskRepository;
 
-            public Handler(ITaskRepository taskRepository)
+            public Handler(IRepository<ToDoTask> taskRepository)
             {
                 this.taskRepository = taskRepository;
             }
