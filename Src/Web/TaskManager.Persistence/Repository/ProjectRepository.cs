@@ -20,7 +20,10 @@
 
         public async Task<Project> GetProjectWithTasksAsync(int id)
         {
-            return await base.context.Projects.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == id);
+            return await base.context.Projects
+                .Include(p => p.Tasks)
+                .Include(p => p.EndedTasks)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

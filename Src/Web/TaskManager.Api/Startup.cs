@@ -35,9 +35,12 @@
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton(Configuration);
+
             services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IRaportService, RaportService>();
+            services.AddHttpContextAccessor();
             services.AddSignalR();
 
             services.AddScoped<ITaskManagerDbContext, TaskManagerDbContext>();
