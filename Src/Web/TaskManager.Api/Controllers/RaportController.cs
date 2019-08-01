@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using TaskManager.Application.Raport.Queries;
+    using TaskManager.Application.Raport.Queries.GetProjectRaport;
 
     public class RaportController : BaseController
     {

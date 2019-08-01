@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Raport.Queries
+﻿namespace TaskManager.Application.Raport.Queries.GetProjectRaport
 {
     using System.Threading;
     using System.Threading.Tasks;
