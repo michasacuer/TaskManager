@@ -21,7 +21,7 @@
         }
 
         [Fact]
-        public async Task GetAllTasksShouldGetAllProjectsFromDb()
+        public async Task GetAllTasksShouldGetAllTasksFromDb()
         {
             var queryHandler = new GetAllTasksQueryHandler(this.repository);
 

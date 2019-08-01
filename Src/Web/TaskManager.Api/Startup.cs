@@ -44,6 +44,7 @@
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             services.AddDbContext<TaskManagerDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TaskManagerDatabase")));

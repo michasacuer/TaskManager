@@ -98,7 +98,7 @@
         private static ToDoTask[] AddTasksToDatabase()
         {
             int tasksCount = 5;
-            var tasks = new ToDoTask[tasksCount];
+            var tasks = new ToDoTask[tasksCount + 1];
 
             for (int i = 0; i < tasksCount; i++)
             {
@@ -136,6 +136,15 @@
                     };
                 }
             }
+
+            tasks[5] = new ToDoTask
+            {
+                Name = $"Task5",
+                Description = $"Desc5",
+                Priority = Priority.High,
+                ProjectId = 6,
+                ApplicationUserId = "GetUserTaskTest"
+            };
 
             return tasks;
         }

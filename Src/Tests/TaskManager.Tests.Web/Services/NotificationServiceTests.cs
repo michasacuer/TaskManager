@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Moq;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Interfaces;
@@ -20,7 +19,6 @@
         public NotificationServiceTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
-
             this.service = new NotificationTestService(new Repository<Notification>(fixture.Context));
         }
 
