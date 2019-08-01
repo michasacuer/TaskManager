@@ -6,7 +6,6 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Project.Queries.GetAllProjects;
-    using TaskManager.Persistence;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
