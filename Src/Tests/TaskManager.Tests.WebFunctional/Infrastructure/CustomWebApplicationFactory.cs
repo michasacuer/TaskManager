@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.TestHost;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using TaskManager.Application.Interfaces;
     using TaskManager.Domain.Entity;
     using TaskManager.Persistence;
     using TaskManager.Tests.Infrastructure;
@@ -21,8 +20,15 @@
 
             builder.ConfigureServices(services =>
             {
-                services.AddScoped<ITaskManagerDbContext, TaskManagerDbContext>();
-                services.AddDbContext<TaskManagerDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                var serviceProvider = new ServiceCollection()
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
+
+                services.AddDbContext<TaskManagerDbContext>(options =>
+                {
+                    options.UseInMemoryDatabase("TEST");
+                    options.UseInternalServiceProvider(serviceProvider);
+                });
 
                 services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
@@ -42,15 +48,14 @@
                 {
                     var scopedServices = scope.ServiceProvider;
 
-                    var context = scopedServices.GetRequiredService<ITaskManagerDbContext>();
+                    var context = scopedServices.GetRequiredService<TaskManagerDbContext>();
                     var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    var concreteContext = (TaskManagerDbContext)context;
-                    concreteContext.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
 
-                    ContextDataSeeding.Run(concreteContext, roleManager, userManager);
-                    ContextDataSeeding.AddRolesToUsers(concreteContext, roleManager, userManager);
+                    ContextDataSeeding.Run(ref context, roleManager, userManager);
+                    ContextDataSeeding.AddRolesToUsers(ref context, roleManager, userManager);
                 }
             });
 

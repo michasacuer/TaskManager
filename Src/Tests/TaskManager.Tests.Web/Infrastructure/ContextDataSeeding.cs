@@ -8,12 +8,12 @@
     public class ContextDataSeeding
     {
         public static void Run(
-            TaskManagerDbContext context,
+            ref TaskManagerDbContext context,
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {
             context.Users.AddRange(AddUsersToDatabase());
-            AddRolesToUsers(context, roleManager, userManager);
+            AddRolesToUsers(ref context, roleManager, userManager);
 
             context.Projects.AddRange(AddProjectsToDatabase());
             context.Tasks.AddRange(AddTasksToDatabase());
@@ -22,7 +22,7 @@
         }
 
         public static void AddRolesToUsers(
-            TaskManagerDbContext context,
+            ref TaskManagerDbContext context,
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {

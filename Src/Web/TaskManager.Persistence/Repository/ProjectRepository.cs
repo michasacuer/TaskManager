@@ -15,7 +15,10 @@
 
         public async Task<List<Project>> GetAllProjectsWithTasksAsync()
         {
-            return await base.context.Projects.Include(p => p.Tasks).ToListAsync();
+            return await base.context.Projects
+                .Include(p => p.Tasks)
+                .Include(p => p.EndedTasks)
+                .ToListAsync();
         }
 
         public async Task<Project> GetProjectWithTasksAsync(int id)

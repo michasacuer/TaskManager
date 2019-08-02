@@ -22,8 +22,8 @@
             var signInManager = services.ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
             var tokenService = services.ServiceProvider.GetRequiredService<ITokenService>();
 
-            ContextDataSeeding.Run(context, roleManager, userManager);
-            ContextDataSeeding.AddRolesToUsers(context, roleManager, userManager);
+            ContextDataSeeding.Run(ref context, roleManager, userManager);
+            ContextDataSeeding.AddRolesToUsers(ref context, roleManager, userManager);
 
             return new ServicesModel
             {

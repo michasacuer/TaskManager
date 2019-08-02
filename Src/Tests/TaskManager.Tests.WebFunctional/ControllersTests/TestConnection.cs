@@ -11,6 +11,7 @@
     public class TestConnection : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
         private readonly HttpClient client;
+
         private readonly TestServer server;
 
         public TestConnection(CustomWebApplicationFactory<TestStartup> factory)
