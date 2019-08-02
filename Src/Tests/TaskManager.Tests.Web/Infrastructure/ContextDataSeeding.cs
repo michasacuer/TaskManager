@@ -12,7 +12,7 @@
             RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {
-            context.Users.AddRange(AddUsersToDatabase());
+            AddUsersToDatabase(userManager);
             AddRolesToUsers(ref context, roleManager, userManager);
 
             context.Projects.AddRange(AddProjectsToDatabase());
@@ -60,7 +60,7 @@
             }
         }
 
-        private static ApplicationUser[] AddUsersToDatabase()
+        private static void AddUsersToDatabase(UserManager<ApplicationUser> userManager)
         {
             int usersCount = 3;
             var users = new ApplicationUser[usersCount];
@@ -70,11 +70,13 @@
                 users[i] = new ApplicationUser
                 {
                     FirstName = $"First{i}",
-                    LastName = $"Name{i}"
+                    LastName = $"Name{i}",
+                    UserName = $"username{i}",
+                    Email = $"test{i}@wp.pl"
                 };
-            }
 
-            return users;
+                userManager.CreateAsync(users[i], $"password11");
+            }
         }
 
 

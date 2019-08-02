@@ -4,9 +4,7 @@
     using System.Threading.Tasks;
     using FluentValidation;
     using MediatR;
-    using Microsoft.AspNetCore.Identity;
     using TaskManager.Application.Interfaces;
-    using TaskManager.Domain.Entity;
     using TaskManager.Domain.Enum;
 
     public class RegisterCommand : IRequest

@@ -21,6 +21,7 @@
         [Fact]
         public async Task Server_Should_Return_All_Projects_From_Db()
         {
+            await this.client.GetCredential("username0", "password11");
             var response = await this.client.GetAsync("Project");
 
             string json = await response.Content.ReadAsStringAsync();
@@ -34,6 +35,7 @@
         [Fact]
         public async Task Server_Should_Return_Concrete_Project_From_Db()
         {
+            await this.client.GetCredential("username0", "password11");
             var response = await this.client.GetAsync("Project/6");
 
             string json = await response.Content.ReadAsStringAsync();
