@@ -7,21 +7,27 @@
 
     public static class HttpClientCredentialExtension
     {
-        public static async Task GetCredential(this HttpClient client, string username, string password)
+        public static async Task GetMockManagerCredential(this HttpClient client)
         {
             var loginModel = new LoginQuery
             {
-                UserName = username,
-                Password = password
+                UserName = "username0",
+                Password = "password11"
             };
 
+            string bearer = await SendLoginRequest(client, loginModel);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
+        }
+
+        private static async Task<string> SendLoginRequest(HttpClient client, LoginQuery loginModel)
+        {
             var response = await client.PostAsJsonAsync("Account/Login", loginModel);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
 
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", json.DeserializeObjectFromJson<LoginModel>().Bearer);
+            return json.DeserializeObjectFromJson<LoginModel>().Bearer;
         }
     }
 }
