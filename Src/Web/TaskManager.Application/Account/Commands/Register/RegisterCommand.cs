@@ -23,18 +23,18 @@
 
         public class Handler : IRequestHandler<RegisterCommand>
         {
-            private readonly IApplicationUserRepository applicationUserRepository;
+            private readonly IApplicationUserService applicationUserService;
 
-            public Handler(IApplicationUserRepository applicationUserRepository)
+            public Handler(IApplicationUserService applicationUserService)
             {
-                this.applicationUserRepository = applicationUserRepository;
+                this.applicationUserService = applicationUserService;
             }
 
             public async Task<Unit> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 new RegisterCommandValidator().ValidateAndThrow(request);
 
-                await this.applicationUserRepository.RegisterAsync(request);
+                await this.applicationUserService.RegisterAsync(request);
 
                 return Unit.Value;
             }

@@ -46,6 +46,7 @@
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IRaportService, RaportService>();
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddHttpContextAccessor();
             services.AddSignalR();
 

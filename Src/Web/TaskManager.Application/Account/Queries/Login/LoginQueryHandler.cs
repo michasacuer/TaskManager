@@ -7,16 +7,16 @@
 
     public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginModel>
     {
-        private readonly IApplicationUserRepository applicationUserRepository;
+        private readonly IApplicationUserService applicationUserService;
 
-        public LoginQueryHandler(IApplicationUserRepository applicationUserRepository)
+        public LoginQueryHandler(IApplicationUserService applicationUserService)
         {
-            this.applicationUserRepository = applicationUserRepository;
+            this.applicationUserService = applicationUserService;
         }
 
         public async Task<LoginModel> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            return await this.applicationUserRepository.LoginAsync(request.UserName, request.Password);
+            return await this.applicationUserService.LoginAsync(request.UserName, request.Password);
         }
     }
 }
