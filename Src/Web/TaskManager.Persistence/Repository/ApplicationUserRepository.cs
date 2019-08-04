@@ -77,17 +77,24 @@
                 LastName = request.LastName
             };
 
-            await this.userManager.CreateAsync(user, request.Password);
+            var result = await this.userManager.CreateAsync(user, request.Password);
 
-            var roleName = request.Role.ToString();
-            if (!await this.roleManager.RoleExistsAsync(roleName))
+            if(result.Succeeded)
             {
-                var role = new IdentityRole(roleName);
-                await this.roleManager.CreateAsync(role);
-            }
+                var roleName = request.Role.ToString();
+                if (!await this.roleManager.RoleExistsAsync(roleName))
+                {
+                    var role = new IdentityRole(roleName);
+                    await this.roleManager.CreateAsync(role);
+                }
 
-            await this.userManager.UpdateSecurityStampAsync(user);
-            await this.userManager.AddToRoleAsync(user, roleName);
+                await this.userManager.UpdateSecurityStampAsync(user);
+                await this.userManager.AddToRoleAsync(user, roleName);
+            }
+            else
+            {
+                throw new EntityAlreadyExistsException();
+            }
         }
 
         public async Task<bool> UserInRoleAsync(ApplicationUser user, string roleName)

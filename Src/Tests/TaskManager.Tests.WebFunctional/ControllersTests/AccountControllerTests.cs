@@ -2,9 +2,11 @@
 {
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands;
     using TaskManager.Application.Queries;
+    using TaskManager.Common.Exceptions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
 
     public class AccountControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
@@ -17,7 +19,7 @@
         }
 
         [Fact]
-        public async Task Client_Cant_Create_Account_And_Login_To_It()
+        public async Task ClientCanCreateAccountAndLoginToIt()
         {
             var command = new RegisterCommand
             {
@@ -38,6 +40,34 @@
             };
             var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query);
             loginResponse.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task ClientCannotLoginToNotExistedAccount()
+        {
+            var query = new LoginQuery
+            {
+                UserName = "not existed",
+                Password = "user"
+            };
+            var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query)
+                .ShouldThrowAsync<EntityNotFoundException>();
+        }
+
+        [Fact]
+        public async Task ClientCantRegisterWhenUserWithSameCredentialExisting()
+        {
+            var command = new RegisterCommand
+            {
+                UserName = "username0",
+                FirstName = "test",
+                LastName = "test",
+                Password = "test11",
+                Email = "test@wp.pl",
+                Role = Domain.Enum.Role.Manager
+            };
+            var registerResponse = await this.client.PostAsJsonAsync("Account/Register", command)
+                .ShouldThrowAsync<EntityAlreadyExistsException>();
         }
     }
 }
