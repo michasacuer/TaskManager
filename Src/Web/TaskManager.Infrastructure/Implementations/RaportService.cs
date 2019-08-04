@@ -44,7 +44,7 @@
             var httpContext = new DefaultHttpContext { RequestServices = this.serviceProvider };
             var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
-            using (var sw = new StringWriter())
+            using (var stringWriter = new StringWriter())
             {
                 string viewPath = "~/wwwroot/RaportTemplate.cshtml";
 
@@ -65,11 +65,11 @@
                     viewResult.View,
                     viewDictionary,
                     new TempDataDictionary(actionContext.HttpContext, this.tempDataProvider),
-                    sw,
+                    stringWriter,
                     new HtmlHelperOptions());
 
                 await viewResult.View.RenderAsync(viewContext);
-                return sw.ToString();
+                return stringWriter.ToString();
             }
         }
     }
