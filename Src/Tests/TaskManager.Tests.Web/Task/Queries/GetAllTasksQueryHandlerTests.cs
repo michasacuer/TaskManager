@@ -8,7 +8,7 @@
     using TaskManager.Domain.Entity;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
-    using TaskManager.Application.Task.Queries;
+    using TaskManager.Application.Task.Queries.GetAllTasks;
 
     [Collection("ServicesTestCollection")]
     public class GetAllTasksQueryHandlerTests

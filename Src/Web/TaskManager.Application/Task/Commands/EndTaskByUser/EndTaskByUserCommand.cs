@@ -36,22 +36,29 @@
 
                 await new EndTaskByUserCommandValidator(task).ValidateAndThrowAsync(request);
 
-                var endedTask = new EndedTask
+                if (task.ApplicationUserId == request.ApplicationUserId)
                 {
-                    Name = task.Name,
-                    Description = task.Description,
-                    ProjectId = task.ProjectId,
-                    ApplicationUserId = task.ApplicationUserId,
-                    Priority = task.Priority,
-                    StartTime = task.StartTime,
-                    EndTime = DateTime.UtcNow
-                };
+                    var endedTask = new EndedTask
+                    {
+                        Name = task.Name,
+                        Description = task.Description,
+                        ProjectId = task.ProjectId,
+                        ApplicationUserId = task.ApplicationUserId,
+                        Priority = task.Priority,
+                        StartTime = task.StartTime,
+                        EndTime = DateTime.UtcNow
+                    };
 
-                await this.endedTaskRepository.AddAsync(endedTask);
-                this.taskRepository.Delete(task);
-                await this.endedTaskRepository.SaveAsync(cancellationToken);
+                    await this.endedTaskRepository.AddAsync(endedTask);
+                    this.taskRepository.Delete(task);
+                    await this.endedTaskRepository.SaveAsync(cancellationToken);
 
-                return Unit.Value;
+                    return Unit.Value;
+                }
+                else
+                {
+                    throw new InvalidUserException();
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Application.Task.Queries
+﻿namespace TaskManager.Application.Task.Queries.GetAllTasks
 {
     using System.Threading;
     using System.Threading.Tasks;

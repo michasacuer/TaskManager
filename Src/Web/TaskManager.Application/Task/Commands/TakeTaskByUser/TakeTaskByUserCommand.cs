@@ -44,13 +44,13 @@
                     task.ApplicationUserId = user.Id;
                     this.taskRepository.Update(task);
                     await this.taskRepository.SaveAsync(cancellationToken);
+
+                    return Unit.Value;
                 }
                 else
                 {
                     throw new UserHaveNoPermissionException();
                 }
-
-                return Unit.Value;
             }
         }
     }
