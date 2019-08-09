@@ -45,7 +45,8 @@
                     Name = request.Name,
                     Description = request.Description,
                     Priority = request.Priority,
-                    ProjectId = request.ProjectId
+                    ProjectId = request.ProjectId,
+                    StoryPoints = request.StoryPoints
                 };
 
                 await this.taskRepository.AddAsync(task);
