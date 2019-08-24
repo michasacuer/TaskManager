@@ -14,6 +14,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using TaskManager.Api.Filters;
     using TaskManager.Application.Commands;
     using TaskManager.Application.Interfaces;
     using TaskManager.Domain.Entity;
@@ -33,7 +34,8 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
+            services.AddMvc(options =>
+                options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options =>
                 {
