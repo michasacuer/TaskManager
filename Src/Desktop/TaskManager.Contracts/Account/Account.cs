@@ -2,42 +2,23 @@
 {
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Taskmanager.BindingModel;
     using TaskManager.BindingModel;
-    using TaskManager.Contracts.Exceptions;
+    using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
 
     public class Account
     {
-        private HttpClient client;
+        private HttpClient httpClient;
 
         public Account()
         {
-            this.client = new HttpClient();
+            this.httpClient = new HttpClient();
         }
 
-        public async Task Register(RegistrationBindingModel newUserAccount)
-        {
-            var response = await this.client.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Register"), newUserAccount);
+        public async Task Register(RegistrationBindingModel newUserAccount) 
+            => await this.httpClient.Register(newUserAccount);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new RegistrationException("Błąd serwera, sprawdź formularz!");
-            }
-        }
-
-        public async Task<ApplicationUser> Login(LoginBindingModel loginData)
-        {
-            var response = await this.client.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Login"), loginData);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<ApplicationUser>();
-            }
-            else
-            {
-                throw new LoginException("Błędne dane logowania!");
-            }
-        }
+        public async Task<ApplicationUser> Login(LoginBindingModel loginCredentials) 
+            => await this.httpClient.Login(loginCredentials);
     }
 }

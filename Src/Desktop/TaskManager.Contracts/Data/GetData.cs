@@ -3,29 +3,18 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
 
     public class GetData
     {
-        private HttpClient client;
+        private HttpClient httpClient;
 
         public GetData()
         {
-            this.client = new HttpClient();
+            this.httpClient = new HttpClient();
         }
 
-        public async Task<List<Project>> GetProjects()
-        {
-            var response = await this.client.GetAsync(UrlBuilder.BuildEndpoint("Project"));
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<List<Project>>();
-            }
-            else
-            {
-                return default;
-            }
-        }
+        public async Task<List<Project>> GetProjects() => await this.httpClient.Get<Project>();
     }
 }

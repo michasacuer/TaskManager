@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{0DBAF5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Entity", "Desktop\TaskManager.Entity\TaskManager.Entity.csproj", "{612060E4-CA55-4BBB-8EC0-C088EEF39674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.BindingModel", "Desktop\Taskmanager.BindingModel\TaskManager.BindingModel.csproj", "{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.BindingModel", "Desktop\TaskManager.BindingModel\TaskManager.BindingModel.csproj", "{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
