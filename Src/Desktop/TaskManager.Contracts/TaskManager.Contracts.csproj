@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Taskmanager.BindingModel\TaskManager.BindingModel.csproj" />
+    <ProjectReference Include="..\TaskManager.BindingModel\TaskManager.BindingModel.csproj" />
     <ProjectReference Include="..\TaskManager.Entity\TaskManager.Entity.csproj" />
   </ItemGroup>
 
