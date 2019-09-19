@@ -6,15 +6,17 @@
     using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
 
-    public class GetData
+    public class Projects
     {
         private HttpClient httpClient;
 
-        public GetData()
+        public Projects()
         {
             this.httpClient = new HttpClient();
         }
 
-        public async Task<List<Project>> GetProjects() => await this.httpClient.Get<Project>();
+        public async Task<List<Project>> GetAllAsync() => await this.httpClient.GetAsync<Project>();
+
+        public async Task<Project> GetAsync(int projectId) => await this.httpClient.GetAsync<Project>(projectId);
     }
 }

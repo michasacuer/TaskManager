@@ -15,10 +15,10 @@
             this.httpClient = new HttpClient();
         }
 
-        public async Task Register(RegistrationBindingModel newUserAccount) 
-            => await this.httpClient.Register(newUserAccount);
+        public async Task RegisterAsync(RegistrationBindingModel newUserAccount) 
+            => await this.httpClient.RegisterAsync(newUserAccount);
 
-        public async Task<ApplicationUser> Login(LoginBindingModel loginCredentials) 
-            => await this.httpClient.Login(loginCredentials);
+        public async Task<ApplicationUser> LoginAsync(LoginBindingModel loginCredentials) 
+            => await this.httpClient.LoginAsync(loginCredentials);
     }
 }

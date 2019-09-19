@@ -8,7 +8,7 @@
 
     public static class HttpClientAccountExtension
     {
-        public static async Task Register(this HttpClient httpClient, RegistrationBindingModel newUserAccount)
+        public static async Task RegisterAsync(this HttpClient httpClient, RegistrationBindingModel newUserAccount)
         {
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Register"), newUserAccount);
 
@@ -18,7 +18,7 @@
             }
         }
 
-        public static async Task<ApplicationUser> Login(this HttpClient httpClient, LoginBindingModel loginCredentials)
+        public static async Task<ApplicationUser> LoginAsync(this HttpClient httpClient, LoginBindingModel loginCredentials)
         {
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Login"), loginCredentials);
 
