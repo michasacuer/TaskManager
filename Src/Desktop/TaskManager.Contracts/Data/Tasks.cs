@@ -5,8 +5,9 @@
     using System.Threading.Tasks;
     using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
+    using TaskManager.Interfaces;
 
-    public class Tasks
+    public class Tasks : ITasks
     {
         private HttpClient httpClient;
 

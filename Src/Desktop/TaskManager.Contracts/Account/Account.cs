@@ -5,8 +5,9 @@
     using TaskManager.BindingModel;
     using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
+    using TaskManager.Interfaces;
 
-    public class Account
+    public class Account : IAccount
     {
         private HttpClient httpClient;
 

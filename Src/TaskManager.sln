@@ -51,7 +51,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{0DBAF5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Entity", "Desktop\TaskManager.Entity\TaskManager.Entity.csproj", "{612060E4-CA55-4BBB-8EC0-C088EEF39674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.BindingModel", "Desktop\TaskManager.BindingModel\TaskManager.BindingModel.csproj", "{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.BindingModel", "Desktop\TaskManager.BindingModel\TaskManager.BindingModel.csproj", "{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Interfaces", "Desktop\TaskManager.Interfaces\TaskManager.Interfaces.csproj", "{405A7A03-CCAD-4F70-8170-35E8719259A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{405A7A03-CCAD-4F70-8170-35E8719259A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405A7A03-CCAD-4F70-8170-35E8719259A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405A7A03-CCAD-4F70-8170-35E8719259A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405A7A03-CCAD-4F70-8170-35E8719259A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{0DBAF5CA-DDAF-4859-84DF-D359A6F2C753} = {ECD4705D-FFE3-4E71-9EAA-8FC54431422C}
 		{612060E4-CA55-4BBB-8EC0-C088EEF39674} = {0DBAF5CA-DDAF-4859-84DF-D359A6F2C753}
 		{0AEF6D24-2B4A-4158-919B-C88A7A43B1FA} = {0DBAF5CA-DDAF-4859-84DF-D359A6F2C753}
+		{405A7A03-CCAD-4F70-8170-35E8719259A8} = {2FC4C570-2942-4DF0-ADD3-C658E919A714}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72D2256E-CAE4-4890-960F-FBC256540482}

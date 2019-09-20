@@ -7,15 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TaskManager.BindingModel\TaskManager.BindingModel.csproj" />
     <ProjectReference Include="..\TaskManager.Entity\TaskManager.Entity.csproj" />
-    <ProjectReference Include="..\TaskManager.Interfaces\TaskManager.Interfaces.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Hub\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
 
 </Project>
