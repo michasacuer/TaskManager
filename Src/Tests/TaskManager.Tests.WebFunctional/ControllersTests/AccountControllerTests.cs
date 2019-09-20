@@ -30,6 +30,7 @@
                 Email = "test@wp.pl",
                 Role = Domain.Enum.Role.Manager
             };
+
             var registerResponse = await this.client.PostAsJsonAsync("Account/Register", command);
             registerResponse.EnsureSuccessStatusCode();
 
@@ -38,6 +39,7 @@
                 UserName = "test",
                 Password = "test11"
             };
+
             var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query);
             loginResponse.EnsureSuccessStatusCode();
         }
@@ -50,6 +52,7 @@
                 UserName = "not existed",
                 Password = "user"
             };
+
             var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query)
                 .ShouldThrowAsync<EntityNotFoundException>();
         }
@@ -66,6 +69,7 @@
                 Email = "test@wp.pl",
                 Role = Domain.Enum.Role.Manager
             };
+
             var registerResponse = await this.client.PostAsJsonAsync("Account/Register", command)
                 .ShouldThrowAsync<EntityAlreadyExistsException>();
         }

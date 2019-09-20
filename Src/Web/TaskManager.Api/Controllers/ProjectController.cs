@@ -31,7 +31,7 @@
             return Ok(await base.Mediator.Send(command));
         }
 
-        [HttpDelete("projectId")]
+        [HttpDelete("{projectId}")]
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteProject(int projectId)
         {

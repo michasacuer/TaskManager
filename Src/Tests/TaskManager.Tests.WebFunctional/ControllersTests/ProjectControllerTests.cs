@@ -8,6 +8,7 @@
     using TaskManager.Tests.WebFunctional.Extensions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
     using TaskManager.Application.Project.Queries.GetProject;
+    using TaskManager.Domain.Entity;
 
     public class ProjectControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
@@ -44,6 +45,28 @@
             response.EnsureSuccessStatusCode();
             reservations.ShouldBeOfType<ProjectModel>();
             reservations.Project.Tasks.ShouldNotBeEmpty();
+        }
+
+        [Fact]
+        public async Task ServerShouldReturnOkAfterAddingProjectToDb()
+        {
+            await this.client.GetMockManagerCredential();
+            var response = await this.client.PostAsJsonAsync("Project", new Project
+            {
+                Name = "DDD",
+                Description = "ddd"
+            });
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task ServerShouldReturnOkAfterDeletingProjectFromDb()
+        {
+            await this.client.GetMockManagerCredential();
+            var response = await this.client.DeleteAsync("Project/1");
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }

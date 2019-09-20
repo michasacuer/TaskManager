@@ -11,7 +11,7 @@
         {
             var loginModel = new LoginQuery
             {
-                UserName = "username0",
+                UserName = "username2",
                 Password = "password11"
             };
 
