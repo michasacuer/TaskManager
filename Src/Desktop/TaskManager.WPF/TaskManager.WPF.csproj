@@ -69,14 +69,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -128,9 +133,17 @@
       <Project>{612060e4-ca55-4bbb-8ec0-c088eef39674}</Project>
       <Name>TaskManager.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskManager.Validation\TaskManager.Validation.csproj">
+      <Project>{f45a9522-3292-4afc-9d54-a1c1294be4f3}</Project>
+      <Name>TaskManager.Validation</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ErrorBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

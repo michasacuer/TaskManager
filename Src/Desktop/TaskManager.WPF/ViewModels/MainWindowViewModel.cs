@@ -1,8 +1,10 @@
 ﻿namespace TaskManager.WPF.ViewModels
 {
+    using System;
     using System.Windows;
     using Caliburn.Micro;
     using TaskManager.WPF.Models;
+    using TaskManager.WPF.ViewModels.Helper;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.OneActive
     {
@@ -23,6 +25,20 @@
             {
                 this.IsActiveTaskButtonVisible = Visibility.Visible;
                 this.NotifyOfPropertyChange(() => this.IsActiveTaskButtonVisible);
+            }
+        }
+
+        protected async override void OnViewLoaded(object view)
+        {
+            ApplicationWindows.ShowLoginBox(this);
+
+            try
+            {
+                //todo signalr hub, fetching data
+            }
+            catch (NullReferenceException)
+            {
+                return;
             }
         }
     }

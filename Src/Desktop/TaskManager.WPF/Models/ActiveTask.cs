@@ -12,7 +12,7 @@
 
         public bool IsTaskTakenByUser() => this.Task != null;
 
-        public async Task<bool> IfUserHaveActiveTask(string userId)
+        public async Task<bool> IsUserHaveActiveTask(string userId)
         {
             var task = await new Tasks().GetUsersTask(userId);
 
