@@ -69,10 +69,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
+    <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
+    <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
+    <Compile Include="Views\ErrorBoxView.xaml.cs">
+      <DependentUpon>ErrorBoxView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SuccesBoxView.xaml.cs">
+      <DependentUpon>SuccesBoxView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,13 +116,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TaskManager.BindingModel\TaskManager.BindingModel.csproj">
+      <Project>{0aef6d24-2b4a-4158-919b-c88a7a43b1fa}</Project>
+      <Name>TaskManager.BindingModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskManager.Contracts\TaskManager.Contracts.csproj">
       <Project>{71157d02-b73e-4914-8965-9e0b2c832927}</Project>
       <Name>TaskManager.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskManager.Entity\TaskManager.Entity.csproj">
+      <Project>{612060e4-ca55-4bbb-8ec0-c088eef39674}</Project>
+      <Name>TaskManager.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ErrorBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SuccesBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

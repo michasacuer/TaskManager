@@ -74,6 +74,15 @@
             return await response.Content.ReadAsAsync<TObject>();
         }
 
+        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, TObject data, params string[] routes)
+            where TObject : BaseEntity<int>
+        {
+            string controllerName = typeof(TObject).Name;
+            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, routes), data);
+
+            return await response.Content.ReadAsAsync<TObject>();
+        }
+
         public static async Task DeleteAsync<TObject>(this HttpClient httpClient, int id)
             where TObject : BaseEntity<int>
         {

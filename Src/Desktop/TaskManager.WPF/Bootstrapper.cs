@@ -7,6 +7,7 @@
     using TaskManager.Contracts.Data;
     using TaskManager.Contracts.Exceptions;
     using TaskManager.WPF.ViewModels;
+    using TaskManager.WPF.ViewModels.Helper;
 
     public class Bootstrapper : BootstrapperBase
     {
@@ -28,9 +29,11 @@
             {
                 if (exception is NotFoundServerException)
                 {
+                    ApplicationWindows.ShowErrorBox(exception.Message);
                 }
                 if (exception is HttpRequestException)
                 {
+                    ApplicationWindows.ShowErrorBox("Uruchom localhost (PowerShell > dotnet run)!");
                 }
             }
         }
