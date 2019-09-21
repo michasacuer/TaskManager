@@ -7,6 +7,6 @@
     {
         Task<ToDoTask> GetUsersTask(string userId);
 
-        Task<ToDoTask> EndActiveTaskByUser(ToDoTask task);
+        Task<ToDoTask> EndActiveTaskByUser(ToDoTask task, string userId);
     }
 }

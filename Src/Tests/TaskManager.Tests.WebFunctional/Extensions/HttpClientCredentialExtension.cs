@@ -15,19 +15,34 @@
                 Password = "password11"
             };
 
-            string bearer = await SendLoginRequest(client, loginModel);
+            var user = await SendLoginRequest(client, loginModel);
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", user.Bearer);
         }
 
-        private static async Task<string> SendLoginRequest(HttpClient client, LoginQuery loginModel)
+        public static async Task<LoginModel> GetMockManagerCredentialWithUserInfo(this HttpClient client)
+        {
+            var loginModel = new LoginQuery
+            {
+                UserName = "username2",
+                Password = "password11"
+            };
+
+            var user = await SendLoginRequest(client, loginModel);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", user.Bearer);
+
+            return user;
+        }
+
+        private static async Task<LoginModel> SendLoginRequest(HttpClient client, LoginQuery loginModel)
         {
             var response = await client.PostAsJsonAsync("Account/Login", loginModel);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
 
-            return json.DeserializeObjectFromJson<LoginModel>().Bearer;
+            return json.DeserializeObjectFromJson<LoginModel>();
         }
     }
 }

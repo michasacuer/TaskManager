@@ -28,9 +28,9 @@
             return true;
         }
 
-        public async Task EndActiveUsersTask()
+        public async Task EndActiveUsersTask(string userId)
         {
-            await new Tasks().EndActiveTaskByUser(this.Task);
+            await new Tasks().EndActiveTaskByUser(this.Task, userId);
             this.Task = null;
         }
     }

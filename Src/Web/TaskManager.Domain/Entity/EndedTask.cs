@@ -7,6 +7,6 @@
     {
         public int? SpentStoryPoints { get; set; }
 
-        public DateTime? EndTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

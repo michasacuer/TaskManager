@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using TaskManager.BindingModel.Commands;
     using TaskManager.Contracts.Exceptions;
     using TaskManager.Entity.Base;
 
@@ -61,6 +62,15 @@
         {
             string controlleName = typeof(TObject).Name;
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName), data);
+
+            return await response.Content.ReadAsAsync<TObject>();
+        }
+
+        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, TObject data, Command command, params string[] routes)
+            where TObject : BaseEntity<int>
+        {
+            string controlleName = typeof(TObject).Name;
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName, routes), command);
 
             return await response.Content.ReadAsAsync<TObject>();
         }

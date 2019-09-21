@@ -7,8 +7,9 @@
     using TaskManager.Tests.WebFunctional.Extensions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
     using TaskManager.Application.Task.Queries.GetAllTasks;
-    using TaskManager.Application.Task.Queries.GetUserTask;
+    using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
+    using TaskManager.Domain.Enum;
 
     public class TaskControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
@@ -45,6 +46,35 @@
             response.EnsureSuccessStatusCode();
             task.ShouldBeOfType<ToDoTask>();
             task.Name.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public async Task ServerShouldReturnOkAfterAddingTaskToDb()
+        {
+            await this.client.GetMockManagerCredential();
+            var response = await this.client.PostAsJsonAsync("Task", new ToDoTask
+            {
+                Name = "TaskTest",
+                Description = "TestTask",
+                Priority = Priority.High,
+                ProjectId = 2
+            }); 
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task ServerShouldReturnEntityNotFoundExceptionWhenWePassWrongProjectId()
+        {
+            await this.client.GetMockManagerCredential();
+            await this.client.PostAsJsonAsync("Task", new ToDoTask
+            {
+                Name = "DDD",
+                Description = "DD",
+                Priority = Priority.High,
+                ProjectId = 2000000
+            }
+            ).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }
