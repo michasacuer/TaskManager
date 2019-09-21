@@ -1,15 +1,18 @@
 ﻿namespace TaskManager.Tests.WebFunctional.ControllersTests
 {
     using System.Net.Http;
+    using System.Threading;
     using System.Threading.Tasks;
     using Shouldly;
     using Xunit;
-    using TaskManager.Tests.WebFunctional.Extensions;
-    using TaskManager.Tests.WebFunctional.Infrastructure;
+    using TaskManager.Application.Task.Commands.EndTaskByUser;
+    using TaskManager.Application.Task.Commands.TakeTaskByUser;
     using TaskManager.Application.Task.Queries.GetAllTasks;
     using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
     using TaskManager.Domain.Enum;
+    using TaskManager.Tests.WebFunctional.Extensions;
+    using TaskManager.Tests.WebFunctional.Infrastructure;
 
     public class TaskControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
@@ -75,6 +78,29 @@
                 ProjectId = 2000000
             }
             ).ShouldThrowAsync<EntityNotFoundException>();
+        }
+
+        [Fact]
+        public async Task UserShouldTakeTaskAndEndItWithOkStatusCode()
+        {
+            var user = await this.client.GetMockManagerCredentialWithUserInfo();
+            var response = await this.client.PutAsJsonAsync("Task/TakeTask", new TakeTaskByUserCommand
+            {
+                ApplicationUserId = user.Id,
+                TaskId = 1
+            });
+
+            response.EnsureSuccessStatusCode();
+
+            Thread.Sleep(100);
+
+            response = await this.client.PostAsJsonAsync("Task/EndTask", new EndTaskByUserCommand
+            {
+                ApplicationUserId = user.Id,
+                TaskId = 1
+            });
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }
