@@ -21,7 +21,7 @@
             return Ok(await base.Mediator.Send(new GetAllTasksQuery()));
         }
 
-        [HttpPost("taskId")]
+        [HttpGet("{taskId}")]
         [Authorize]
         public async Task<ActionResult<ToDoTask>> GetTask(int taskId)
         {
@@ -35,7 +35,7 @@
             return Ok(await base.Mediator.Send(command));
         }
 
-        [HttpDelete("taskId")]
+        [HttpDelete("{taskId}")]
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteTask(int taskId)
         {
@@ -56,7 +56,7 @@
             return Ok(await base.Mediator.Send(command));
         }
 
-        [HttpPost("userId")]
+        [HttpPost("{userId}")]
         [Authorize]
         public async Task<ActionResult<TaskModel>> GetUserTask(string userId)
         {

@@ -26,11 +26,11 @@
             var response = await this.client.GetAsync("Project");
 
             string json = await response.Content.ReadAsStringAsync();
-            var reservations = json.DeserializeObjectFromJson<ProjectsListModel>();
+            var projects = json.DeserializeObjectFromJson<ProjectsListModel>();
 
             response.EnsureSuccessStatusCode();
-            reservations.ShouldBeOfType<ProjectsListModel>();
-            reservations.Projects.ShouldNotBeEmpty();
+            projects.ShouldBeOfType<ProjectsListModel>();
+            projects.Projects.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -40,11 +40,11 @@
             var response = await this.client.GetAsync("Project/6");
 
             string json = await response.Content.ReadAsStringAsync();
-            var reservations = json.DeserializeObjectFromJson<ProjectModel>();
+            var project = json.DeserializeObjectFromJson<ProjectModel>();
 
             response.EnsureSuccessStatusCode();
-            reservations.ShouldBeOfType<ProjectModel>();
-            reservations.Project.Tasks.ShouldNotBeEmpty();
+            project.ShouldBeOfType<ProjectModel>();
+            project.Project.Tasks.ShouldNotBeEmpty();
         }
 
         [Fact]
