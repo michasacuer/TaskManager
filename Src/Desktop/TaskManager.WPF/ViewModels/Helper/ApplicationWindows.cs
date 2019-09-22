@@ -13,5 +13,7 @@
 
         public static void ShowLoginBox(MainWindowViewModel mainWindowViewModel) 
             => manager.ShowDialogAsync(new LoginViewModel(mainWindowViewModel), null, null);
+
+        public static void ShowRegistrationBox() => manager.ShowDialogAsync(new RegistrationViewModel(), null, null);
     }
 }

@@ -43,13 +43,13 @@
                         this.mainWindowViewModel.IsActiveTaskButtonVisible = Visibility.Visible;
                         this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsActiveTaskButtonVisible);
                     }
-                    else
-                    {
-                        ApplicationWindows.ShowErrorBox(validationResult.Message);
+                }
+                else
+                {
+                    ApplicationWindows.ShowErrorBox(validationResult.Message);
 
-                        this.IsFormEnabled = true;
-                        this.NotifyOfPropertyChange(() => this.IsFormEnabled);
-                    }
+                    this.IsFormEnabled = true;
+                    this.NotifyOfPropertyChange(() => this.IsFormEnabled);
                 }
             }
             catch (LoginException exception)
@@ -62,5 +62,7 @@
         }
 
         public void CancelButton() => Application.Current.Shutdown();
+
+        public void RegisterButton() => ApplicationWindows.ShowRegistrationBox();
     }
 }
