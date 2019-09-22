@@ -15,7 +15,7 @@
 
         public async Task CheckServerConnection()
         {
-            var response = await this.httpClient.GetAsync(UrlBuilder.BuildEndpoint(Consts.BaseUrl, "Test"));
+            var response = await this.httpClient.GetAsync(UrlBuilder.BuildEndpoint("Test"));
 
             if (!response.IsSuccessStatusCode)
             {

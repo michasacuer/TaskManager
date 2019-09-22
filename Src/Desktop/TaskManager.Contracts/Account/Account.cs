@@ -17,9 +17,9 @@
         }
 
         public async Task RegisterAsync(RegistrationBindingModel newUserAccount) 
-            => await this.httpClient.RegisterAsync(Consts.BaseUrl, newUserAccount);
+            => await this.httpClient.RegisterAsync(newUserAccount);
 
         public async Task<ApplicationUser> LoginAsync(LoginBindingModel loginCredentials) 
-            => await this.httpClient.LoginAsync(Consts.BaseUrl, loginCredentials);
+            => await this.httpClient.LoginAsync(loginCredentials);
     }
 }
