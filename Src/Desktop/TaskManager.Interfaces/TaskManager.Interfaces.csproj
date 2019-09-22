@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TaskManager.Contracts.Interfaces</AssemblyName>
+    <RootNamespace>TaskManager.Contracts.Interfaces</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

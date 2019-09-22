@@ -4,8 +4,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using TaskManager.Contracts.Extensions;
+    using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
-    using TaskManager.Interfaces;
 
     public class Projects : IProjects
     {

@@ -5,8 +5,8 @@
     using System.Threading.Tasks;
     using TaskManager.BindingModel.Commands;
     using TaskManager.Contracts.Extensions;
+    using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
-    using TaskManager.Interfaces;
 
     public class Tasks : ITasks
     {

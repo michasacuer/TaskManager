@@ -11,6 +11,7 @@
 
         public static void ShowSuccesBox(string alert) => manager.ShowDialogAsync(new SuccesBoxViewModel(alert), null, null);
 
-        public static void ShowLoginBox(MainWindowViewModel vm) => manager.ShowDialogAsync(new LoginViewModel(vm), null, null);
+        public static void ShowLoginBox(MainWindowViewModel mainWindowViewModel) 
+            => manager.ShowDialogAsync(new LoginViewModel(mainWindowViewModel), null, null);
     }
 }

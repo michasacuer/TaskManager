@@ -76,12 +76,14 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
@@ -91,6 +93,9 @@
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationView.xaml.cs">
+      <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuccesBoxView.xaml.cs">
       <DependentUpon>SuccesBoxView.xaml</DependentUpon>
@@ -158,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Interfaces
+﻿namespace TaskManager.Contracts.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

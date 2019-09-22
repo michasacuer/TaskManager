@@ -5,7 +5,7 @@
     using TaskManager.BindingModel;
     using TaskManager.Contracts.Extensions;
     using TaskManager.Entity;
-    using TaskManager.Interfaces;
+    using TaskManager.Contracts.Interfaces;
 
     public class Account : IAccount
     {
