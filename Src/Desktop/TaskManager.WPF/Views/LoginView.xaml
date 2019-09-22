@@ -95,7 +95,7 @@
                      Grid.Column="1" Grid.Row="3" 
                      MinWidth="100" 
                      FontSize="12" 
-                     FontFamily="/Font/#Password"
+                     FontFamily="/Fonts/#Password"
                      VerticalContentAlignment="Center" Margin="0,2,10,2"
                      IsEnabled="{Binding IsFormEnabled}"/>
 

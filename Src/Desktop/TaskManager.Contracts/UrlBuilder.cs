@@ -4,7 +4,7 @@
 
     internal static class UrlBuilder
     {
-        public static string BaseUrl = "http://localhost:5000";
+        public static string BaseUrl = "http://localhost:50298";
 
         public static string BuildEndponit(string controller) => $"{BaseUrl}/{controller}";
 

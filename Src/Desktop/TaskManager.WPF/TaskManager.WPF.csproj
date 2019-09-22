@@ -44,8 +44,14 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -132,6 +138,10 @@
     <ProjectReference Include="..\TaskManager.Entity\TaskManager.Entity.csproj">
       <Project>{612060e4-ca55-4bbb-8ec0-c088eef39674}</Project>
       <Name>TaskManager.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskManager.Interfaces\TaskManager.Interfaces.csproj">
+      <Project>{405a7a03-ccad-4f70-8170-35e8719259a8}</Project>
+      <Name>TaskManager.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskManager.Validation\TaskManager.Validation.csproj">
       <Project>{f45a9522-3292-4afc-9d54-a1c1294be4f3}</Project>
