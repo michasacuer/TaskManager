@@ -23,7 +23,7 @@
         [Fact]
         public async Task CheckIfApiWorks()
         {
-            var response = await this.client.GetAsync("/api/test");
+            var response = await this.client.GetAsync("Test");
             response.EnsureSuccessStatusCode();
         }
 
