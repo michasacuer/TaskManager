@@ -8,9 +8,9 @@
 
     public static class HttpClientAccountExtension
     {
-        public static async Task RegisterAsync(this HttpClient httpClient, RegistrationBindingModel newUserAccount)
+        public static async Task RegisterAsync(this HttpClient httpClient, string baseUrl, RegistrationBindingModel newUserAccount)
         {
-            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Register"), newUserAccount);
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, "Account", "Register"), newUserAccount);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -18,9 +18,9 @@
             }
         }
 
-        public static async Task<ApplicationUser> LoginAsync(this HttpClient httpClient, LoginBindingModel loginCredentials)
+        public static async Task<ApplicationUser> LoginAsync(this HttpClient httpClient, string baseUrl, LoginBindingModel loginCredentials)
         {
-            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint("Account", "Login"), loginCredentials);
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, "Account", "Login"), loginCredentials);
 
             if (response.IsSuccessStatusCode)
             {

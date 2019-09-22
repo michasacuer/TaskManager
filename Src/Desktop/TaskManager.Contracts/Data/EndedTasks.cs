@@ -16,8 +16,8 @@
             this.httpClient = new HttpClient();
         }
 
-        public async Task<List<EndedTask>> GetAllAsync() => await this.httpClient.GetAsync<EndedTask>();
+        public async Task<List<EndedTask>> GetAllAsync() => await this.httpClient.GetAsync<EndedTask>(Consts.BaseUrl);
 
-        public async Task<EndedTask> GetAsync(int taskId) => await this.httpClient.GetAsync<EndedTask>(taskId);
+        public async Task<EndedTask> GetAsync(int taskId) => await this.httpClient.GetAsync<EndedTask>(Consts.BaseUrl, taskId);
     }
 }

@@ -9,11 +9,11 @@
 
     public static class HttpClientDataExtension
     {
-        public static async Task<List<TObject>> GetAsync<TObject>(this HttpClient httpClient)
+        public static async Task<List<TObject>> GetAsync<TObject>(this HttpClient httpClient, string baseUrl)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(controllerName));
+            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName));
 
             if (response.IsSuccessStatusCode)
             {
@@ -25,11 +25,11 @@
             }
         }
 
-        public static async Task<TObject> GetAsync<TObject>(this HttpClient httpClient, int id)
+        public static async Task<TObject> GetAsync<TObject>(this HttpClient httpClient, string baseUrl, int id)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(controllerName, id));
+            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName, id));
 
             if (response.IsSuccessStatusCode)
             {
@@ -41,11 +41,11 @@
             }
         }
 
-        public static async Task<TObject> GetAsync<TObject>(this HttpClient httpClient, string id)
+        public static async Task<TObject> GetAsync<TObject>(this HttpClient httpClient, string baseUrl, string id)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(controllerName, id));
+            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName, id));
 
             if (response.IsSuccessStatusCode)
             {
@@ -57,47 +57,47 @@
             }
         }
 
-        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, TObject data)
+        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, string baseUrl, TObject data)
             where TObject : BaseEntity<int>
         {
             string controlleName = typeof(TObject).Name;
-            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName), data);
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, controlleName), data);
 
             return await response.Content.ReadAsAsync<TObject>();
         }
 
-        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, TObject data, Command command, params string[] routes)
+        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, string baseUrl, TObject data, Command command, params string[] routes)
             where TObject : BaseEntity<int>
         {
             string controlleName = typeof(TObject).Name;
-            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName, routes), command);
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, controlleName, routes), command);
 
             return await response.Content.ReadAsAsync<TObject>();
         }
 
-        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, TObject data, int id)
+        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, string baseUrl, TObject data, int id)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, id), data);
+            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName, id), data);
 
             return await response.Content.ReadAsAsync<TObject>();
         }
 
-        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, TObject data, params string[] routes)
+        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, string baseUrl, TObject data, params string[] routes)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, routes), data);
+            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName, routes), data);
 
             return await response.Content.ReadAsAsync<TObject>();
         }
 
-        public static async Task DeleteAsync<TObject>(this HttpClient httpClient, int id)
+        public static async Task DeleteAsync<TObject>(this HttpClient httpClient, string baseUrl, int id)
             where TObject : BaseEntity<int>
         {
             string controllerName = typeof(TObject).Name;
-            var response = await httpClient.DeleteAsync(UrlBuilder.BuildEndpoint(controllerName, id));
+            var response = await httpClient.DeleteAsync(UrlBuilder.BuildEndpoint(baseUrl, controllerName, id));
 
             if (!response.IsSuccessStatusCode)
             {
