@@ -10,6 +10,8 @@
     {
         public Visibility IsActiveTaskButtonVisible { get; set; } = Visibility.Hidden;
 
+        public void LoadUserInfoPage() => this.ActivateItemAsync(new UserInfoViewModel(this));
+
         public void HideBar()
         {
             if (LoggedUser.Instance.GetUserTask().IsTaskTakenByUser())

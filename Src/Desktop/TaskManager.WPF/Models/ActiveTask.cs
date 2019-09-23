@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using TaskManager.Contracts.Data;
+    using TaskManager.Contracts.Exceptions;
     using TaskManager.Entity;
 
     public class ActiveTask
@@ -14,18 +15,21 @@
 
         public async Task<bool> IsUserHaveActiveTask(string userId)
         {
-            var task = await new Tasks().GetUsersTask(userId);
-
-            if (task != null)
+            try
             {
-                this.Task = task;
+                var task = await new Tasks().GetUsersTask(userId);
+
+                if (task != null)
+                {
+                    this.Task = task;
+                }
+
+                return true;
             }
-            else
+            catch (NotFoundServerException)
             {
                 return false;
             }
-
-            return true;
         }
 
         public async Task EndActiveUsersTask(string userId)

@@ -1,6 +1,6 @@
 ﻿namespace TaskManager.Validation
 {
-    using System.ComponentModel.DataAnnotations;
+    using System.Net.Mail;
     using TaskManager.BindingModel;
     using TaskManager.Entity.Enum;
 
@@ -80,8 +80,15 @@
 
         private bool IsEmailValid(string email)
         {
-            var validator = new EmailAddressAttribute();
-            return validator.IsValid(email);
+            try
+            {
+                var addr = new MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

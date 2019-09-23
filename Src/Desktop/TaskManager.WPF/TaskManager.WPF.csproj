@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
+    <Compile Include="ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="Views\SuccesBoxView.xaml.cs">
       <DependentUpon>SuccesBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserInfoView.xaml.cs">
+      <DependentUpon>UserInfoView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SuccesBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

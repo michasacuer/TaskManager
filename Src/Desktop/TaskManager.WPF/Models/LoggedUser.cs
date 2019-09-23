@@ -22,6 +22,8 @@
 
         public string GetUserFullName() => $"{this.User.FirstName} {this.User.LastName}";
 
+        public string GetUserPosition() => this.User.Role.ToString();
+
         public ActiveTask GetUserTask() => this.activeTask;
 
         public bool HavePermissionToTakeTask()

@@ -15,5 +15,7 @@
             => manager.ShowDialogAsync(new LoginViewModel(mainWindowViewModel), null, null);
 
         public static void ShowRegistrationBox() => manager.ShowDialogAsync(new RegistrationViewModel(), null, null);
+
+        public static void ShowManagerPanelBox() => throw new System.NotImplementedException();
     }
 }
