@@ -4,6 +4,8 @@
 [![CircleCI](https://circleci.com/gh/michasacuer/TaskManager/tree/master.svg?style=shield)](https://circleci.com/gh/michasacuer/TaskManager/tree/master)
 [![Actions Status](https://github.com/michasacuer/TaskManager/workflows/Build/badge.svg)](https://github.com/michasacuer/TaskManager/actions)
 
+![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/12.PNG)
+
 Parts of this project (with hiperlinks):
 
 * [Web](https://github.com/michasacuer/TaskManager/tree/master/Src/Web) <br/>
