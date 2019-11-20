@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Tests.WebFunctional.Infrastructure
+﻿namespace TaskManager.Tests.WebFunctional.Extensions
 {
     using System;
     using System.IdentityModel.Tokens.Jwt;
@@ -6,7 +6,6 @@
     using System.Text;
     using MediatR;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
@@ -21,12 +20,12 @@
     {
         public static void InjectServices(this IServiceCollection services)
         {
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    })
+                    .AddApplicationPart(Assembly.Load("TaskManager.Api"));
 
             services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
             services.AddScoped<ITokenService, TokenTestService>();
