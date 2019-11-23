@@ -35,5 +35,3 @@ jobs:
       run: dotnet build Src/Web/TaskManager.Persistence
     - name: Run Web Tests
       run: dotnet test Src/Tests/TaskManager.Tests.Web
-    - name: Run Functional Tests
-      run: dotnet test Src/Tests/TaskManager.Tests.WebFunctional
