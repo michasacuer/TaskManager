@@ -81,6 +81,7 @@
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="ViewModels\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModels\AddNewViewModel.cs" />
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Views\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewView.xaml.cs">
+      <DependentUpon>AddNewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
@@ -164,6 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AddNewProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

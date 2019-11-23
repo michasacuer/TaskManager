@@ -7,11 +7,11 @@
     using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
 
-    public class NotificationService : INotificationContract
+    public class NotificationContract : INotificationContract
     {
         private HttpClient httpClient;
 
-        public NotificationService()
+        public NotificationContract()
         {
             this.httpClient = new HttpClient();
         }

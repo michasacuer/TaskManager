@@ -218,7 +218,7 @@
             </ToggleButton.Style>
         </ToggleButton>
 
-        <ToggleButton x:Name="LoadAddNewTaskPage"               
+        <ToggleButton x:Name="LoadAddNewPage"               
                 Grid.Column="4"
                 Width="50" Height="50" 
                 Content="&#xf067;" 
