@@ -75,10 +75,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\AddNewProjectHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
+    <Compile Include="ViewModels\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
+    <Compile Include="Views\AddNewProjectView.xaml.cs">
+      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +163,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddNewProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ErrorBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -4,7 +4,7 @@
     using TaskManager.BindingModel;
     using TaskManager.Entity;
 
-    public interface IAccount
+    public interface IAccountContract
     {
         Task RegisterAsync(RegistrationBindingModel newUserAccount);
 

@@ -8,11 +8,11 @@
     using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
 
-    public class Tasks : ITasks
+    public class TaskContract : ITaskService
     {
         private HttpClient httpClient;
 
-        public Tasks()
+        public TaskContract()
         {
             this.httpClient = new HttpClient();
         }
@@ -22,6 +22,8 @@
                 task, 
                 new EndTaskByUserBindingModel { ApplicationUserId = userId, TaskId = task.Id }, 
                 "EndTask");
+
+        public async Task<ToDoTask> AddAsync(ToDoTask task) => await this.httpClient.PostAsync(task);
 
         public async Task<List<ToDoTask>> GetAllAsync() => await this.httpClient.GetAsync<ToDoTask>();
 

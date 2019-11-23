@@ -17,7 +17,7 @@
         {
             try
             {
-                var task = await new Tasks().GetUsersTask(userId);
+                var task = await new TaskContract().GetUsersTask(userId);
 
                 if (task != null)
                 {
@@ -34,7 +34,7 @@
 
         public async Task EndActiveUsersTask(string userId)
         {
-            await new Tasks().EndActiveTaskByUser(this.Task, userId);
+            await new TaskContract().EndActiveTaskByUser(this.Task, userId);
             this.Task = null;
         }
     }

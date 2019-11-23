@@ -7,11 +7,11 @@
     using TaskManager.Entity;
     using TaskManager.Contracts.Interfaces;
 
-    public class Account : IAccount
+    public class AccountContract : IAccountContract
     {
         private HttpClient httpClient;
 
-        public Account()
+        public AccountContract()
         {
             this.httpClient = new HttpClient();
         }

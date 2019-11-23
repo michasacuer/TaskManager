@@ -4,9 +4,11 @@
     using System.Threading.Tasks;
     using TaskManager.Entity.Base;
 
-    public interface IBaseContracts<T>
+    public interface IBaseContract<T>
         where T : BaseEntity<int>
     {
+        Task<T> AddAsync(T data);
+
         Task<List<T>> GetAllAsync();
 
         Task<T> GetAsync(int id);

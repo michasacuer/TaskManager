@@ -18,7 +18,7 @@
 
         protected override async void OnStartup(object sender, StartupEventArgs e)
         {
-            var test = new TestConnections();
+            var test = new TestConnection();
 
             try
             {

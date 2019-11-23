@@ -29,8 +29,8 @@
 
             if (validationResult.IsValid)
             {
-                var account = new Account();
-                await account.RegisterAsync(accountForm);
+                var accountContract = new AccountContract();
+                await accountContract.RegisterAsync(accountForm);
             }
 
             return validationResult;

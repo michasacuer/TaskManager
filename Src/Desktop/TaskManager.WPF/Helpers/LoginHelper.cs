@@ -21,8 +21,8 @@
 
             if (validationResult.IsValid)
             {
-                var account = new Account();
-                var user = await account.LoginAsync(loginForm);
+                var accountContract = new AccountContract();
+                var user = await accountContract.LoginAsync(loginForm);
 
                 LoggedUser.Instance.LoginUserToApp(user);
 

@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using TaskManager.Entity;
 
-    public interface INotifications
+    public interface INotificationContract
     {
         Task<List<Notification>> GetAllAsync();
     }

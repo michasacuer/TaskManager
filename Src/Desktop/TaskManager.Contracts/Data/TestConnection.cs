@@ -4,11 +4,11 @@
     using System.Threading.Tasks;
     using TaskManager.Contracts.Exceptions;
 
-    public class TestConnections
+    public class TestConnection
     {
         private HttpClient httpClient;
 
-        public TestConnections()
+        public TestConnection()
         {
             this.httpClient = new HttpClient();
         }
