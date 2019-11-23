@@ -53,8 +53,7 @@
                 Password = "user"
             };
 
-            var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query)
-                .ShouldThrowAsync<EntityNotFoundException>();
+            await this.client.PostAsJsonAsync("Account/Login", query).ShouldThrowAsync<EntityNotFoundException>();
         }
 
         [Fact]
@@ -70,8 +69,7 @@
                 Role = Domain.Enum.Role.Manager
             };
 
-            var registerResponse = await this.client.PostAsJsonAsync("Account/Register", command)
-                .ShouldThrowAsync<EntityAlreadyExistsException>();
+            await this.client.PostAsJsonAsync("Account/Register", command).ShouldThrowAsync<EntityAlreadyExistsException>();
         }
     }
 }
