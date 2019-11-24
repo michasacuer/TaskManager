@@ -69,6 +69,10 @@
         {
             string controlleName = ControllerNameValidator(typeof(TObject).Name);
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName), data);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NotFoundServerException();
+            }
 
             return await response.Content.ReadAsAsync<TObject>();
         }
@@ -78,6 +82,10 @@
         {
             string controlleName = ControllerNameValidator(typeof(TObject).Name);
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName, routes), command);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NotFoundServerException();
+            }
 
             return await response.Content.ReadAsAsync<TObject>();
         }
@@ -87,6 +95,10 @@
         {
             string controllerName = ControllerNameValidator(typeof(TObject).Name);
             var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, id), data);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NotFoundServerException();
+            }
 
             return await response.Content.ReadAsAsync<TObject>();
         }
@@ -96,6 +108,10 @@
         {
             string controllerName = ControllerNameValidator(typeof(TObject).Name);
             var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, routes), data);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NotFoundServerException();
+            }
 
             return await response.Content.ReadAsAsync<TObject>();
         }
