@@ -3,7 +3,7 @@
     using System;
     using TaskManager.Entity.Enum;
 
-    public class BaseTask : BaseEntity<int>
+    public abstract class BaseTask : BaseEntity<int>
     {
         public int ProjectId { get; set; }
 
