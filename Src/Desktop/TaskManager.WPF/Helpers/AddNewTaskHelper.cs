@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using TaskManager.Contracts.Data;
     using TaskManager.Entity;
@@ -31,6 +32,7 @@
             {
                 TaskName = vm.TaskNameTextBox,
                 SelectedProject = vm.SelectedProject,
+                Description = vm.DescriptionTextBox,
                 Priority = vm.Priority,
                 LowPriorityButton = vm.LowPriorityButton,
                 MediumPriorityButton = vm.MediumPriorityButton,
@@ -58,13 +60,13 @@
         
                     return validationResult;
                 }
-        
+
                 var newTask = new ToDoTask
                 {
-                    Name = vm.TaskNameTextBox,
-                    Description = vm.DescriptionTextBox,
-                    Priority = vm.Priority,
-                    ProjectId = vm.SelectedProject,
+                    Name = model.TaskName,
+                    Description = model.Description,
+                    Priority = model.Priority,
+                    ProjectId = model.SelectedProject.Id,
                     StoryPoints = storyPoints
                 };
 

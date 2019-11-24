@@ -1,14 +1,17 @@
-﻿using TaskManager.Entity.Enum;
-
-namespace TaskManager.Validation.Models
+﻿namespace TaskManager.Validation.Models
 {
+    using TaskManager.Entity;
+    using TaskManager.Entity.Enum;
+    
     public class AddNewTaskForm
     {
         public string TaskName { get; set; }
 
-        public int SelectedProject { get; set; }
+        public string Description { get; set; }
 
-        public Priority? Priority { get; set; }
+        public Project SelectedProject { get; set; }
+
+        public Priority Priority { get; set; }
 
         public bool LowPriorityButton { get; set; }
 

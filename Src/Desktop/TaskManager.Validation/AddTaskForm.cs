@@ -10,7 +10,7 @@
         {
             var result = new ValidationResult();
 
-            if (isManager)
+            if (!isManager)
             {
                 result.Message = "Brak uprawnień! Zgłoś się do administratora!";
                 result.IsValid = false;
@@ -18,7 +18,7 @@
                 return result;
             }
 
-            if (model.SelectedProject == 0 || model.TaskName == null)
+            if (model.SelectedProject == null || model.TaskName == null)
             {
                 result.Message = "Wypełnij wszystkie pola";
                 result.IsValid = false;

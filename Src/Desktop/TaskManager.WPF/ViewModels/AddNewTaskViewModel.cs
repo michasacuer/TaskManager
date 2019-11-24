@@ -11,7 +11,7 @@
     {
         private AddNewTaskHelper helper;
 
-        public int SelectedProject { get; set; }
+        public Project SelectedProject { get; set; }
 
         public string DescriptionTextBox { get; set; }
 
