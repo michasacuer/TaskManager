@@ -21,7 +21,7 @@
 
             return new TasksListModel
             {
-                ToDoTasks = tasks
+                List = tasks
             };
         }
     }

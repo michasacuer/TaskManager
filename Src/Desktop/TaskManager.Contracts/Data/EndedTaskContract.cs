@@ -1,23 +1,21 @@
 ﻿namespace TaskManager.Contracts.Data
 {
     using System.Collections.Generic;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using TaskManager.Contracts.Extensions;
     using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
+    using TaskManager.Entity.JSONMapper;
 
-    public class EndedTaskContract : IEndedTaskContract
+    public class EndedTaskContract : BaseContract, IEndedTaskContract
     {
-        private HttpClient httpClient;
-
-        public EndedTaskContract()
+        public EndedTaskContract(string bearer)
+            : base(bearer)
         {
-            this.httpClient = new HttpClient();
         }
 
-        public async Task<List<EndedTask>> GetAllAsync() => await this.httpClient.GetAsync<EndedTask>();
+        public async Task<List<EndedTask>> GetAllAsync() => await base.httpClient.GetAsync<EndedTasks, EndedTask>();
 
-        public async Task<EndedTask> GetAsync(int taskId) => await this.httpClient.GetAsync<EndedTask>(taskId);
+        public async Task<EndedTask> GetAsync(int taskId) => await base.httpClient.GetAsync<EndedTask>(taskId);
     }
 }

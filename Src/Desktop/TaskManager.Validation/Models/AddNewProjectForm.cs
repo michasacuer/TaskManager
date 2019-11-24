@@ -1,6 +1,6 @@
-﻿namespace TaskManager.BindingModel
+﻿namespace TaskManager.Validation.Models
 {
-    public class AddNewProjectBindingModel
+    public class AddNewProjectForm
     {
         public string ProjectName { get; set; }
 

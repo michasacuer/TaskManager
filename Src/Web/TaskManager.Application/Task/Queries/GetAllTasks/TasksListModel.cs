@@ -5,6 +5,6 @@
 
     public class TasksListModel
     {
-        public IEnumerable<ToDoTask> ToDoTasks { get; set; }
+        public IEnumerable<ToDoTask> List { get; set; }
     }
 }

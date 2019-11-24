@@ -21,7 +21,7 @@
 
             return new NotificationsModel
             {
-                Notifications = notifications
+                List = notifications
             };
         }
     }

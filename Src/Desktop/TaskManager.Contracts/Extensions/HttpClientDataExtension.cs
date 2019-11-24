@@ -2,22 +2,29 @@
 {
     using System.Collections.Generic;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading.Tasks;
     using TaskManager.BindingModel.Commands;
     using TaskManager.Contracts.Exceptions;
     using TaskManager.Entity.Base;
+    using TaskManager.Entity.JSONMapper;
 
     public static class HttpClientDataExtension
     {
-        public static async Task<List<TObject>> GetAsync<TObject>(this HttpClient httpClient)
+        public static void Authorize(this HttpClient httpClient, string bearer) 
+            => httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
+
+        public static async Task<List<TObject>> GetAsync<T, TObject>(this HttpClient httpClient)
             where TObject : BaseEntity<int>
+            where T : JSONResponse<TObject>
         {
             string controllerName = typeof(TObject).Name;
             var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(controllerName));
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsAsync<List<TObject>>();
+                var data = await response.Content.ReadAsAsync<T>();
+                return data.List;
             }
             else
             {

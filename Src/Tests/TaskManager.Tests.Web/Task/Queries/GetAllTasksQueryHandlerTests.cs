@@ -28,8 +28,8 @@
             var result = await queryHandler.Handle(new GetAllTasksQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<TasksListModel>();
-            result.ToDoTasks.ShouldNotBeNull();
-            result.ToDoTasks.ShouldNotBeEmpty();
+            result.List.ShouldNotBeNull();
+            result.List.ShouldNotBeEmpty();
         }
     }
 }

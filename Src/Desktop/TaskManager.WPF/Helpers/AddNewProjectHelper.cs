@@ -1,7 +1,6 @@
 ﻿namespace TaskManager.WPF.Helpers
 {
     using System.Threading.Tasks;
-    using TaskManager.BindingModel;
     using TaskManager.Contracts.Data;
     using TaskManager.Entity;
     using TaskManager.Validation;
@@ -14,7 +13,7 @@
         public async Task<ValidationResult> AddProjectToDatabase(AddNewProjectViewModel vm)
         {
             bool isManager = LoggedUser.Instance.IsManager();
-            var model = new AddNewProjectBindingModel 
+            var model = new AddNewProjectForm 
             { 
                 ProjectName = vm.ProjectNameTextBox,
                 Description = vm.DescriptionTextBox
@@ -30,7 +29,7 @@
                     Description = model.Description
                 };
 
-                var projectContract = new ProjectContract();
+                var projectContract = new ProjectContract(LoggedUser.Instance.User.Bearer);
                 await projectContract.AddAsync(newProject);
                 validationResult.Message = "Projekt dodano pomyślnie!";
             }

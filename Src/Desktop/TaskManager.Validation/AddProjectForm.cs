@@ -1,11 +1,10 @@
 ﻿namespace TaskManager.Validation
 {
-    using TaskManager.BindingModel;
     using TaskManager.Validation.Models;
     
     public class AddProjectForm
     {
-        public ValidationResult IsValid(AddNewProjectBindingModel model, bool isManager)
+        public ValidationResult IsValid(AddNewProjectForm model, bool isManager)
         {
             var result = new ValidationResult();
 

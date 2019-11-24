@@ -1,21 +1,19 @@
 ﻿namespace TaskManager.Contracts.Data
 {
     using System.Collections.Generic;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using TaskManager.Contracts.Extensions;
     using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
+    using TaskManager.Entity.JSONMapper;
 
-    public class NotificationContract : INotificationContract
+    public class NotificationContract : BaseContract, INotificationContract
     {
-        private HttpClient httpClient;
-
-        public NotificationContract()
+        public NotificationContract(string bearer)
+            : base(bearer)
         {
-            this.httpClient = new HttpClient();
         }
 
-        public Task<List<Notification>> GetAllAsync() => this.httpClient.GetAsync<Notification>();
+        public Task<List<Notification>> GetAllAsync() => this.httpClient.GetAsync<Notifications, Notification>();
     }
 }

@@ -30,7 +30,7 @@
 
             response.EnsureSuccessStatusCode();
             projects.ShouldBeOfType<ProjectsListModel>();
-            projects.Projects.ShouldNotBeEmpty();
+            projects.List.ShouldNotBeEmpty();
         }
 
         [Fact]

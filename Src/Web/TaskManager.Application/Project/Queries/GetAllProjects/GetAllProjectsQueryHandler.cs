@@ -20,7 +20,7 @@
 
             return new ProjectsListModel
             {
-                Projects = projects
+                List = projects
             };
         }
     }

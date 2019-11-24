@@ -6,20 +6,19 @@
     using TaskManager.Contracts.Extensions;
     using TaskManager.Contracts.Interfaces;
     using TaskManager.Entity;
+    using TaskManager.Entity.JSONMapper;
 
-    public class ProjectContract : IProjectService
+    public class ProjectContract : BaseContract, IProjectContract
     {
-        private HttpClient httpClient;
-
-        public ProjectContract()
+        public ProjectContract(string bearer)
+            : base(bearer)
         {
-            this.httpClient = new HttpClient();
         }
 
-        public async Task<Project> AddAsync(Project project) => await this.httpClient.PostAsync(project);
+        public async Task<Project> AddAsync(Project project) => await base.httpClient.PostAsync(project);
 
-        public async Task<List<Project>> GetAllAsync() => await this.httpClient.GetAsync<Project>();
+        public async Task<List<Project>> GetAllAsync() => await base.httpClient.GetAsync<Projects, Project>();
 
-        public async Task<Project> GetAsync(int projectId) => await this.httpClient.GetAsync<Project>(projectId);
+        public async Task<Project> GetAsync(int projectId) => await base.httpClient.GetAsync<Project>(projectId);
     }
 }

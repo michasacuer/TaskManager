@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using TaskManager.Entity;
 
-    public interface ITaskService : IBaseContract<ToDoTask>
+    public interface ITaskContract : IBaseContract<ToDoTask>
     {
         Task<ToDoTask> GetUsersTask(string userId);
 

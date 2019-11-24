@@ -2,7 +2,7 @@
 {
     using TaskManager.Entity;
 
-    public interface IProjectService : IBaseContract<Project>
+    public interface IProjectContract : IBaseContract<Project>
     {
     }
 }

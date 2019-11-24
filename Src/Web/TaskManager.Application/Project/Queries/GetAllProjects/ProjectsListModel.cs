@@ -5,6 +5,6 @@
 
     public class ProjectsListModel
     {
-        public IEnumerable<Project> Projects { get; set; }
+        public IEnumerable<Project> List { get; set; }
     }
 }

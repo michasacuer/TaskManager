@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Caliburn.Micro.Core.4.0.62-alpha\lib\net45\Caliburn.Micro.Core.dll</HintPath>
     </Reference>
@@ -76,14 +79,17 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AddNewProjectHelper.cs" />
+    <Compile Include="Helpers\AddNewTaskHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="ViewModels\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModels\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNewViewModel.cs" />
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
+    <Compile Include="ViewModels\Helper\ContainerConfig.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
@@ -91,6 +97,9 @@
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Views\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewTaskView.xaml.cs">
+      <DependentUpon>AddNewTaskView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddNewView.xaml.cs">
       <DependentUpon>AddNewView.xaml</DependentUpon>
@@ -168,6 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AddNewProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

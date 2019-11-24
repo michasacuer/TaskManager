@@ -5,6 +5,6 @@
 
     public class NotificationsModel
     {
-        public IEnumerable<Notification> Notifications { get; set; }
+        public IEnumerable<Notification> List { get; set; }
     }
 }

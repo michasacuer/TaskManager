@@ -34,7 +34,7 @@
 
             response.EnsureSuccessStatusCode();
             tasks.ShouldBeOfType<TasksListModel>();
-            tasks.ToDoTasks.ShouldNotBeEmpty();
+            tasks.List.ShouldNotBeEmpty();
         }
 
         [Fact]

@@ -21,7 +21,7 @@
 
             return new EndedTasksModel
             {
-                EndedTasks = endedTasks
+                List = endedTasks
             };
         }
     }

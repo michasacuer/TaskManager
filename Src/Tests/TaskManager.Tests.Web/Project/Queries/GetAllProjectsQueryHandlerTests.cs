@@ -27,7 +27,7 @@
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<ProjectsListModel>();
-            result.Projects.ShouldNotBeEmpty();
+            result.List.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -38,7 +38,7 @@
             var result = await queryHandler.Handle(new GetAllProjectsQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<ProjectsListModel>();
-            var projects = result.Projects.ToList();
+            var projects = result.List.ToList();
 
             projects[5].Tasks.ShouldNotBeNull();
         }

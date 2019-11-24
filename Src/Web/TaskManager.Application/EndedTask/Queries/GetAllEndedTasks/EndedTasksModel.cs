@@ -5,6 +5,6 @@
 
     public class EndedTasksModel
     {
-        public IEnumerable<EndedTask> EndedTasks { get; set; }
+        public IEnumerable<EndedTask> List { get; set; }
     }
 }
