@@ -6,6 +6,7 @@
     using System.Text;
     using MediatR;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
@@ -26,12 +27,15 @@
                         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     })
                     .AddApplicationPart(Assembly.Load("TaskManager.Api"));
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddMediatR(typeof(RegisterCommand.Handler).GetTypeInfo().Assembly);
             services.AddScoped<ITokenService, TokenTestService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IRaportService, RaportService>();
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
+            services.AddScoped<IRazorViewEngine, RazorViewEngine>();
             services.AddHttpContextAccessor();
             services.AddSignalR();
 

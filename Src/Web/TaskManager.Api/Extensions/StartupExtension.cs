@@ -29,6 +29,8 @@
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddSingleton(configuration);
 

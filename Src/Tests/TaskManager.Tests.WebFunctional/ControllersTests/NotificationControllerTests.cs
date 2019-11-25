@@ -21,7 +21,7 @@
         public async Task ServerShouldReturnAllNotificationsFromDb()
         {
             await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Project");
+            var response = await this.client.GetAsync("Notification");
 
             string json = await response.Content.ReadAsStringAsync();
             var notifications = json.DeserializeObjectFromJson<NotificationsModel>();

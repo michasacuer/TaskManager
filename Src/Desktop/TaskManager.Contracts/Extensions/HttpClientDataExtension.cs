@@ -128,6 +128,20 @@
             }
         }
 
+        public static async Task<string> GetPdfAsync(this HttpClient httpClient, int projectId)
+        {
+            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint("Raport", projectId));
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                throw new NotFoundServerException();
+            }
+        }
+
         private static string ControllerNameValidator(string controllerName) => controllerName == "ToDoTask" ? "Task" : controllerName;
     }
 }
