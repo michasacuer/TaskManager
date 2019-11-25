@@ -87,6 +87,7 @@
     <Compile Include="Helpers\AddNewProjectHelper.cs" />
     <Compile Include="Helpers\AddNewTaskHelper.cs" />
     <Compile Include="Helpers\FileDialog.cs" />
+    <Compile Include="Helpers\InfoBoxHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\ManagerPanelHelper.cs" />
     <Compile Include="Helpers\RegistrationHelper.cs" />
@@ -98,9 +99,11 @@
     <Compile Include="ViewModels\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\Helper\ContainerConfig.cs" />
+    <Compile Include="ViewModels\InfoProjectBoxViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ManagerPanelViewModel.cs" />
+    <Compile Include="ViewModels\ProjectsDataGridViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SuccesBoxViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
@@ -116,6 +119,9 @@
     <Compile Include="Views\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InfoProjectBoxView.xaml.cs">
+      <DependentUpon>InfoProjectBoxView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -124,6 +130,9 @@
     </Compile>
     <Compile Include="Views\ManagerPanelView.xaml.cs">
       <DependentUpon>ManagerPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectsDataGridView.xaml.cs">
+      <DependentUpon>ProjectsDataGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
@@ -204,6 +213,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InfoProjectBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -213,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectsDataGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

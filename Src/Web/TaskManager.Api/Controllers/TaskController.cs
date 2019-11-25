@@ -42,7 +42,7 @@
             return Ok(await base.Mediator.Send(new DeleteTaskCommand { TaskId = taskId }));
         }
 
-        [HttpPut("TakeTask")]
+        [HttpPost("TakeTask")]
         [Authorize(Roles = "Developer, Manager")]
         public async Task<IActionResult> TakeTaskByUser([FromBody]TakeTaskByUserCommand command)
         {

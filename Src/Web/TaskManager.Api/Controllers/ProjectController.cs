@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using TaskManager.Application.Commands.CreateProject;
+    using TaskManager.Application.Commands.EditProject;
     using TaskManager.Application.Project.Commands.DeleteProject;
     using TaskManager.Application.Project.Queries.GetAllProjects;
     using TaskManager.Application.Project.Queries.GetProject;
@@ -27,6 +28,13 @@
         [HttpPost]
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> CreateProject([FromBody]CreateProjectCommand command)
+        {
+            return Ok(await base.Mediator.Send(command));
+        }
+
+        [HttpPost("Edit")]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> EditProject([FromBody]EditProjectCommand command)
         {
             return Ok(await base.Mediator.Send(command));
         }

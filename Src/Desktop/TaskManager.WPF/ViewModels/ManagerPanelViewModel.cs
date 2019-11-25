@@ -14,7 +14,7 @@
         {
             this.helper = new ManagerPanelHelper();
 
-            //this.Items.Add(new ProjectsDataGridViewModel { DisplayName = "Projekty" });
+            this.Items.Add(new ProjectsDataGridViewModel { DisplayName = "Projekty" });
             //this.Items.Add(new TasksDataGridViewModel { DisplayName = "Zadania" });
             //this.Items.Add(new EndedTasksDataGridViewModel { DisplayName = "Skończone zadania" });
         }

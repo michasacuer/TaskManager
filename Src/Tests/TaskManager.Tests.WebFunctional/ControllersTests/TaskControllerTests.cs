@@ -84,7 +84,7 @@
         public async Task UserShouldTakeTaskAndEndItWithOkStatusCode()
         {
             var user = await this.client.GetMockManagerCredentialWithUserInfo();
-            var response = await this.client.PutAsJsonAsync("Task/TakeTask", new TakeTaskByUserCommand
+            var response = await this.client.PostAsJsonAsync("Task/TakeTask", new TakeTaskByUserCommand
             {
                 ApplicationUserId = user.Id,
                 TaskId = 1

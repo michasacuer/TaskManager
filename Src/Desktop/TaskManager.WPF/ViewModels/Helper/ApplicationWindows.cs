@@ -3,6 +3,7 @@
     using Caliburn.Micro;
     using System;
     using System.Diagnostics;
+    using TaskManager.Entity;
     using TaskManager.WPF.ViewModels;
 
     public static class ApplicationWindows
@@ -28,5 +29,7 @@
             process.StartInfo.FileName = pdf.LocalPath;
             process.Start();
         }
+
+        public static void ShowInfoProjectBox(Project project) => manager.ShowDialogAsync(new InfoProjectBoxViewModel(project), null, null);
     }
 }

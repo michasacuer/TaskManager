@@ -68,5 +68,21 @@
 
             response.EnsureSuccessStatusCode();
         }
+
+        [Fact]
+        public async Task ServerShouldReturnOkAfterEditingProjectInDb()
+        {
+            await this.client.GetMockManagerCredential();
+            var project = new Project
+            {
+                Id = 1,
+                Name = "DDD",
+                Description = "ddd"
+            };
+
+            var response = await this.client.PostAsJsonAsync("Project/Edit", new { project = project } );
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

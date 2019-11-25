@@ -14,7 +14,7 @@
         Task AddAsync(T item);
 
         void Update(T item);
-        
+
         void Delete(T item);
 
         Task SaveAsync(CancellationToken cancellationToken = default);

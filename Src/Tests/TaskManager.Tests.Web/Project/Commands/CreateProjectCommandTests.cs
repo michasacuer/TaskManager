@@ -7,7 +7,6 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands.CreateProject;
-    using TaskManager.Common.Exceptions;
     using TaskManager.Persistence;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
