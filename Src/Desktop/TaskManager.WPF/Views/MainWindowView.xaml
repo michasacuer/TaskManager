@@ -335,7 +335,7 @@
                 Grid.Column="4" Grid.Row="1" Grid.RowSpan="4"
                 Height="218" Width="8"
                 Content="&#xf061;" FontSize="6" 
-                FontFamily="/Font/#FontAwesome"
+                FontFamily="/Fonts/#FontAwesome"
                 BorderBrush="{x:Null}" 
                 Foreground="White" BorderThickness="0"  
                 Background="#FF085078" Margin="7,3,41,3">

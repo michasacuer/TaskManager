@@ -44,7 +44,7 @@
 
         <ToggleButton x:Name="CancelButton"
                 Grid.Row="0" Grid.Column="3"
-                FontFamily="/Font/#FontAwesome"
+                FontFamily="/Fonts/#FontAwesome"
                 Width="50" Height="50" 
                 Content="&#xf00d;"
                       FontSize="25"
