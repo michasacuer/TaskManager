@@ -31,17 +31,22 @@
 
         public string DescriptionTextBox { get; set; }
 
-        public void SaveButton()
+        public async void SaveButton()
         {
             if (LoggedUser.Instance.IsManager())
             {
                 this.project.Name = this.NameTextBox;
                 this.project.Description = this.DescriptionTextBox;
 
-                this.helper.EditProject(this.project);
-
-                ApplicationWindows.ShowSuccesBox("Pomyślnie edytowano projekt.");
-                this.TryCloseAsync();
+                bool isSucced = await this.helper.EditProject(this.project);
+                if (isSucced)
+                {
+                    ApplicationWindows.ShowSuccesBox("Pomyślnie edytowano projekt.");
+                }
+                else
+                {
+                    ApplicationWindows.ShowErrorBox("Błąd przy edycji projektu");
+                }
             }
             else
             {

@@ -12,5 +12,7 @@
         Task<List<T>> GetAllAsync();
 
         Task<T> GetAsync(int id);
+
+        Task<bool> EditAsync(T data);
     }
 }

@@ -10,7 +10,7 @@
 
     public class EditProjectCommand : IRequest
     {
-        public Project Project { get; set; }
+        public Project Data { get; set; }
 
         public class Handler : IRequestHandler<EditProjectCommand>
         {
@@ -25,11 +25,11 @@
             {
                 await new EditProjectCommandValidator().ValidateAndThrowAsync(request);
 
-                var project = await this.projectRepository.GetByIdAsync(request.Project.Id)
+                var project = await this.projectRepository.GetByIdAsync(request.Data.Id)
                     ?? throw new EntityNotFoundException();
 
-                project.Name = request.Project.Name;
-                project.Description = request.Project.Description;
+                project.Name = request.Data.Name;
+                project.Description = request.Data.Description;
 
                 this.projectRepository.Update(project);
                 await this.projectRepository.SaveAsync(cancellationToken);

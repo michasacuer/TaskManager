@@ -82,7 +82,7 @@
 
         private static Project[] AddProjectsToDatabase()
         {
-            int projectsCount = 6;
+            int projectsCount = 7;
             var projects = new Project[projectsCount];
 
             for (int i = 0; i < projectsCount; i++)

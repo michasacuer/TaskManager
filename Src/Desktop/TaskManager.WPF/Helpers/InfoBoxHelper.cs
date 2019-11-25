@@ -1,36 +1,33 @@
 ﻿namespace TaskManager.WPF.Helpers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using TaskManager.Contracts.Data;
-    using TaskManager.Contracts.Exceptions;
     using TaskManager.Entity;
-    using TaskManager.Entity.Base;
     using TaskManager.WPF.Models;
-    using TaskManager.WPF.ViewModels.Helper;
 
     public class InfoBoxHelper
     {
-        public void EditTask(ToDoTask task) => this.EditItemInDatabase(task, task.Id);
+        private ProjectContract projectContract;
 
-        public void EditProject(Project project) => this.EditItemInDatabase(project, project.Id);
+        private TaskContract taskContract;
 
-        private async void EditItemInDatabase<TObject>(TObject item, int itemId)
-            where TObject : BaseEntity<int>
+        public InfoBoxHelper()
         {
-            try
-            {
-                if (item is Project)
-                {
-                    var projectContract = new ProjectContract(LoggedUser.Instance.User.Bearer);
+            string bearer = LoggedUser.Instance.User.Bearer;
 
-
-                }
-                //var httpDataService = new HttpDataService();
-                //await httpDataService.Put(item, itemId);
-            }
-            catch (NotFoundServerException exception)
-            {
-                ApplicationWindows.ShowErrorBox(exception.Message);
-            }
+            this.projectContract = new ProjectContract(bearer);
+            this.taskContract = new TaskContract(bearer);
         }
+
+        public async Task<List<Project>> GetAllProjectsFromDatabase() => await this.projectContract.GetAllAsync();
+
+        public async Task<bool> EditTask(ToDoTask task) => await this.EditTaskInDatabase(task, task.Id);
+
+        public async Task<bool> EditProject(Project project) => await this.EditProjectInDatabase(project, project.Id);
+
+        private async Task<bool> EditProjectInDatabase(Project project, int itemId) => await this.projectContract.EditAsync(project);
+
+        private async Task<bool> EditTaskInDatabase(ToDoTask task, int itemId) => await this.taskContract.EditAsync(task);
     }
 }

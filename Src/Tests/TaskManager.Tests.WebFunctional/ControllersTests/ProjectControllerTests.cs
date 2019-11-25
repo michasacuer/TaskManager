@@ -75,12 +75,12 @@
             await this.client.GetMockManagerCredential();
             var project = new Project
             {
-                Id = 1,
+                Id = 2,
                 Name = "DDD",
                 Description = "ddd"
             };
 
-            var response = await this.client.PostAsJsonAsync("Project/Edit", new { project = project } );
+            var response = await this.client.PostAsJsonAsync("Project/Edit", new { data = project } );
 
             response.EnsureSuccessStatusCode();
         }

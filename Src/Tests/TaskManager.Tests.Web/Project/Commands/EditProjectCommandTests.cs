@@ -33,7 +33,7 @@
 
             var command = new EditProjectCommand
             {
-                Project = new Project
+                Data = new Project
                 {
                     Id = 1,
                     Name = "ChangedName!",
@@ -48,7 +48,7 @@
             var project = await this.context.Projects.FindAsync(1);
 
             project.ShouldNotBeNull();
-            project.Name.ShouldBe(command.Project.Name);
+            project.Name.ShouldBe(command.Data.Name);
             nameBefore.ShouldNotBe(project.Name);
         }
 
@@ -57,7 +57,7 @@
         {
             var command = new EditProjectCommand
             {
-                Project = new Project
+                Data = new Project
                 {
                     Id = 1111111111,
                     Name = "ChangedName!",
@@ -75,7 +75,7 @@
         {
             var command = new EditProjectCommand
             {
-                Project = new Project
+                Data = new Project
                 {
                     Id = 1,
                     Name = "",
@@ -86,6 +86,35 @@
             var commandHandler = new EditProjectCommand.Handler(this.projectRepository);
 
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
+        }
+
+        [Fact]
+        public async Task EditProjectShouldEditWhenDescOnlyEdited()
+        {
+            var projectBefore = await this.context.Projects.FindAsync(7);
+            string nameBefore = projectBefore.Name;
+            string descriptionBefore = projectBefore.Description;
+
+            var command = new EditProjectCommand
+            {
+                Data = new Project
+                {
+                    Id = 7,
+                    Name = nameBefore,
+                    Description = "ChangedDescAAAAAAA!"
+                }
+            };
+
+            var commandHandler = new EditProjectCommand.Handler(this.projectRepository);
+
+            await commandHandler.Handle(command, CancellationToken.None);
+
+            var project = await this.context.Projects.FindAsync(7);
+
+            project.ShouldNotBeNull();
+            project.Name.ShouldBe(command.Data.Name);
+            nameBefore.ShouldBe(project.Name);
+            descriptionBefore.ShouldNotBe(project.Description);
         }
     }
 }

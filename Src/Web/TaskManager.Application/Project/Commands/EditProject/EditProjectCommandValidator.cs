@@ -6,8 +6,8 @@
     {
         public EditProjectCommandValidator()
         {
-            RuleFor(x => x.Project.Id).NotEmpty();
-            RuleFor(x => x.Project.Name).NotEmpty();
+            RuleFor(x => x.Data.Id).NotEmpty();
+            RuleFor(x => x.Data.Name).NotEmpty();
         }
     }
 }

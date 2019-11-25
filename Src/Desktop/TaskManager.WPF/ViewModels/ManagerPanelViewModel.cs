@@ -61,6 +61,7 @@
         protected async override void OnViewLoaded(object view)
         {
             this.ProjectsList = await this.helper.GetAllProjectsFromDatabase();
+            this.NotifyOfPropertyChange(() => this.ProjectsList);
         }
     }
 }

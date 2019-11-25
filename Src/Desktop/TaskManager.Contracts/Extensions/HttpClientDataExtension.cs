@@ -77,43 +77,30 @@
             return await response.Content.ReadAsAsync<TObject>();
         }
 
-        public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, TObject data, Command command, params string[] routes)
+        public static async Task<bool> PostAsync<TObject>(this HttpClient httpClient, Command command, params string[] routes)
             where TObject : BaseEntity<int>
         {
             string controlleName = ControllerNameValidator(typeof(TObject).Name);
             var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName, routes), command);
             if (!response.IsSuccessStatusCode)
             {
-                throw new NotFoundServerException();
+                return false;
             }
 
-            return await response.Content.ReadAsAsync<TObject>();
+            return true;
         }
 
-        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, TObject data, int id)
+        public static async Task<bool> PostAsync<TObject>(this HttpClient httpClient, TObject data, params string[] routes)
             where TObject : BaseEntity<int>
         {
-            string controllerName = ControllerNameValidator(typeof(TObject).Name);
-            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, id), data);
+            string controlleName = ControllerNameValidator(typeof(TObject).Name);
+            var response = await httpClient.PostAsJsonAsync(UrlBuilder.BuildEndpoint(controlleName, routes), new { data = data });
             if (!response.IsSuccessStatusCode)
             {
-                throw new NotFoundServerException();
+                return false;
             }
 
-            return await response.Content.ReadAsAsync<TObject>();
-        }
-
-        public static async Task<TObject> PutAsync<TObject>(this HttpClient httpClient, TObject data, params string[] routes)
-            where TObject : BaseEntity<int>
-        {
-            string controllerName = ControllerNameValidator(typeof(TObject).Name);
-            var response = await httpClient.PutAsJsonAsync(UrlBuilder.BuildEndpoint(controllerName, routes), data);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new NotFoundServerException();
-            }
-
-            return await response.Content.ReadAsAsync<TObject>();
+            return true;
         }
 
         public static async Task DeleteAsync<TObject>(this HttpClient httpClient, int id)

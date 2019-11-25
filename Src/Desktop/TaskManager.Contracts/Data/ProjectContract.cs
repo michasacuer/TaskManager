@@ -17,6 +17,8 @@
 
         public async Task<Project> AddAsync(Project project) => await base.httpClient.PostAsync(project);
 
+        public async Task<bool> EditAsync(Project data) => await base.httpClient.PostAsync(data, "Edit");
+
         public async Task<List<Project>> GetAllAsync() => await base.httpClient.GetAsync<Projects, Project>();
 
         public async Task<Project> GetAsync(int projectId) => await base.httpClient.GetAsync<Project>(projectId);

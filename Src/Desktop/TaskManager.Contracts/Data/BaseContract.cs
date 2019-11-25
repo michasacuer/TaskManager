@@ -1,6 +1,8 @@
 ﻿namespace TaskManager.Contracts.Data
 {
+    using System.Collections.Generic;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using TaskManager.Contracts.Extensions;
 
     public abstract class BaseContract
