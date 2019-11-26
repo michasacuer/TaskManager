@@ -107,37 +107,37 @@
     <Compile Include="ViewModels\Account\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\Boxes\SuccesBoxViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
-    <Compile Include="Views\AddNewProjectView.xaml.cs">
+    <Compile Include="Views\AddNew\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddNewTaskView.xaml.cs">
+    <Compile Include="Views\AddNew\AddNewTaskView.xaml.cs">
       <DependentUpon>AddNewTaskView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddNewView.xaml.cs">
+    <Compile Include="Views\AddNew\AddNewView.xaml.cs">
       <DependentUpon>AddNewView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ErrorBoxView.xaml.cs">
+    <Compile Include="Views\Boxes\ErrorBoxView.xaml.cs">
       <DependentUpon>ErrorBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InfoProjectBoxView.xaml.cs">
+    <Compile Include="Views\Boxes\InfoProjectBoxView.xaml.cs">
       <DependentUpon>InfoProjectBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
+    <Compile Include="Views\Account\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManagerPanelView.xaml.cs">
+    <Compile Include="Views\ManagerPanel\ManagerPanelView.xaml.cs">
       <DependentUpon>ManagerPanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectsDataGridView.xaml.cs">
+    <Compile Include="Views\ManagerPanel\ProjectsDataGridView.xaml.cs">
       <DependentUpon>ProjectsDataGridView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegistrationView.xaml.cs">
+    <Compile Include="Views\Account\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SuccesBoxView.xaml.cs">
+    <Compile Include="Views\Boxes\SuccesBoxView.xaml.cs">
       <DependentUpon>SuccesBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserInfoView.xaml.cs">
@@ -197,27 +197,27 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AddNewProjectView.xaml">
+    <Page Include="Views\AddNew\AddNewProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddNewTaskView.xaml">
+    <Page Include="Views\AddNew\AddNewTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddNewView.xaml">
+    <Page Include="Views\AddNew\AddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ErrorBoxView.xaml">
+    <Page Include="Views\Boxes\ErrorBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InfoProjectBoxView.xaml">
+    <Page Include="Views\Boxes\InfoProjectBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="Views\Account\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,19 +225,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManagerPanelView.xaml">
+    <Page Include="Views\ManagerPanel\ManagerPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectsDataGridView.xaml">
+    <Page Include="Views\ManagerPanel\ProjectsDataGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegistrationView.xaml">
+    <Page Include="Views\Account\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SuccesBoxView.xaml">
+    <Page Include="Views\Boxes\SuccesBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
