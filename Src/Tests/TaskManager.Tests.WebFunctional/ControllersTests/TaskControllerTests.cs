@@ -102,5 +102,21 @@
 
             response.EnsureSuccessStatusCode();
         }
+
+        [Fact]
+        public async Task ServerShouldReturnOkWhenEditTask()
+        {
+            await this.client.GetMockManagerCredential();
+            var task = new ToDoTask
+            {
+                Id = 2,
+                Name = "AAAAA",
+                Description = "AAAAAA"
+            };
+
+            var response = await this.client.PostAsJsonAsync("Task/Edit", new { data = task });
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

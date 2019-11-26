@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using TaskManager.Application.Task.Commands.CreateTask;
     using TaskManager.Application.Task.Commands.DeleteTask;
+    using TaskManager.Application.Task.Commands.EditTask;
     using TaskManager.Application.Task.Commands.EndTaskByUser;
     using TaskManager.Application.Task.Commands.TakeTaskByUser;
     using TaskManager.Application.Task.Queries.GetAllTasks;
@@ -31,6 +32,13 @@
         [HttpPost]
         [Authorize(Roles = "Manager")]
         public async Task<IActionResult> CreateTask([FromBody]CreateTaskCommand command)
+        {
+            return Ok(await base.Mediator.Send(command));
+        }
+
+        [HttpPost("Edit")]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> EditTask([FromBody]EditTaskCommand command)
         {
             return Ok(await base.Mediator.Send(command));
         }

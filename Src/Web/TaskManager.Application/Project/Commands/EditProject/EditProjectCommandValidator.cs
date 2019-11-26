@@ -1,7 +1,7 @@
 ﻿namespace TaskManager.Application.Commands.EditProject
 {
     using FluentValidation;
-    
+
     public class EditProjectCommandValidator : AbstractValidator<EditProjectCommand>
     {
         public EditProjectCommandValidator()
