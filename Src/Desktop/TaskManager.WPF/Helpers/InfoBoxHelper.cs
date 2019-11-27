@@ -22,6 +22,8 @@
 
         public async Task<List<Project>> GetAllProjectsFromDatabase() => await this.projectContract.GetAllAsync();
 
+        public async Task<List<ToDoTask>> GetAllTasksFromDatabase() => await this.taskContract.GetAllAsync();
+
         public async Task<bool> EditTask(ToDoTask task) => await this.taskContract.EditAsync(task);
 
         public async Task<bool> EditProject(Project project) => await this.projectContract.EditAsync(project);

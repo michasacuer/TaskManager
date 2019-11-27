@@ -98,16 +98,18 @@
     <Compile Include="ViewModels\AddNew\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNew\AddNewViewModel.cs" />
     <Compile Include="ViewModels\Boxes\ErrorBoxViewModel.cs" />
-    <Compile Include="ViewModels\DeleteProjectBoxViewModel.cs" />
+    <Compile Include="ViewModels\Boxes\DeleteProjectBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\Helper\ContainerConfig.cs" />
     <Compile Include="ViewModels\Boxes\InfoProjectBoxViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Boxes\InfoTaskBoxViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ManagerPanel\ManagerPanelViewModel.cs" />
     <Compile Include="ViewModels\ManagerPanel\ProjectsDataGridViewModel.cs" />
     <Compile Include="ViewModels\Account\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\Boxes\SuccesBoxViewModel.cs" />
+    <Compile Include="ViewModels\ManagerPanel\TasksDataGridViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Views\AddNew\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
@@ -127,8 +129,11 @@
     <Compile Include="Views\Account\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DeleteProjectBoxView.xaml.cs">
+    <Compile Include="Views\Boxes\DeleteProjectBoxView.xaml.cs">
       <DependentUpon>DeleteProjectBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boxes\InfoTaskBoxView.xaml.cs">
+      <DependentUpon>InfoTaskBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -144,6 +149,9 @@
     </Compile>
     <Compile Include="Views\Boxes\SuccesBoxView.xaml.cs">
       <DependentUpon>SuccesBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerPanel\TasksDataGridView.xaml.cs">
+      <DependentUpon>TasksDataGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserInfoView.xaml.cs">
       <DependentUpon>UserInfoView.xaml</DependentUpon>
@@ -226,7 +234,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DeleteProjectBoxView.xaml">
+    <Page Include="Views\Boxes\DeleteProjectBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boxes\InfoTaskBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boxes\SuccesBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerPanel\TasksDataGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

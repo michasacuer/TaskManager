@@ -30,7 +30,6 @@
             if (LoggedUser.Instance.IsManager())
             {
                 ApplicationWindows.ShowDeleteProjectBox(project);
-                
                 this.Projects = await this.helper.GetAllProjectsFromDatabase();
                 this.NotifyOfPropertyChange(() => this.Projects);
             }
