@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="TaskManager.WPF.Views.EndedTasksDataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TaskManager.WPF.Views"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="columnStyle" TargetType="DataGrid">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource columnStyle1}"/>
+        </Style>
+
+        <Style x:Key="columnStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FF085078"/>
+        </Style>
+
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#FF085078"/>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="Margin" Value="3,1,1,1"/>
+            <Setter Property="Padding" Value="3,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <DataGrid GridLinesVisibility="Horizontal" Grid.Row ="0" x:Name="EndedTasks" AutoGenerateColumns="False"  IsReadOnly="true" Height="auto" Style="{DynamicResource columnStyle}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+            <DataGridTextColumn Header="NAZWA" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="DATA ROZPOCZĘCIA" Binding="{Binding StartTime}"/>
+            <DataGridTextColumn Header="DATA ZAKOŃCZENIA" Binding="{Binding EndTime}"/>
+            <DataGridTextColumn Header="OPIS" Binding="{Binding Description}"/>
+            <DataGridTextColumn Header="ID UŻYTKOWNIKA" Binding="{Binding ApplicationUserId}"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

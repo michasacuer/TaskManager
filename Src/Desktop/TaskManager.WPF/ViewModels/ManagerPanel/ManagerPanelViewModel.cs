@@ -16,7 +16,7 @@
 
             this.Items.Add(new ProjectsDataGridViewModel { DisplayName = "Projekty" });
             this.Items.Add(new TasksDataGridViewModel { DisplayName = "Zadania" });
-            //this.Items.Add(new EndedTasksDataGridViewModel { DisplayName = "Skończone zadania" });
+            this.Items.Add(new EndedTasksDataGridViewModel { DisplayName = "Skończone zadania" });
         }
 
         public List<Project> Projects { get; set; }
