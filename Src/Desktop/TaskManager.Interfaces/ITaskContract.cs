@@ -7,6 +7,8 @@
     {
         Task<ToDoTask> GetUsersTask(string userId);
 
-        Task<bool> EndActiveTaskByUser(ToDoTask task, string userId);
+        Task<bool> EndActiveTaskByUserAsync(int taskId, string userId);
+
+        Task<bool> TakeTaskByUserAsync(int taskId, string userId);
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\ManagerPanelHelper.cs" />
     <Compile Include="Helpers\RegistrationHelper.cs" />
+    <Compile Include="Helpers\TaskManagerHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="ViewModels\AddNew\AddNewProjectViewModel.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="ViewModels\Account\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\Boxes\SuccesBoxViewModel.cs" />
     <Compile Include="ViewModels\ManagerPanel\TasksDataGridViewModel.cs" />
+    <Compile Include="ViewModels\TaskManagerViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Views\AddNew\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
@@ -160,6 +162,9 @@
     </Compile>
     <Compile Include="Views\ManagerPanel\TasksDataGridView.xaml.cs">
       <DependentUpon>TasksDataGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaskManagerView.xaml.cs">
+      <DependentUpon>TaskManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserInfoView.xaml.cs">
       <DependentUpon>UserInfoView.xaml</DependentUpon>
@@ -279,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManagerPanel\TasksDataGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TaskManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

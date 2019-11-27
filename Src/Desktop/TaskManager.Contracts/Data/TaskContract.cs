@@ -16,9 +16,14 @@
         {
         }
 
-        public async Task<bool> EndActiveTaskByUser(ToDoTask task, string userId)
+        public async Task<bool> TakeTaskByUserAsync(int taskId, string userId)
             => await this.httpClient.PostAsync<ToDoTask>(
-                new EndTaskByUserBindingModel { ApplicationUserId = userId, TaskId = task.Id }, 
+                new TakeTaskByUserBindingModel { ApplicationUserId = userId, TaskId = taskId } );
+
+
+        public async Task<bool> EndActiveTaskByUserAsync(int taskId, string userId)
+            => await this.httpClient.PostAsync<ToDoTask>(
+                new EndTaskByUserBindingModel { ApplicationUserId = userId, TaskId = taskId }, 
                 "EndTask");
 
         public async Task<ToDoTask> AddAsync(ToDoTask task) => await base.httpClient.PostAsync(task);

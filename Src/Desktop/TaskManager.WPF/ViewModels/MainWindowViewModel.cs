@@ -12,6 +12,8 @@
 
         public void LoadUserInfoPage() => this.ActivateItemAsync(new UserInfoViewModel(this));
 
+        public void LoadTaskManagerPage() => this.ActivateItemAsync(new TaskManagerViewModel(this));
+
         public void LoadAddNewPage() => this.ActivateItemAsync(new AddNewViewModel());
 
         public void HideBar()
