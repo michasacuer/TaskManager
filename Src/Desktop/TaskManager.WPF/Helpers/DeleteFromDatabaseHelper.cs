@@ -1,18 +1,16 @@
 ﻿namespace TaskManager.WPF.Helpers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using TaskManager.Contracts.Data;
-    using TaskManager.Entity;
     using TaskManager.WPF.Models;
 
-    public class InfoBoxHelper
+    public class DeleteFromDatabaseHelper
     {
         private ProjectContract projectContract;
 
         private TaskContract taskContract;
 
-        public InfoBoxHelper()
+        public DeleteFromDatabaseHelper()
         {
             string bearer = LoggedUser.Instance.User.Bearer;
 
@@ -20,10 +18,8 @@
             this.taskContract = new TaskContract(bearer);
         }
 
-        public async Task<List<Project>> GetAllProjectsFromDatabase() => await this.projectContract.GetAllAsync();
-
-        public async Task<bool> EditTask(ToDoTask task) => await this.taskContract.EditAsync(task);
-
-        public async Task<bool> EditProject(Project project) => await this.projectContract.EditAsync(project);
+        public async Task<bool> DeleteProject(int projectId) => await this.projectContract.DeleteAsync(projectId);
+        
+        public async Task<bool> DeleteTask(int taskId) => await this.taskContract.DeleteAsync(taskId);
     }
 }

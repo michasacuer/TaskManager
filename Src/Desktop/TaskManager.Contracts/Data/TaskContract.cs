@@ -30,5 +30,7 @@
         public async Task<ToDoTask> GetUsersTask(string userId) => await base.httpClient.GetAsync<ToDoTask>(userId);
 
         public async Task<bool> EditAsync(ToDoTask data) => await base.httpClient.PostAsync(data, "Edit");
+
+        public async Task<bool> DeleteAsync(int id) => await base.httpClient.DeleteAsync<ToDoTask>(id);
     }
 }

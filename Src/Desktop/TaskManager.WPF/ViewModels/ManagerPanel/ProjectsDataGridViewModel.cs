@@ -25,20 +25,20 @@
             this.NotifyOfPropertyChange(() => this.Projects);
         }
 
-        //public async void DeleteButton(Project project)
-        //{
-        //    if (LoggedUser.Instance.IsManager())
-        //    {
-        //        //ApplicationWindows.ShowDeleteProjectBox(project);
-        //        
-        //        this.Projects = await this.helper.GetAllProjectsFromDatabase();
-        //        this.NotifyOfPropertyChange(() => this.Projects);
-        //    }
-        //    else
-        //    {
-        //        ApplicationWindows.ShowErrorBox("Nie masz uprawnień do usuwania zadań!");
-        //    }
-        //}
+        public async void DeleteButton(Project project)
+        {
+            if (LoggedUser.Instance.IsManager())
+            {
+                ApplicationWindows.ShowDeleteProjectBox(project);
+                
+                this.Projects = await this.helper.GetAllProjectsFromDatabase();
+                this.NotifyOfPropertyChange(() => this.Projects);
+            }
+            else
+            {
+                ApplicationWindows.ShowErrorBox("Nie masz uprawnień do usuwania zadań!");
+            }
+        }
 
         protected async override void OnViewLoaded(object view)
         {

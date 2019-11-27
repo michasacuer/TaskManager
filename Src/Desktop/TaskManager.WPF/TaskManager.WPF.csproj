@@ -86,6 +86,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AddNewProjectHelper.cs" />
     <Compile Include="Helpers\AddNewTaskHelper.cs" />
+    <Compile Include="Helpers\DeleteFromDatabaseHelper.cs" />
     <Compile Include="Helpers\FileDialog.cs" />
     <Compile Include="Helpers\InfoBoxHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ViewModels\AddNew\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNew\AddNewViewModel.cs" />
     <Compile Include="ViewModels\Boxes\ErrorBoxViewModel.cs" />
+    <Compile Include="ViewModels\DeleteProjectBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\Helper\ContainerConfig.cs" />
     <Compile Include="ViewModels\Boxes\InfoProjectBoxViewModel.cs" />
@@ -124,6 +126,9 @@
     </Compile>
     <Compile Include="Views\Account\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteProjectBoxView.xaml.cs">
+      <DependentUpon>DeleteProjectBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -218,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeleteProjectBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

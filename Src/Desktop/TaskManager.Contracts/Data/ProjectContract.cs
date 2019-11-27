@@ -22,5 +22,7 @@
         public async Task<List<Project>> GetAllAsync() => await base.httpClient.GetAsync<Projects, Project>();
 
         public async Task<Project> GetAsync(int projectId) => await base.httpClient.GetAsync<Project>(projectId);
+
+        public async Task<bool> DeleteAsync(int id) => await base.httpClient.DeleteAsync<Project>(id);
     }
 }

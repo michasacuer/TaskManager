@@ -14,5 +14,7 @@
         Task<T> GetAsync(int id);
 
         Task<bool> EditAsync(T data);
+
+        Task<bool> DeleteAsync(int id);
     }
 }

@@ -103,7 +103,7 @@
             return true;
         }
 
-        public static async Task DeleteAsync<TObject>(this HttpClient httpClient, int id)
+        public static async Task<bool> DeleteAsync<TObject>(this HttpClient httpClient, int id)
             where TObject : BaseEntity<int>
         {
             string controllerName = ControllerNameValidator(typeof(TObject).Name);
@@ -111,8 +111,10 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new NotFoundServerException();
+                return false;
             }
+
+            return true;
         }
 
         public static async Task<string> GetPdfAsync(this HttpClient httpClient, int projectId)

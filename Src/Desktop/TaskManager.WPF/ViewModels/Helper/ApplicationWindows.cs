@@ -31,5 +31,7 @@
         }
 
         public static void ShowInfoProjectBox(Project project) => manager.ShowDialogAsync(new InfoProjectBoxViewModel(project), null, null);
+
+        public static void ShowDeleteProjectBox(Project project) => manager.ShowDialogAsync(new DeleteProjectBoxViewModel(project), null, null);
     }
 }
