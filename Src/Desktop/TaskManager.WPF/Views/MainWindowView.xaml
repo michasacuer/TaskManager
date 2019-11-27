@@ -368,7 +368,7 @@
                 Height="218" Width="8"
                 HorizontalAlignment="Right" 
                 Content="&#xf060;" FontSize="6" 
-                FontFamily="/Font/#FontAwesome"
+                FontFamily="/Fonts/#FontAwesome"
                 BorderBrush="{x:Null}" 
                 Foreground="White" BorderThickness="0"  
                 Background="#FF085078" Margin="0,3">

@@ -9,11 +9,12 @@
              Visibility="Visible"
              AllowsTransparency="True" 
              WindowStyle="None" 
-             Topmost="True"
+             Topmost="False"
              ShowInTaskbar="False"
              Height="140"
              Width="400"
              WindowStartupLocation="CenterScreen"
+             MouseDown="Window_MouseDown"
              >
 
     <Grid>

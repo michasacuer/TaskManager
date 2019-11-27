@@ -19,7 +19,7 @@
             //this.Items.Add(new EndedTasksDataGridViewModel { DisplayName = "Skończone zadania" });
         }
 
-        public List<Project> ProjectsList { get; set; }
+        public List<Project> Projects { get; set; }
 
         public Project SelectedProject { get; set; }
 
@@ -60,8 +60,8 @@
 
         protected async override void OnViewLoaded(object view)
         {
-            this.ProjectsList = await this.helper.GetAllProjectsFromDatabase();
-            this.NotifyOfPropertyChange(() => this.ProjectsList);
+            this.Projects = await this.helper.GetAllProjectsFromDatabase();
+            this.NotifyOfPropertyChange(() => this.Projects);
         }
     }
 }
