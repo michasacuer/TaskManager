@@ -16,6 +16,8 @@
 
         public void LoadAddNewPage() => this.ActivateItemAsync(new AddNewViewModel());
 
+        public void LoadActiveTaskPage() => ApplicationWindows.ShowActiveTask(this);
+
         public void HideBar()
         {
             if (LoggedUser.Instance.GetUserTask().IsTaskTakenByUser())

@@ -1,5 +1,6 @@
 ﻿namespace TaskManager.Application.Task.Commands.TakeTaskByUser
 {
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using FluentValidation;
@@ -42,6 +43,8 @@
                     await new TaskApplicationUserIdValidator().ValidateAndThrowAsync(task);
 
                     task.ApplicationUserId = user.Id;
+                    task.StartTime = DateTime.Now;
+
                     this.taskRepository.Update(task);
                     await this.taskRepository.SaveAsync(cancellationToken);
 

@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\ActiveTaskHelper.cs" />
     <Compile Include="Helpers\AddNewProjectHelper.cs" />
     <Compile Include="Helpers\AddNewTaskHelper.cs" />
     <Compile Include="Helpers\DeleteFromDatabaseHelper.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Helpers\TaskManagerHelper.cs" />
     <Compile Include="Models\ActiveTask.cs" />
     <Compile Include="Models\LoggedUser.cs" />
+    <Compile Include="ViewModels\ActiveTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNew\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModels\AddNew\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNew\AddNewViewModel.cs" />
@@ -115,6 +117,9 @@
     <Compile Include="ViewModels\ManagerPanel\TasksDataGridViewModel.cs" />
     <Compile Include="ViewModels\TaskManagerViewModel.cs" />
     <Compile Include="ViewModels\UserInfoViewModel.cs" />
+    <Compile Include="Views\ActiveTaskView.xaml.cs">
+      <DependentUpon>ActiveTaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddNew\AddNewProjectView.xaml.cs">
       <DependentUpon>AddNewProjectView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +228,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ActiveTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddNew\AddNewProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

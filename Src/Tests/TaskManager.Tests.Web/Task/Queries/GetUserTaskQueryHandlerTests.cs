@@ -9,6 +9,7 @@
     using TaskManager.Common.Exceptions;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
+    using TaskManager.Domain.Entity;
 
     [Collection("ServicesTestCollection")]
     public class GetUserTaskQueryTests
@@ -32,8 +33,8 @@
 
             var result = await queryHandler.Handle(command, CancellationToken.None);
 
-            result.ShouldBeOfType<TaskModel>();
-            result.Task.ShouldNotBeNull();
+            result.ShouldBeOfType<ToDoTask>();
+            result.ShouldNotBeNull();
         }
 
         [Fact]

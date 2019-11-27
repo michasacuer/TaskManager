@@ -31,11 +31,5 @@
                 return false;
             }
         }
-
-        public async Task EndActiveUsersTask(string userId)
-        {
-            await new TaskContract(LoggedUser.Instance.User.Bearer).EndActiveTaskByUser(this.Task, userId);
-            this.Task = null;
-        }
     }
 }

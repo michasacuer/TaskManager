@@ -64,9 +64,9 @@
             return Ok(await base.Mediator.Send(command));
         }
 
-        [HttpPost("{userId}")]
+        [HttpGet("UsersTask/{userId}")]
         [Authorize]
-        public async Task<ActionResult<TaskModel>> GetUserTask(string userId)
+        public async Task<ActionResult<ToDoTask>> GetUserTask(string userId)
         {
             return Ok(await base.Mediator.Send(new GetUserTaskQuery { ApplicationUserId = userId} ));
         }

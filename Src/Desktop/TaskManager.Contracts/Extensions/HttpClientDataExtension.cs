@@ -64,6 +64,22 @@
             }
         }
 
+        public static async Task<TObject> GetAsync<TObject>(this HttpClient httpClient, string id, string method)
+            where TObject : BaseEntity<int>
+        {
+            string controllerName = ControllerNameValidator(typeof(TObject).Name);
+            var response = await httpClient.GetAsync(UrlBuilder.BuildEndpoint(controllerName, method, id));
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<TObject>();
+            }
+            else
+            {
+                throw new NotFoundServerException();
+            }
+        }
+
         public static async Task<TObject> PostAsync<TObject>(this HttpClient httpClient, TObject data)
             where TObject : BaseEntity<int>
         {

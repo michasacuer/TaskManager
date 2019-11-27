@@ -5,8 +5,9 @@
     using MediatR;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
+    using TaskManager.Domain.Entity;
 
-    public class GetUserTaskQueryHandler : IRequestHandler<GetUserTaskQuery, TaskModel>
+    public class GetUserTaskQueryHandler : IRequestHandler<GetUserTaskQuery, ToDoTask>
     {
         private readonly ITaskRepository taskRepository;
 
@@ -15,7 +16,7 @@
             this.taskRepository = taskRepository;
         }
 
-        public async Task<TaskModel> Handle(GetUserTaskQuery request, CancellationToken cancellationToken)
+        public async Task<ToDoTask> Handle(GetUserTaskQuery request, CancellationToken cancellationToken)
         {
             if (request.ApplicationUserId == null)
             {
@@ -25,10 +26,7 @@
             var userTask = await this.taskRepository.GetUserTask(request.ApplicationUserId)
                 ?? throw new EntityNotFoundException();
 
-            return new TaskModel
-            {
-                Task = userTask
-            };
+            return userTask;
         }
     }
 }

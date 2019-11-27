@@ -37,5 +37,8 @@
         public static void ShowInfoTaskBox(ToDoTask task) => manager.ShowDialogAsync(new InfoTaskBoxViewModel(task), null, null);
 
         public static void ShowDeleteTaskBox(ToDoTask task) => manager.ShowDialogAsync(new DeleteTaskBoxViewModel(task), null, null);
+
+        public static void ShowActiveTask(MainWindowViewModel mainWindowViewModel)
+            => manager.ShowDialogAsync(new ActiveTaskViewModel(mainWindowViewModel), null, null);
     }
 }
