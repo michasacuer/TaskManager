@@ -29,7 +29,7 @@
         {
             if (LoggedUser.Instance.IsManager())
             {
-                //ApplicationWindows.ShowDeleteTaskBox(task);
+                ApplicationWindows.ShowDeleteTaskBox(task);
                 this.Tasks = await this.helper.GetAllTasksFromDatabase();
                 this.NotifyOfPropertyChange(() => this.Tasks);
             }

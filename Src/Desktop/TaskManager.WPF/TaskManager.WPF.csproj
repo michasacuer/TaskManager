@@ -99,6 +99,7 @@
     <Compile Include="ViewModels\AddNew\AddNewViewModel.cs" />
     <Compile Include="ViewModels\Boxes\ErrorBoxViewModel.cs" />
     <Compile Include="ViewModels\Boxes\DeleteProjectBoxViewModel.cs" />
+    <Compile Include="ViewModels\DeleteTaskBoxViewModel.cs" />
     <Compile Include="ViewModels\Helper\ApplicationWindows.cs" />
     <Compile Include="ViewModels\Helper\ContainerConfig.cs" />
     <Compile Include="ViewModels\Boxes\InfoProjectBoxViewModel.cs" />
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Views\Boxes\InfoTaskBoxView.xaml.cs">
       <DependentUpon>InfoTaskBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boxes\DeleteTaskBoxView.xaml.cs">
+      <DependentUpon>DeleteTaskBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -239,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boxes\InfoTaskBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boxes\DeleteTaskBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

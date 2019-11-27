@@ -35,5 +35,7 @@
         public static void ShowDeleteProjectBox(Project project) => manager.ShowDialogAsync(new DeleteProjectBoxViewModel(project), null, null);
 
         public static void ShowInfoTaskBox(ToDoTask task) => manager.ShowDialogAsync(new InfoTaskBoxViewModel(task), null, null);
+
+        public static void ShowDeleteTaskBox(ToDoTask task) => manager.ShowDialogAsync(new DeleteTaskBoxViewModel(task), null, null);
     }
 }

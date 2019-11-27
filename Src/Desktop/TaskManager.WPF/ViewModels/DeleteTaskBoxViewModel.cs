@@ -5,32 +5,32 @@
     using TaskManager.WPF.Helpers;
     using TaskManager.WPF.ViewModels.Helper;
 
-    public class DeleteProjectBoxViewModel : Screen
+    public class DeleteTaskBoxViewModel : Screen
     {
         private DeleteFromDatabaseHelper helper;
 
-        private Project projectToDelete;
+        private ToDoTask taskToDelete;
 
-        public DeleteProjectBoxViewModel(Project project)
+        public DeleteTaskBoxViewModel(ToDoTask task)
         {
             this.helper = new DeleteFromDatabaseHelper();
 
-            this.projectToDelete = project;
-            this.DeleteName = project.Name;
+            this.taskToDelete = task;
+            this.DeleteName = task.Name;
         }
 
         public string DeleteName { get; set; }
 
         public async void YesButton()
         {
-            bool isSucceed = await this.helper.DeleteProject(this.projectToDelete.Id);
+            bool isSucceed = await helper.DeleteTask(this.taskToDelete.Id);
             if (isSucceed)
             {
-                ApplicationWindows.ShowSuccesBox($"Projekt {this.DeleteName} usunięto pomyślnie!");
+                ApplicationWindows.ShowSuccesBox($"Task {this.DeleteName} usunięto pomyślnie!");
             }
             else
             {
-                ApplicationWindows.ShowErrorBox("Błąd przy usuwaniu projektu!");
+                ApplicationWindows.ShowErrorBox("Błąd przy usuwaniu zadania!");
             }
 
             this.TryCloseAsync();
