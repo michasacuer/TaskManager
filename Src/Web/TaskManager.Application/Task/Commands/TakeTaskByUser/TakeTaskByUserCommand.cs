@@ -21,10 +21,16 @@
 
             private readonly IRepository<ToDoTask> taskRepository;
 
-            public Handler(IApplicationUserRepository applicationUserRepository, IRepository<ToDoTask> taskRepository)
+            private readonly INotificationService notificationService;
+
+            public Handler(
+                IApplicationUserRepository applicationUserRepository,
+                IRepository<ToDoTask> taskRepository,
+                INotificationService notificationService)
             {
                 this.applicationUserRepository = applicationUserRepository;
                 this.taskRepository = taskRepository;
+                this.notificationService = notificationService;
             }
 
             public async Task<Unit> Handle(TakeTaskByUserCommand request, CancellationToken cancellationToken)
@@ -47,6 +53,8 @@
 
                     this.taskRepository.Update(task);
                     await this.taskRepository.SaveAsync(cancellationToken);
+                    await this.notificationService.SendMessageToAll($"{user.FirstName} {user.LastName} " +
+                        $"zaczął zadanie {task.Id} = {task.Name}");
 
                     return Unit.Value;
                 }

@@ -27,10 +27,16 @@
 
             private readonly IProjectRepository projectRepository;
 
-            public Handler(IRepository<ToDoTask> taskRepository, IProjectRepository projectRepository)
+            private readonly INotificationService notificationService;
+
+            public Handler(
+                IRepository<ToDoTask> taskRepository,
+                IProjectRepository projectRepository,
+                INotificationService notificationService)
             {
                 this.taskRepository = taskRepository;
                 this.projectRepository = projectRepository;
+                this.notificationService = notificationService;
             }
 
             public async Task<Unit> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
@@ -51,6 +57,7 @@
 
                 await this.taskRepository.AddAsync(task);
                 await this.taskRepository.SaveAsync(cancellationToken);
+                await this.notificationService.SendMessageToAll($"Utworzono nowy task w projekcie {project.Name}");
 
                 return Unit.Value;
             }

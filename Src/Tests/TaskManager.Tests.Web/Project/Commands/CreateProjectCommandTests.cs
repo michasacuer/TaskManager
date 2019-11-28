@@ -7,6 +7,7 @@
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands.CreateProject;
+    using TaskManager.Application.Interfaces;
     using TaskManager.Persistence;
     using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
@@ -18,10 +19,13 @@
 
         private readonly ProjectRepository projectRepository;
 
+        private readonly INotificationService notificationService;
+
         public CreateProjectCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.projectRepository = new ProjectRepository(fixture.Context);
+            this.notificationService = fixture.NotificationService;
         }
 
         [Fact]
@@ -33,7 +37,7 @@
                 Description = "Description"
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
@@ -51,7 +55,7 @@
                 Name = "ProjectTest",
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
@@ -69,7 +73,7 @@
                 Description = "Description of project without name"
             };
 
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository);
+            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
 
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }

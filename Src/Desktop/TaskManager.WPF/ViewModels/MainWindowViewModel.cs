@@ -1,8 +1,8 @@
 ﻿namespace TaskManager.WPF.ViewModels
 {
-    using System;
     using System.Windows;
     using Caliburn.Micro;
+    using TaskManager.WPF.Helpers;
     using TaskManager.WPF.Models;
     using TaskManager.WPF.ViewModels.Helper;
 
@@ -13,6 +13,8 @@
         public void LoadUserInfoPage() => this.ActivateItemAsync(new UserInfoViewModel(this));
 
         public void LoadTaskManagerPage() => this.ActivateItemAsync(new TaskManagerViewModel(this));
+
+        public void LoadNotificationsPage() => this.ActivateItemAsync(new NotificationsViewModel());
 
         public void LoadAddNewPage() => this.ActivateItemAsync(new AddNewViewModel());
 
@@ -39,15 +41,7 @@
         protected async override void OnViewLoaded(object view)
         {
             ApplicationWindows.ShowLoginBox(this);
-
-            try
-            {
-                //todo signalr hub, fetching data
-            }
-            catch (NullReferenceException)
-            {
-                return;
-            }
+            NotificationsHubService.Instance.Initialize();
         }
     }
 }

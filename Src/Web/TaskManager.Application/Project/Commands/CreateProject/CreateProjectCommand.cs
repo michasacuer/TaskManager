@@ -17,9 +17,12 @@
         {
             private readonly IProjectRepository projectRepository;
 
-            public Handler(IProjectRepository projectRepository)
+            private readonly INotificationService notificationService;
+
+            public Handler(IProjectRepository projectRepository, INotificationService notificationService)
             {
                 this.projectRepository = projectRepository;
+                this.notificationService = notificationService;
             }
 
             public async Task<Unit> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
@@ -33,6 +36,7 @@
                 });
 
                 await this.projectRepository.SaveAsync(cancellationToken);
+                await this.notificationService.SendMessageToAll($"Utworzono projekt {request.Name}");
 
                 return Unit.Value;
             }

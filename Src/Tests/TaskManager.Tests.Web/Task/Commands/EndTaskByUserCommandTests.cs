@@ -21,11 +21,14 @@
 
         private readonly IRepository<EndedTask> endedTaskRepository;
 
+        private readonly INotificationService notificationService;
+
         public EndTaskByUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.taskRepository = new Repository<ToDoTask>(this.context);
             this.endedTaskRepository = new Repository<EndedTask>(this.context);
+            this.notificationService = fixture.NotificationService;
         }
 
         [Fact]
@@ -41,7 +44,10 @@
                 ApplicationUserId = "NotEmpty"
             };
 
-            var commandHandler = new EndTaskByUserCommand.Handler(this.taskRepository, this.endedTaskRepository);
+            var commandHandler = new EndTaskByUserCommand.Handler(
+                this.taskRepository,
+                this.endedTaskRepository,
+                this.notificationService);
 
             await commandHandler.Handle(command, CancellationToken.None);
 

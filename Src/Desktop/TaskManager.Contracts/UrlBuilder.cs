@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    internal static class UrlBuilder
+    public static class UrlBuilder
     {
         public static string BaseUrl = "http://localhost:50299";
 

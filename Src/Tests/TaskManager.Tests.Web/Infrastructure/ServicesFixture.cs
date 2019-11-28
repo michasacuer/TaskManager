@@ -1,10 +1,12 @@
 ﻿namespace TaskManager.Tests.Infrastructure
 {
     using Microsoft.AspNetCore.Identity;
+    using Moq;
     using Xunit;
-    using TaskManager.Domain.Entity;
-    using TaskManager.Persistence;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Domain.Entity;
+    using TaskManager.Infrastructure.Implementations;
+    using TaskManager.Persistence;
 
     public class ServicesFixture
     {
@@ -18,6 +20,8 @@
 
         public ITokenService TokenService { get; private set; }
 
+        public INotificationService NotificationService { get; private set; }
+
         public ServicesFixture()
         {
             var servicesModel = ServicesFactory.CreateProperServices();
@@ -27,6 +31,10 @@
             this.RoleManager = servicesModel.RoleManager;
             this.SignInManager = servicesModel.SignInManager;
             this.TokenService = servicesModel.TokenService;
+
+            var service = new Mock<INotificationService>();
+            service.Setup(s => s.SendMessageToAll(It.IsAny<string>()));
+            this.NotificationService = service.Object;
         }
 
         [CollectionDefinition("ServicesTestCollection")]

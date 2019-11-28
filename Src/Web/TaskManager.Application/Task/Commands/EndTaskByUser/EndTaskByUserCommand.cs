@@ -21,10 +21,16 @@
 
             private readonly IRepository<EndedTask> endedTaskRepository;
 
-            public Handler(IRepository<ToDoTask> taskRepository, IRepository<EndedTask> endedTaskRepository)
+            private readonly INotificationService notificationService;
+
+            public Handler(
+                IRepository<ToDoTask> taskRepository,
+                IRepository<EndedTask> endedTaskRepository,
+                INotificationService notificationService)
             {
                 this.taskRepository = taskRepository;
                 this.endedTaskRepository = endedTaskRepository;
+                this.notificationService = notificationService;
             }
 
             public async Task<Unit> Handle(EndTaskByUserCommand request, CancellationToken cancellationToken)
@@ -52,6 +58,7 @@
                     await this.endedTaskRepository.AddAsync(endedTask);
                     this.taskRepository.Delete(task);
                     await this.endedTaskRepository.SaveAsync(cancellationToken);
+                    await this.notificationService.SendMessageToAll($"Task {task.Id} - {task.Name} został zakończony");
 
                     return Unit.Value;
                 }

@@ -23,11 +23,14 @@
 
         private readonly ProjectRepository projectRepository;
 
+        private readonly INotificationService notificationService;
+
         public CreateTaskCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.taskRepository = new Repository<ToDoTask>(this.context);
             this.projectRepository = new ProjectRepository(this.context);
+            this.notificationService = fixture.NotificationService;
         }
 
         [Fact]
@@ -41,7 +44,11 @@
                 ProjectId = 3
             };
 
-            var commandHandler = new CreateTaskCommand.Handler(this.taskRepository, this.projectRepository);
+            var commandHandler = new CreateTaskCommand.Handler(
+                this.taskRepository,
+                this.projectRepository,
+                this.notificationService);
+
             await commandHandler.Handle(command, CancellationToken.None);
 
             var task = this.context.Tasks.FirstOrDefault(t => t.Name.Equals(command.Name));
@@ -60,7 +67,11 @@
                 ProjectId = 3
             };
 
-            var commandHandler = new CreateTaskCommand.Handler(this.taskRepository, this.projectRepository);
+            var commandHandler = new CreateTaskCommand.Handler(
+                this.taskRepository,
+                this.projectRepository,
+                this.notificationService);
+
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
@@ -74,7 +85,11 @@
                 ProjectId = 3
             };
 
-            var commandHandler = new CreateTaskCommand.Handler(this.taskRepository, this.projectRepository);
+            var commandHandler = new CreateTaskCommand.Handler(
+                this.taskRepository,
+                this.projectRepository,
+                this.notificationService);
+
             await commandHandler.Handle(command, CancellationToken.None);
 
             var task = this.context.Tasks.FirstOrDefault(t => t.Name.Equals(command.Name));
@@ -93,7 +108,11 @@
                 ProjectId = 1321424
             };
 
-            var commandHandler = new CreateTaskCommand.Handler(this.taskRepository, this.projectRepository);
+            var commandHandler = new CreateTaskCommand.Handler(
+                this.taskRepository,
+                this.projectRepository,
+                this.notificationService);
+
             await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
