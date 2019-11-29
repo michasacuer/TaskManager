@@ -18,7 +18,6 @@ Parts of this project (with hiperlinks):
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/10.PNG)
 
 ## Gallery 
-(app still in development, full working example [here](https://github.com/michasacuer/TaskManager-edu)
 
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/2.PNG)
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/3.PNG)
