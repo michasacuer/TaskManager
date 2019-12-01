@@ -27,7 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Web\TaskManager.Api\TaskManager.Api.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Application\TaskManager.Application.csproj" />
-    <ProjectReference Include="..\..\Web\TaskManager.Common\TaskManager.Common\TaskManager.Common.csproj" />
+    <ProjectReference Include="..\..\Web\TaskManager.Common\TaskManager.Common.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Domain\TaskManager.Domain.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\TaskManager.Persistence\TaskManager.Persistence.csproj" />

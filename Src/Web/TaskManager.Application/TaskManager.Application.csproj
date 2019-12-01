@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TaskManager.Common\TaskManager.Common\TaskManager.Common.csproj" />
+    <ProjectReference Include="..\TaskManager.Common\TaskManager.Common.csproj" />
     <ProjectReference Include="..\TaskManager.Domain\TaskManager.Domain.csproj" />
   </ItemGroup>
 

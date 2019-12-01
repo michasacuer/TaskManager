@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Tests.Desktop",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{6A97F6DD-9C9E-47DE-BBA1-E1682547488D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Common", "Web\TaskManager.Common\TaskManager.Common\TaskManager.Common.csproj", "{36607D49-A0C2-47D5-862B-B4162734D1D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Common", "Web\TaskManager.Common\TaskManager.Common.csproj", "{36607D49-A0C2-47D5-862B-B4162734D1D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Tests.WebFunctional", "Tests\TaskManager.Tests.WebFunctional\TaskManager.Tests.WebFunctional.csproj", "{8C79362F-9DF4-480F-80A0-25392219E227}"
 EndProject
