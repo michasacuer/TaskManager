@@ -7,6 +7,10 @@
 
     public class EndedTaskController : BaseController
     {
+        /// <summary>
+        /// Get all ended tasks
+        /// </summary>
+        /// <returns>All ended tasks</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<EndedTasksModel>> GetAllTasks()

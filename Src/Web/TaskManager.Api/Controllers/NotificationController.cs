@@ -7,6 +7,10 @@
 
     public class NotificationController : BaseController
     {
+        /// <summary>
+        /// Get all notifications
+        /// </summary>
+        /// <returns>All notifications</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<NotificationsModel>> GetAllNotifications()

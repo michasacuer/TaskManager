@@ -7,6 +7,11 @@
 
     public class RaportController : BaseController
     {
+        /// <summary>
+        /// Print PDF by Project ID
+        /// </summary>
+        /// <param name="projectId">Project ID</param>
+        /// <returns>PDF File</returns>
         [HttpGet("{projectId}")]
         [Authorize(Roles = "Manager")]
         public async Task<ActionResult<string>> GetProjectRaport(int projectId)

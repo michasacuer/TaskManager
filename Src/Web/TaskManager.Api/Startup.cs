@@ -39,6 +39,12 @@
                 endpoints.MapControllers();
                 endpoints.MapHub<NotificationHub>("/Notifications");
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Manager Api");
+            });
         }
     }
 }
