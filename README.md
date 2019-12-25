@@ -19,8 +19,8 @@ Parts of this project (with hiperlinks):
 
 ## Gallery 
 
-![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/gifMain.gif)
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/1gif.gif)
+![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/gifMain.gif)
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/2gif.gif)
-![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/3gif.gif)
 ![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/4gif.gif)
+![My image](https://github.com/michasacuer/TaskManager/blob/master/Gallery/3gif.gif)
