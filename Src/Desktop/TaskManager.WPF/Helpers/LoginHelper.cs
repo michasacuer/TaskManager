@@ -23,7 +23,7 @@
             {
                 var accountContract = new AccountContract();
                 var user = await accountContract.LoginAsync(loginForm);
-
+                
                 LoggedUser.Instance.LoginUserToApp(user);
 
                 await LoggedUser.Instance.GetUserTask().IsUserHaveActiveTask(user.Id);

@@ -45,6 +45,6 @@
                 BorderThickness="0"  
                 BorderBrush="{x:Null}" 
                 Background="#FF085078"/>
-        <ListBox FontSize="10" Name="Notifications" Grid.ColumnSpan="4"  Height="auto" Grid.Row="2" Grid.RowSpan="4" Width="auto" BorderThickness="1" />
+        <ListBox FontSize="9" Name="Notifications" Grid.ColumnSpan="4"  Height="auto" Grid.Row="2" Grid.RowSpan="4" Width="auto" BorderThickness="1" />
     </Grid>
 </UserControl>
