@@ -1,10 +1,9 @@
 ﻿namespace TaskManager.Application.Task.Commands.EndTaskByUser
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
     using FluentValidation;
     using MediatR;
+    using System.Threading;
+    using System.Threading.Tasks;
     using TaskManager.Application.Interfaces;
     using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
@@ -40,21 +39,10 @@
 
                 if (task.ApplicationUserId == request.ApplicationUserId)
                 {
-                    // var endedTask = new EndedTask
-                    // {
-                    //     Name = task.Name,
-                    //     Description = task.Description,
-                    //     ProjectId = task.ProjectId,
-                    //     ApplicationUserId = task.ApplicationUserId,
-                    //     Priority = task.Priority,
-                    //     StartTime = task.StartTime,
-                    //     EndTime = DateTime.UtcNow
-                    // };
-                    // 
-                    // await this.endedTaskRepository.AddAsync(endedTask);
-                    // this.taskRepository.Delete(task);
-                    // await this.endedTaskRepository.SaveAsync(cancellationToken);
-                    // await this.notificationService.SendMessageToAll($"Task {task.Id} - {task.Name} został zakończony");
+                    task.IsDeleted = true;
+                    this.taskRepository.Update(task);
+                    await this.taskRepository.SaveAsync(cancellationToken);
+                    await this.notificationService.SendMessageToAll($"Task {task.Id} - {task.Name} został zakończony");
 
                     return Unit.Value;
                 }

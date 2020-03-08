@@ -33,8 +33,6 @@
         {
             var task = await this.context.Tasks.FindAsync(3);
 
-            string taskName = task.Name;
-
             var command = new EndTaskByUserCommand()
             {
                 TaskId = task.Id,
@@ -49,7 +47,7 @@
 
             var deletedTask = await this.context.Tasks.FindAsync(3);
 
-            deletedTask.ShouldBeNull();
+            deletedTask.IsDeleted.ShouldBeTrue();
         }
     }
 }

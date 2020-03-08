@@ -4,16 +4,16 @@
     int? spentStoryPoints = 0;
     int? storyPoints = 0;
 
-    // foreach(var item in Model.ProjectEndedTasks)
-    // {
-    //     spentStoryPoints += item.SpentStoryPoints;
-    //     storyPoints += item.StoryPoints;
-    // }
-    // 
-    // foreach(var item in Model.ProjectTasks)
-    // {
-    //     storyPoints += item.StoryPoints;
-    // }
+    foreach(var item in Model.ProjectTasks)
+    {
+        spentStoryPoints += item.SpentStoryPoints;
+        storyPoints += item.StoryPoints;
+    }
+    
+    foreach(var item in Model.ProjectTasks)
+    {
+        storyPoints += item.StoryPoints;
+    }
 }
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
             <th>STORY POINTY</th>
 
         </tr>
-        @foreach (var item in Model.ProjectTasks)
+        @foreach (var item in Model.ProjectTasks.Where(x => !x.IsDeleted))
         {
             <tr>
                 <td>@item.Id</td>
@@ -62,7 +62,7 @@
             <th>STORY POINTY</th>
         </tr>
 
-         @foreach (var item in Model.ProjectTasks) 
+         @foreach (var item in Model.ProjectTasks.Where(x => x.IsDeleted)) 
          {
              <tr>
                  <td>@item.Id</td>
