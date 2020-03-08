@@ -16,12 +16,6 @@
             </summary>
             <returns>JWT token with information about logged user</returns>
         </member>
-        <member name="M:TaskManager.Api.Controllers.EndedTaskController.GetAllTasks">
-            <summary>
-            Get all ended tasks
-            </summary>
-            <returns>All ended tasks</returns>
-        </member>
         <member name="M:TaskManager.Api.Controllers.NotificationController.GetAllNotifications">
             <summary>
             Get all notifications
@@ -109,6 +103,12 @@
             </summary>
             <param name="userId">User ID</param>
             <returns>Concrete task based on User ID</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.GetAllEndedTasks">
+            <summary>
+            Get all ended tasks
+            </summary>
+            <returns>All ended tasks</returns>
         </member>
     </members>
 </doc>

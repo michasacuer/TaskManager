@@ -8,6 +8,7 @@
     using TaskManager.Application.Task.Commands.EditTask;
     using TaskManager.Application.Task.Commands.EndTaskByUser;
     using TaskManager.Application.Task.Commands.TakeTaskByUser;
+    using TaskManager.Application.Task.Queries.GetAllEndedTasks;
     using TaskManager.Application.Task.Queries.GetAllTasks;
     using TaskManager.Application.Task.Queries.GetTask;
     using TaskManager.Application.Task.Queries.GetUserTask;
@@ -99,6 +100,17 @@
         public async Task<ActionResult<ToDoTask>> GetUserTask(string userId)
         {
             return Ok(await base.Mediator.Send(new GetUserTaskQuery { ApplicationUserId = userId} ));
+        }
+
+        /// <summary>
+        /// Get all ended tasks
+        /// </summary>
+        /// <returns>All ended tasks</returns>
+        [HttpGet("AllEndedTasks")]
+        [Authorize]
+        public async Task<ActionResult<EndedTasksModel>> GetAllEndedTasks()
+        {
+            return Ok(await base.Mediator.Send(new GetAllEndedTasksQuery()));
         }
     }
 }

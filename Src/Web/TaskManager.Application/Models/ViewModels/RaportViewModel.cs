@@ -9,8 +9,6 @@
 
         public List<ToDoTask> ProjectTasks { get; set; }
 
-        public List<EndedTask> ProjectEndedTasks { get; set; }
-
         public int SpentStoryPoints { get; set; }
 
         public int RemainingStoryPoints { get; set; }

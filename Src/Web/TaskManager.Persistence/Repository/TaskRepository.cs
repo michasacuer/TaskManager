@@ -1,5 +1,7 @@
 ﻿namespace TaskManager.Persistence.Repository
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using TaskManager.Application.Interfaces;
@@ -10,6 +12,11 @@
         public TaskRepository(TaskManagerDbContext context)
             : base(context)
         {
+        }
+
+        public async Task<List<ToDoTask>> GetAllEndedTasksAsync()
+        {
+            return await base.context.Tasks.Where(t => t.IsDeleted).AsNoTracking().ToListAsync();
         }
 
         public async Task<ToDoTask> GetUserTask(string userId)

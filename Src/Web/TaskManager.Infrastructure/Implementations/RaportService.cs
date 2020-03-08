@@ -56,7 +56,7 @@
                     {
                         Project = project,
                         ProjectTasks = project.Tasks.ToList(),
-                        ProjectEndedTasks = project.EndedTasks.ToList(),
+                        // ProjectEndedTasks = project.EndedTasks.ToList(),
                     }
                 };
 

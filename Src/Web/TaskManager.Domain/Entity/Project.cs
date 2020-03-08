@@ -10,7 +10,5 @@
         public string Description { get; set; }
 
         public ICollection<ToDoTask> Tasks { get; set; }
-
-        public ICollection<EndedTask> EndedTasks { get; set; }
     }
 }

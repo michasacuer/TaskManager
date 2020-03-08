@@ -17,7 +17,6 @@
         {
             return await base.context.Projects
                 .Include(p => p.Tasks)
-                .Include(p => p.EndedTasks)
                 .ToListAsync();
         }
 
@@ -25,7 +24,6 @@
         {
             return await base.context.Projects
                 .Include(p => p.Tasks)
-                .Include(p => p.EndedTasks)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
     }

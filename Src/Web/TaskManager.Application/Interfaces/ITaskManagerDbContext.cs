@@ -12,8 +12,6 @@
 
         DbSet<ToDoTask> Tasks { get; set; }
 
-        DbSet<EndedTask> EndedTasks { get; set; }
-
         DbSet<Notification> Notifications { get; set; }
 
         DbSet<ApplicationUser> Users { get; set; }

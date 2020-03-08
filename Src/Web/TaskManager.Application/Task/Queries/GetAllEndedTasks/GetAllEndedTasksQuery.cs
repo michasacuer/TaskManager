@@ -1,7 +1,7 @@
-﻿namespace TaskManager.Application.EndedTask.Queries.GetAllEndedTasks
+﻿namespace TaskManager.Application.Task.Queries.GetAllEndedTasks
 {
     using MediatR;
-
+    
     public class GetAllEndedTasksQuery : IRequest<EndedTasksModel>
     {
     }

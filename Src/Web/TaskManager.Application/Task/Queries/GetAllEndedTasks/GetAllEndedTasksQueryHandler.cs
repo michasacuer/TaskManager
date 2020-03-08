@@ -1,23 +1,22 @@
-﻿namespace TaskManager.Application.EndedTask.Queries.GetAllEndedTasks
+﻿namespace TaskManager.Application.Task.Queries.GetAllEndedTasks
 {
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
     using TaskManager.Application.Interfaces;
-    using TaskManager.Domain.Entity;
-
+    
     public class GetAllEndedTasksQueryHandler : IRequestHandler<GetAllEndedTasksQuery, EndedTasksModel>
     {
-        private readonly IRepository<EndedTask> repository;
+        private readonly ITaskRepository taskRepository;
 
-        public GetAllEndedTasksQueryHandler(IRepository<EndedTask> repository)
+        public GetAllEndedTasksQueryHandler(ITaskRepository taskRepository)
         {
-            this.repository = repository;
+            this.taskRepository = taskRepository;
         }
 
         public async Task<EndedTasksModel> Handle(GetAllEndedTasksQuery request, CancellationToken cancellationToken)
         {
-            var endedTasks = await this.repository.GetAllAsync();
+            var endedTasks = await this.taskRepository.GetAllEndedTasksAsync();
 
             return new EndedTasksModel
             {

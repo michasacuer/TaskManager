@@ -16,8 +16,6 @@
 
         public DbSet<ToDoTask> Tasks { get; set; }
 
-        public DbSet<EndedTask> EndedTasks { get; set; }
-
         public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -19,15 +19,12 @@
 
         private readonly IRepository<ToDoTask> taskRepository;
 
-        private readonly IRepository<EndedTask> endedTaskRepository;
-
         private readonly INotificationService notificationService;
 
         public EndTaskByUserCommandTests(ServicesFixture fixture)
         {
             this.context = fixture.Context;
             this.taskRepository = new Repository<ToDoTask>(this.context);
-            this.endedTaskRepository = new Repository<EndedTask>(this.context);
             this.notificationService = fixture.NotificationService;
         }
 
@@ -46,16 +43,13 @@
 
             var commandHandler = new EndTaskByUserCommand.Handler(
                 this.taskRepository,
-                this.endedTaskRepository,
                 this.notificationService);
 
             await commandHandler.Handle(command, CancellationToken.None);
 
-            var endedTask = await this.context.EndedTasks.FirstOrDefaultAsync(et => et.Name == taskName);
             var deletedTask = await this.context.Tasks.FindAsync(3);
 
             deletedTask.ShouldBeNull();
-            endedTask.Name.ShouldBe(taskName);
         }
     }
 }

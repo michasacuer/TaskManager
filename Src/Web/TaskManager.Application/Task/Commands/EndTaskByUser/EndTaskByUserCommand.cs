@@ -19,17 +19,13 @@
         {
             private readonly IRepository<ToDoTask> taskRepository;
 
-            private readonly IRepository<EndedTask> endedTaskRepository;
-
             private readonly INotificationService notificationService;
 
             public Handler(
                 IRepository<ToDoTask> taskRepository,
-                IRepository<EndedTask> endedTaskRepository,
                 INotificationService notificationService)
             {
                 this.taskRepository = taskRepository;
-                this.endedTaskRepository = endedTaskRepository;
                 this.notificationService = notificationService;
             }
 
@@ -44,21 +40,21 @@
 
                 if (task.ApplicationUserId == request.ApplicationUserId)
                 {
-                    var endedTask = new EndedTask
-                    {
-                        Name = task.Name,
-                        Description = task.Description,
-                        ProjectId = task.ProjectId,
-                        ApplicationUserId = task.ApplicationUserId,
-                        Priority = task.Priority,
-                        StartTime = task.StartTime,
-                        EndTime = DateTime.UtcNow
-                    };
-
-                    await this.endedTaskRepository.AddAsync(endedTask);
-                    this.taskRepository.Delete(task);
-                    await this.endedTaskRepository.SaveAsync(cancellationToken);
-                    await this.notificationService.SendMessageToAll($"Task {task.Id} - {task.Name} został zakończony");
+                    // var endedTask = new EndedTask
+                    // {
+                    //     Name = task.Name,
+                    //     Description = task.Description,
+                    //     ProjectId = task.ProjectId,
+                    //     ApplicationUserId = task.ApplicationUserId,
+                    //     Priority = task.Priority,
+                    //     StartTime = task.StartTime,
+                    //     EndTime = DateTime.UtcNow
+                    // };
+                    // 
+                    // await this.endedTaskRepository.AddAsync(endedTask);
+                    // this.taskRepository.Delete(task);
+                    // await this.endedTaskRepository.SaveAsync(cancellationToken);
+                    // await this.notificationService.SendMessageToAll($"Task {task.Id} - {task.Name} został zakończony");
 
                     return Unit.Value;
                 }

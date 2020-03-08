@@ -4,16 +4,16 @@
     int? spentStoryPoints = 0;
     int? storyPoints = 0;
 
-    foreach(var item in Model.ProjectEndedTasks)
-    {
-        spentStoryPoints += item.SpentStoryPoints;
-        storyPoints += item.StoryPoints;
-    }
-
-    foreach(var item in Model.ProjectTasks)
-    {
-        storyPoints += item.StoryPoints;
-    }
+    // foreach(var item in Model.ProjectEndedTasks)
+    // {
+    //     spentStoryPoints += item.SpentStoryPoints;
+    //     storyPoints += item.StoryPoints;
+    // }
+    // 
+    // foreach(var item in Model.ProjectTasks)
+    // {
+    //     storyPoints += item.StoryPoints;
+    // }
 }
 
 <!DOCTYPE html>
@@ -62,15 +62,15 @@
             <th>STORY POINTY</th>
         </tr>
 
-        @foreach (var item in Model.ProjectEndedTasks)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Priority</td>
-                <td>@item.StoryPoints</td>
-
-            </tr>
-        }
+         @foreach (var item in Model.ProjectTasks) 
+         {
+             <tr>
+                 <td>@item.Id</td>
+                 <td>@item.Name</td>
+                 <td>@item.Priority</td>
+                 <td>@item.StoryPoints</td>
+         
+             </tr>
+         }
     </table>
 </div>
