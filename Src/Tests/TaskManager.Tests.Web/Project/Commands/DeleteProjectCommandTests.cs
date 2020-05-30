@@ -1,50 +1,50 @@
 ﻿namespace TaskManager.Tests.Web
 {
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Moq;
     using Shouldly;
     using Xunit;
+    using TaskManager.Application.Interfaces;
     using TaskManager.Application.Project.Commands.DeleteProject;
     using TaskManager.Common.Exceptions;
-    using TaskManager.Persistence;
-    using TaskManager.Persistence.Repository;
+    using TaskManager.Domain.Entity;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("ServicesTestCollection")]
     public class DeleteProjectCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly Mock<IProjectRepository> projectRepositoryMock;
 
-        private readonly ProjectRepository projectRepository;
+        private readonly DeleteProjectCommand.Handler uut;
 
-        public DeleteProjectCommandTests(ServicesFixture fixture)
+        public DeleteProjectCommandTests()
         {
-            this.context = fixture.Context;
-            this.projectRepository = new ProjectRepository(fixture.Context);
+            this.projectRepositoryMock = new Mock<IProjectRepository>();
+            this.uut = new DeleteProjectCommand.Handler(this.projectRepositoryMock.Object);
         }
 
-        [Fact]
-        public async Task DeleteProjectCommandShouldDeleteConcreteProjectFromDb()
+        [Theory]
+        [NoRecurseAutoData]
+        public void DeleteProjectCommandShouldDeleteConcreteProjectFromDb(DeleteProjectCommand command, Project project)
         {
-            var project = await this.context.Projects.FindAsync(2);
+            this.projectRepositoryMock
+                .Setup(x => 
+                    x.GetByIdAsync(It.Is<int>(z => z == command.ProjectId)))
+                .ReturnsAsync(project);
+            
+            this.projectRepositoryMock.Setup(x => x.Delete(It.Is<Project>(z => z == project)));
+            this.projectRepositoryMock.Setup(x => x.SaveAsync(CancellationToken.None)).Returns(Task.CompletedTask);
+            
+            var result = this.uut.Handle(command, CancellationToken.None).Result;
 
-            var command = new DeleteProjectCommand { ProjectId = project.Id };
-            var commandHandler = new DeleteProjectCommand.Handler(this.projectRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var deletedProject = this.context.Projects.FirstOrDefault(p => p.Id == 22);
-            deletedProject.ShouldBe(null);
+            result.ShouldNotBeNull();
         }
 
-        [Fact]
-        public async Task DeleteProjectShouldThrowWhenProjectNotFound()
+        [Theory]
+        [NoRecurseAutoData]
+        public void DeleteProjectShouldThrowWhenProjectNotFound(DeleteProjectCommand command)
         {
-            var command = new DeleteProjectCommand { ProjectId = 2323223 };
-            var commandHandler = new DeleteProjectCommand.Handler(this.projectRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }
