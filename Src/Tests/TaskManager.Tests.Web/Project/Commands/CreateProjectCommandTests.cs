@@ -15,17 +15,19 @@
 
     public class CreateProjectCommandTests
     {
-        private readonly Mock<IProjectRepository> projectRepository;
+        private readonly Mock<IProjectRepository> projectRepositoryMock;
 
-        private readonly Mock<INotificationService> notificationService;
+        private readonly Mock<INotificationService> notificationServiceMock;
 
         private readonly CreateProjectCommand.Handler uut;
 
         public CreateProjectCommandTests()
         {
-            this.projectRepository = new Mock<IProjectRepository>();
-            this.notificationService = new Mock<INotificationService>();
-            this.uut = new CreateProjectCommand.Handler(this.projectRepository.Object, this.notificationService.Object);
+            this.projectRepositoryMock = new Mock<IProjectRepository>();
+            this.notificationServiceMock = new Mock<INotificationService>();
+            this.uut = new CreateProjectCommand.Handler(
+                this.projectRepositoryMock.Object,
+                this.notificationServiceMock.Object);
         }
 
         [Theory]
@@ -33,7 +35,7 @@
         public void CreateProjectShouldAddProjectToDatabase(CreateProjectCommand command)
         {
             Project addedProject = null;
-            this.projectRepository
+            this.projectRepositoryMock
                 .Setup(x =>
                     x.AddAsync(It.IsAny<Project>()))
                 .Callback<Project>(x => addedProject = x)
