@@ -1,81 +1,83 @@
 ﻿namespace TaskManager.Tests.Web
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using FluentValidation;
-    using Microsoft.EntityFrameworkCore;
+    using Moq;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Commands.CreateProject;
     using TaskManager.Application.Interfaces;
-    using TaskManager.Persistence;
-    using TaskManager.Persistence.Repository;
+    using TaskManager.Domain.Entity;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("ServicesTestCollection")]
     public class CreateProjectCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly Mock<IProjectRepository> projectRepository;
 
-        private readonly ProjectRepository projectRepository;
+        private readonly Mock<INotificationService> notificationService;
 
-        private readonly INotificationService notificationService;
+        private readonly CreateProjectCommand.Handler uut;
 
-        public CreateProjectCommandTests(ServicesFixture fixture)
+        public CreateProjectCommandTests()
         {
-            this.context = fixture.Context;
-            this.projectRepository = new ProjectRepository(fixture.Context);
-            this.notificationService = fixture.NotificationService;
+            this.projectRepository = new Mock<IProjectRepository>();
+            this.notificationService = new Mock<INotificationService>();
+            this.uut = new CreateProjectCommand.Handler(this.projectRepository.Object, this.notificationService.Object);
         }
 
-        [Fact]
-        public async Task CreateProjectShouldAddProjectToDatabase()
+        [Theory]
+        [ClassData(typeof(Commands))]
+        public void CreateProjectShouldAddProjectToDatabase(CreateProjectCommand command)
         {
-            var command = new CreateProjectCommand
-            {
-                Name = "Project",
-                Description = "Description"
-            };
+            Project addedProject = null;
+            this.projectRepository
+                .Setup(x =>
+                    x.AddAsync(It.IsAny<Project>()))
+                .Callback<Project>(x => addedProject = x)
+                .Returns(Task.CompletedTask);
+            
+            var result = uut.Handle(command, CancellationToken.None).Result;
 
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var project = await this.context.Projects.FirstOrDefaultAsync(p => p.Name.Equals(command.Name));
-
-            project.ShouldNotBeNull();
-            project.Name.ShouldBe(command.Name);
+            result.ShouldNotBeNull();
+            addedProject.ShouldNotBeNull();
+            addedProject.Name.ShouldBe(command.Name);
+            addedProject.Description.ShouldBe(command.Description);
         }
 
-        [Fact]
-        public async Task CreateProjectWithoutDescriptionShouldAddProjectToDatabase()
+        [Theory]
+        [NoRecurseAutoData]
+        public void CreateProjectWithEmptyNameShouldThrowException(CreateProjectCommand command)
         {
-            var command = new CreateProjectCommand
-            {
-                Name = "ProjectTest",
-            };
-
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var project = await this.context.Projects.FirstOrDefaultAsync(p => p.Name.Equals(command.Name));
-
-            project.ShouldNotBeNull();
-            project.Name.ShouldBe(command.Name);
+            command.Name = null;
+            uut.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
 
-        [Fact]
-        public async Task CreateProjectWithEmptyNameShouldThrowException()
+        private class Commands : IEnumerable<object[]>
         {
-            var command = new CreateProjectCommand
+            public IEnumerator<object[]> GetEnumerator()
             {
-                Description = "Description of project without name"
-            };
-
-            var commandHandler = new CreateProjectCommand.Handler(this.projectRepository, this.notificationService);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
+                yield return new object[]
+                {
+                    new CreateProjectCommand
+                    {
+                        Name = "name",
+                        Description = "desc",
+                    }
+                };
+                
+                yield return new object[]
+                {
+                    new CreateProjectCommand
+                    {
+                        Name = "name",
+                    }
+                };
+            }
+            
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }
