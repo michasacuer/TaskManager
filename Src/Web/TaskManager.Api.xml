@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskManager.Api</name>
+    </assembly>
+    <members>
+        <member name="M:TaskManager.Api.Controllers.AccountController.Register(TaskManager.Application.Commands.RegisterCommand)">
+            <summary>
+            Register New User
+            </summary>
+            <returns>Returns succes status code</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.AccountController.Login(TaskManager.Api.Models.LoginViewModel)">
+            <summary>
+            Login user to application
+            </summary>
+            <returns>JWT token with information about logged user</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.NotificationController.GetAllNotifications">
+            <summary>
+            Get all notifications
+            </summary>
+            <returns>All notifications</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.ProjectController.GetAllProjects">
+            <summary>
+            Get all Projects
+            </summary>
+            <returns>All projects</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.ProjectController.GetProject(System.Int32)">
+            <summary>
+            Get project by project ID
+            </summary>
+            <param name="projectId">Project ID</param>
+            <returns>Concrete project by ID</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.ProjectController.CreateProject(TaskManager.Application.Commands.CreateProject.CreateProjectCommand)">
+            <summary>
+            Create Project
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.ProjectController.EditProject(TaskManager.Application.Commands.EditProject.EditProjectCommand)">
+            <summary>
+            Edit existing project
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.ProjectController.DeleteProject(System.Int32)">
+            <summary>
+            Deleting project by ID
+            </summary>
+            <param name="projectId">Project ID</param>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.RaportController.GetProjectRaport(System.Int32)">
+            <summary>
+            Print PDF by Project ID
+            </summary>
+            <param name="projectId">Project ID</param>
+            <returns>PDF File</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.GetAllTasks">
+            <summary>
+            Get all tasks
+            </summary>
+            <returns>All tasks</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.GetTask(System.Int32)">
+            <summary>
+            Get Task by ID
+            </summary>
+            <param name="taskId">Task ID</param>
+            <returns>Concrete Task by ID</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.CreateTask(TaskManager.Application.Task.Commands.CreateTask.CreateTaskCommand)">
+            <summary>
+            Create Task
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.EditTask(TaskManager.Application.Task.Commands.EditTask.EditTaskCommand)">
+            <summary>
+            Editing Task by ID
+            </summary>
+            <param name="command">Task ID</param>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.DeleteTask(System.Int32)">
+            <summary>
+            Deleting Task by ID
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.TakeTaskByUser(TaskManager.Application.Task.Commands.TakeTaskByUser.TakeTaskByUserCommand)">
+            <summary>
+            Take task by concrete user, status "in progress"
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.EndTaskByUser(TaskManager.Application.Task.Commands.EndTaskByUser.EndTaskByUserCommand)">
+            <summary>
+            When concrete user work on concrete task, it setting his status to "done"
+            </summary>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.GetUserTask(System.String)">
+            <summary>
+            Get task that user work on in this time
+            </summary>
+            <param name="userId">User ID</param>
+            <returns>Concrete task based on User ID</returns>
+        </member>
+        <member name="M:TaskManager.Api.Controllers.TaskController.GetAllEndedTasks">
+            <summary>
+            Get all ended tasks
+            </summary>
+            <returns>All ended tasks</returns>
+        </member>
+    </members>
+</doc>
