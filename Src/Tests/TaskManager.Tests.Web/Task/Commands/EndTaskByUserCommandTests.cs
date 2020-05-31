@@ -1,53 +1,92 @@
 ﻿namespace TaskManager.Tests.Web
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using FluentValidation;
     using Shouldly;
+    using Moq;
     using Xunit;
-    using Microsoft.EntityFrameworkCore;
-    using TaskManager.Application.Task.Commands.EndTaskByUser;
-    using TaskManager.Persistence;
-    using TaskManager.Tests.Infrastructure;
-    using TaskManager.Persistence.Repository;
-    using TaskManager.Domain.Entity;
     using TaskManager.Application.Interfaces;
+    using TaskManager.Application.Task.Commands.EndTaskByUser;
+    using TaskManager.Domain.Entity;
+    using TaskManager.Tests.Infrastructure;
 
-    [Collection("ServicesTestCollection")]
     public class EndTaskByUserCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly Mock<IRepository<ToDoTask>> taskRepositoryMock;
 
-        private readonly IRepository<ToDoTask> taskRepository;
+        private readonly Mock<INotificationService> notificationServiceMock;
 
-        private readonly INotificationService notificationService;
+        private readonly EndTaskByUserCommand.Handler uut;
 
-        public EndTaskByUserCommandTests(ServicesFixture fixture)
+        public EndTaskByUserCommandTests()
         {
-            this.context = fixture.Context;
-            this.taskRepository = new Repository<ToDoTask>(this.context);
-            this.notificationService = fixture.NotificationService;
+            this.taskRepositoryMock = new Mock<IRepository<ToDoTask>>();
+            this.notificationServiceMock = new Mock<INotificationService>();
+            
+            
+            this.uut = new EndTaskByUserCommand.Handler(this.taskRepositoryMock.Object, this.notificationServiceMock.Object);
         }
 
-        [Fact]
-        public async Task EndTaskByUserCommandShouldMoveTaskToEndedTaskTable()
+        [Theory]
+        [NoRecurseAutoData]
+        public void EndTaskByUserCommandShouldSetIsDeletedToTrue(EndTaskByUserCommand command, ToDoTask task)
         {
-            var task = await this.context.Tasks.FindAsync(3);
+            ToDoTask updatedTask = null;
+            task.Id = command.TaskId;
+            task.ApplicationUserId = command.ApplicationUserId;
+            task.IsDeleted = false;
+            
+            this.taskRepositoryMock
+                .Setup(x =>
+                    x.GetByIdAsync(It.Is<int>(z => z == command.TaskId)))
+                .ReturnsAsync(task);
 
-            var command = new EndTaskByUserCommand()
+            this.taskRepositoryMock
+                .Setup(x =>
+                    x.Update(It.Is<ToDoTask>(z => z == task)))
+                .Callback<ToDoTask>(x => updatedTask = x);
+
+            this.taskRepositoryMock.Setup(x => x.SaveAsync(CancellationToken.None)).Returns(Task.CompletedTask);
+            
+            var result = uut.Handle(command, CancellationToken.None).Result;
+
+            result.ShouldNotBeNull();
+            updatedTask.ShouldNotBeNull();
+            updatedTask.IsDeleted.ShouldBeTrue();
+        }
+
+        [Theory]
+        [ClassData(typeof(InvalidCommands))]
+        public void EndTaskByUserCommandShouldThrowWhenDataNotValid(EndTaskByUserCommand command)
+        {
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
+        }
+        
+        private class InvalidCommands : IEnumerable<object[]>
+        {
+            public IEnumerator<object[]> GetEnumerator()
             {
-                TaskId = task.Id,
-                ApplicationUserId = "NotEmpty"
-            };
-
-            var commandHandler = new EndTaskByUserCommand.Handler(
-                this.taskRepository,
-                this.notificationService);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var deletedTask = await this.context.Tasks.FindAsync(3);
-
-            deletedTask.IsDeleted.ShouldBeTrue();
+                yield return new object[]
+                {
+                    new EndTaskByUserCommand
+                    {
+                        TaskId = 1
+                    }
+                };
+                
+                yield return new object[]
+                {
+                    new EndTaskByUserCommand
+                    {
+                        ApplicationUserId = "test"
+                    }
+                };
+            }
+            
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }
