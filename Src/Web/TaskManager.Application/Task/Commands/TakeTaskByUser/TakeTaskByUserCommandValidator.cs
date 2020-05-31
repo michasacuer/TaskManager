@@ -8,6 +8,7 @@
         public TakeTaskByUserCommandValidator()
         {
             RuleFor(x => x.ApplicationUserId).NotEmpty();
+            RuleFor(x => x.TaskId).NotEmpty();
         }
     }
 

@@ -26,7 +26,6 @@
             this.taskRepositoryMock = new Mock<IRepository<ToDoTask>>();
             this.notificationServiceMock = new Mock<INotificationService>();
             
-            
             this.uut = new EndTaskByUserCommand.Handler(this.taskRepositoryMock.Object, this.notificationServiceMock.Object);
         }
 
