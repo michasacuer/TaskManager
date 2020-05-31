@@ -1,52 +1,35 @@
 ﻿namespace TaskManager.Tests.Web
 {
-    using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
+    using Moq;
     using Shouldly;
     using Xunit;
     using TaskManager.Application.Interfaces;
     using TaskManager.Application.Task.Commands.DeleteTask;
     using TaskManager.Common.Exceptions;
     using TaskManager.Domain.Entity;
-    using TaskManager.Persistence;
-    using TaskManager.Persistence.Repository;
     using TaskManager.Tests.Infrastructure;
 
-    [Collection("ServicesTestCollection")]
     public class DeleteTaskCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly Mock<IRepository<ToDoTask>> taskRepository;
 
-        private readonly IRepository<ToDoTask> taskRepository;
+        private readonly DeleteTaskCommand.Handler uut;
 
         public DeleteTaskCommandTests(ServicesFixture fixture)
         {
-            this.context = fixture.Context;
-            this.taskRepository = new Repository<ToDoTask>(this.context);
+            this.taskRepository = new Mock<IRepository<ToDoTask>>();
+            this.uut = new DeleteTaskCommand.Handler(this.taskRepository.Object);
         }
 
-        [Fact]
-        public async Task EnsureThatTaskWasDeletedFromDatabase()
+        [Theory]
+        [NoRecurseAutoData]
+        public void DeleteTaskShouldThrowWhenTaskNotFound(DeleteTaskCommand command, ToDoTask task)
         {
-            var task = await this.context.Tasks.FindAsync(1);
-
-            var command = new DeleteTaskCommand { TaskId = task.Id };
-            var commandHandler = new DeleteTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var deletedTask = this.context.Tasks.FirstOrDefault(t => t.Id == 1);
-            deletedTask.ShouldBe(null);
-        }
-
-        [Fact]
-        public async Task DeleteTaskShouldThrowWhenProjectNotFound()
-        {
-            var command = new DeleteTaskCommand { TaskId = 2323223 };
-            var commandHandler = new DeleteTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
+            task = null;
+            this.taskRepository.Setup(x => x.GetByIdAsync(It.Is<int>(z => z == command.TaskId))).ReturnsAsync(task);
+            
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }

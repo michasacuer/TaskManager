@@ -28,9 +28,9 @@
             this.notificationServiceMock = new Mock<INotificationService>();
             
             this.uut = new CreateTaskCommand.Handler(
-                taskRepositoryMock.Object,
-                projectRepositoryMock.Object,
-                notificationServiceMock.Object);
+                this.taskRepositoryMock.Object,
+                this.projectRepositoryMock.Object,
+                this.notificationServiceMock.Object);
         }
 
         [Theory]
