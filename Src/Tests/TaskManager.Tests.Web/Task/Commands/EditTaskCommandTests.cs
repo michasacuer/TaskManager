@@ -1,121 +1,49 @@
 ﻿namespace TaskManager.Tests.Web
 {
     using System.Threading;
-    using System.Threading.Tasks;
     using FluentValidation;
+    using Moq;
     using Shouldly;
     using Xunit;
-    using TaskManager.Persistence;
-    using TaskManager.Persistence.Repository;
+    using TaskManager.Application.Interfaces;
     using TaskManager.Tests.Infrastructure;
-    using TaskManager.Application.Commands.EditProject;
     using TaskManager.Domain.Entity;
     using TaskManager.Common.Exceptions;
     using TaskManager.Application.Task.Commands.EditTask;
 
-    [Collection("ServicesTestCollection")]
     public class EditTaskCommandTests
     {
-        private readonly TaskManagerDbContext context;
+        private readonly Mock<ITaskRepository> taskRepositoryMock;
 
-        private readonly TaskRepository taskRepository;
+        private readonly EditTaskCommand.Handler uut;
 
-        public EditTaskCommandTests(ServicesFixture fixture)
+        public EditTaskCommandTests()
         {
-            this.context = fixture.Context;
-            this.taskRepository = new TaskRepository(fixture.Context);
+            this.taskRepositoryMock = new Mock<ITaskRepository>();
+            this.uut = new EditTaskCommand.Handler(this.taskRepositoryMock.Object);
         }
 
-        [Fact]
-        public async Task EditTaskShouldEditProjectInDatabase()
+        [Theory]
+        [NoRecurseAutoData]
+        public void EditTaskShouldThrowWhenTaskNotFound(EditTaskCommand command, ToDoTask task)
         {
-            var taskBefore = await this.context.Tasks.FindAsync(2);
-            string nameBefore = taskBefore.Name;
+            task = null;
 
-            var command = new EditTaskCommand
-            {
-                Data = new ToDoTask
-                {
-                    Id = 2,
-                    Name = "ChangedName!",
-                    Description = "ChangedDesc!"
-                }
-            };
-
-            var commandHandler = new EditTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var task = await this.context.Tasks.FindAsync(2);
-
-            task.ShouldNotBeNull();
-            task.Name.ShouldBe(command.Data.Name);
-            nameBefore.ShouldNotBe(task.Name);
+            this.taskRepositoryMock
+                .Setup(x =>
+                    x.GetByIdAsync(It.Is<int>(z => z == command.Data.Id)))
+                .ReturnsAsync(task);
+            
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
         }
 
-        [Fact]
-        public async Task EditTaskShouldThrowWhenProjectNotFound()
+        [Theory]
+        [NoRecurseAutoData]
+        public void EditTaskShouldThrowWhenTaskNameIsEmpty(EditTaskCommand command)
         {
-            var command = new EditTaskCommand
-            {
-                Data = new ToDoTask
-                {
-                    Id = 1111111111,
-                    Name = "ChangedName!",
-                    Description = "ChangedDesc!"
-                }
-            };
+            command.Data.Name = null;
 
-            var commandHandler = new EditTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
-        }
-
-        [Fact]
-        public async Task EditTaskShouldThrowWhenProjectNameIsEmpty()
-        {
-            var command = new EditTaskCommand
-            {
-                Data = new ToDoTask
-                {
-                    Id = 1,
-                    Name = "",
-                    Description = "ChangedDesc!"
-                }
-            };
-
-            var commandHandler = new EditTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
-        }
-
-        [Fact]
-        public async Task EditTaskShouldEditWhenDescOnlyEdited()
-        {
-            var taskBefore = await this.context.Tasks.FindAsync(7);
-            string nameBefore = taskBefore.Name;
-            string descriptionBefore = taskBefore.Description;
-
-            var command = new EditTaskCommand
-            {
-                Data = new ToDoTask
-                {
-                    Id = 7,
-                    Name = nameBefore,
-                    Description = "ChangedDescAAAAAAA!"
-                }
-            };
-
-            var commandHandler = new EditTaskCommand.Handler(this.taskRepository);
-
-            await commandHandler.Handle(command, CancellationToken.None);
-
-            var task = await this.context.Tasks.FindAsync(7);
-
-            task.ShouldNotBeNull();
-            task.Name.ShouldBe(command.Data.Name);
-            nameBefore.ShouldBe(task.Name);
-            descriptionBefore.ShouldNotBe(task.Description);
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
     }
 }

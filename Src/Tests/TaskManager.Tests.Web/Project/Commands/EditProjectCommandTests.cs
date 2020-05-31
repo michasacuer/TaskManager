@@ -23,7 +23,7 @@
         public EditProjectCommandTests()
         {
             this.projectRepositoryMock = new Mock<IProjectRepository>();
-            this.uut = new EditProjectCommand.Handler(projectRepositoryMock.Object);
+            this.uut = new EditProjectCommand.Handler(this.projectRepositoryMock.Object);
         }
 
         [Theory]

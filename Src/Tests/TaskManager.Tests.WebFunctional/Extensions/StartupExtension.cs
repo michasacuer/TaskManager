@@ -46,7 +46,7 @@
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
-            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<Application.Interfaces.ITaskRepository, Persistence.Repository.ITaskRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 

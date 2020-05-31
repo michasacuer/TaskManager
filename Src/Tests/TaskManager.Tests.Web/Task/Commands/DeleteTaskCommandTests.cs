@@ -16,7 +16,7 @@
 
         private readonly DeleteTaskCommand.Handler uut;
 
-        public DeleteTaskCommandTests(ServicesFixture fixture)
+        public DeleteTaskCommandTests()
         {
             this.taskRepository = new Mock<IRepository<ToDoTask>>();
             this.uut = new DeleteTaskCommand.Handler(this.taskRepository.Object);
