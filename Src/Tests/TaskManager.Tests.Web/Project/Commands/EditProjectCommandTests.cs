@@ -77,7 +77,7 @@
                     x.GetByIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(projectToUpdate);
             
-            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<EntityNotFoundException>();
+            this.uut.Handle(command, CancellationToken.None).ShouldThrowAsync<ValidationException>();
         }
     }
 }
