@@ -20,6 +20,14 @@
 
             context.SaveChanges();
         }
+        
+        public static void Run(ref TaskManagerDbContext context)
+        {
+            context.Projects.AddRange(AddProjectsToDatabase());
+            context.Tasks.AddRange(AddTasksToDatabase());
+
+            context.SaveChanges();
+        }
 
         public static void AddRolesToUsers(
             ref TaskManagerDbContext context,

@@ -45,19 +45,19 @@
 
                 var sp = services.BuildServiceProvider();
 
-                using (var scope = sp.CreateScope())
-                {
-                    var scopedServices = scope.ServiceProvider;
-
-                    var context = scopedServices.GetRequiredService<TaskManagerDbContext>();
-                    var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
-
-                    context.Database.EnsureCreated();
-
-                    ContextDataSeeding.Run(ref context, roleManager, userManager);
-                    ContextDataSeeding.AddRolesToUsers(ref context, roleManager, userManager);
-                }
+                // using (var scope = sp.CreateScope())
+                // {
+                //     var scopedServices = scope.ServiceProvider;
+                //
+                //     var context = scopedServices.GetRequiredService<TaskManagerDbContext>();
+                //     var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
+                //     var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
+                //
+                //     context.Database.EnsureCreated();
+                //
+                //     ContextDataSeeding.Run(ref context, roleManager, userManager);
+                //     ContextDataSeeding.AddRolesToUsers(ref context, roleManager, userManager);
+                // }
             });
 
             base.ConfigureWebHost(builder);

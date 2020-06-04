@@ -1,5 +1,6 @@
 ﻿namespace TaskManager.Tests.WebFunctional.ControllersTests
 {
+    using TaskManager.Tests.WebFunctional.TestData;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Shouldly;
@@ -8,26 +9,22 @@
     using TaskManager.Tests.WebFunctional.Extensions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
 
-    public class NotificationControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
+    public class NotificationControllerTests 
     {
-        private readonly HttpClient client;
-
-        public NotificationControllerTests(CustomWebApplicationFactory<TestStartup> factory)
-        {
-            this.client = factory.CreateClient();
-        }
-
         [Fact]
         public async Task ServerShouldReturnAllNotificationsFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Notification");
+            using (var testApp = new TestAppClient(new TestSeed()))
+            {
+                await testApp.Client.GetMockManagerCredential();
+                var response = await testApp.Client.GetAsync("Notification");
 
-            string json = await response.Content.ReadAsStringAsync();
-            var notifications = json.DeserializeObjectFromJson<NotificationsModel>();
+                string json = await response.Content.ReadAsStringAsync();
+                var notifications = json.DeserializeObjectFromJson<NotificationsModel>();
 
-            response.EnsureSuccessStatusCode();
-            notifications.ShouldBeOfType<NotificationsModel>();
+                response.EnsureSuccessStatusCode();
+                notifications.ShouldBeOfType<NotificationsModel>();
+            }
         }
     }
 }
