@@ -11,7 +11,6 @@
 
     public class NotificationControllerTests 
     {
-        [Fact]
         public async Task ServerShouldReturnAllNotificationsFromDb()
         {
             using (var testApp = new TestAppClient(new TestSeed()))
