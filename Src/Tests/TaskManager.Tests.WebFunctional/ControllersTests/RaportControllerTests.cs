@@ -1,26 +1,21 @@
 ﻿namespace TaskManager.Tests.WebFunctional.ControllersTests
 {
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Shouldly;
     using Xunit;
     using TaskManager.Common.Exceptions;
     using TaskManager.Tests.WebFunctional.Extensions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
+    using TaskManager.Tests.WebFunctional.TestData;
 
-    public class RaportControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
+    public class RaportControllerTests
     {
-        private readonly HttpClient client;
-
-        public RaportControllerTests(CustomWebApplicationFactory<TestStartup> factory)
-        {
-            this.client = factory.CreateClient();
-        }
-
         public async Task ServerShouldGeneratePdfAsStringFromProject()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Raport/6");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Raport/6");
 
             var json = response.Content.ReadAsStringAsync();
             json.ShouldBeOfType<string>();
@@ -29,8 +24,10 @@
 
         public async Task ServerShouldThrowWhenCantGeneratePdf()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Raport/1000000").ShouldThrowAsync<EntityNotFoundException>();
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Raport/1000000").ShouldThrowAsync<EntityNotFoundException>();
         }
     }
 }
