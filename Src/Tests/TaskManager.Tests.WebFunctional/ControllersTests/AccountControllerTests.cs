@@ -8,19 +8,17 @@
     using TaskManager.Application.Queries;
     using TaskManager.Common.Exceptions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
+    using TaskManager.Tests.WebFunctional.TestData;
 
-    public class AccountControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
+
+    public class AccountControllerTests
     {
-        private readonly HttpClient client;
-
-        public AccountControllerTests(CustomWebApplicationFactory<TestStartup> factory)
-        {
-            this.client = factory.CreateClient();
-        }
 
         [Fact]
         public async Task ClientCanCreateAccountAndLoginToIt()
         {
+            using var testApp = new TestAppClient(new TestSeed());
+            
             var command = new RegisterCommand
             {
                 UserName = "test",
@@ -31,7 +29,7 @@
                 Role = Domain.Enum.Role.Manager
             };
 
-            var registerResponse = await this.client.PostAsJsonAsync("Account/Register", command);
+            var registerResponse = await testApp.Client.PostAsJsonAsync("Account/Register", command);
             registerResponse.EnsureSuccessStatusCode();
 
             var query = new LoginQuery
@@ -40,25 +38,29 @@
                 Password = "test11"
             };
 
-            var loginResponse = await this.client.PostAsJsonAsync("Account/Login", query);
+            var loginResponse = await testApp.Client.PostAsJsonAsync("Account/Login", query);
             loginResponse.EnsureSuccessStatusCode();
         }
 
         [Fact]
         public async Task ClientCannotLoginToNotExistedAccount()
         {
+            using var testApp = new TestAppClient(new TestSeed());
+            
             var query = new LoginQuery
             {
                 UserName = "not existed",
                 Password = "user"
             };
 
-            await this.client.PostAsJsonAsync("Account/Login", query).ShouldThrowAsync<EntityNotFoundException>();
+            await testApp.Client.PostAsJsonAsync("Account/Login", query).ShouldThrowAsync<EntityNotFoundException>();
         }
 
         [Fact]
         public async Task ClientCantRegisterWhenUserWithSameCredentialExisting()
         {
+            using var testApp = new TestAppClient(new TestSeed());
+            
             var command = new RegisterCommand
             {
                 UserName = "username0",
@@ -69,7 +71,7 @@
                 Role = Domain.Enum.Role.Manager
             };
 
-            await this.client.PostAsJsonAsync("Account/Register", command).ShouldThrowAsync<EntityAlreadyExistsException>();
+            await testApp.Client.PostAsJsonAsync("Account/Register", command).ShouldThrowAsync<EntityAlreadyExistsException>();
         }
     }
 }
