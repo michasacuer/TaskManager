@@ -11,19 +11,19 @@
 
     public class NotificationControllerTests 
     {
+        [Fact]
         public async Task ServerShouldReturnAllNotificationsFromDb()
         {
-            using (var testApp = new TestAppClient(new TestSeed()))
-            {
-                await testApp.Client.GetMockManagerCredential();
-                var response = await testApp.Client.GetAsync("Notification");
+            using var testApp = new TestAppClient(new TestSeed());
 
-                string json = await response.Content.ReadAsStringAsync();
-                var notifications = json.DeserializeObjectFromJson<NotificationsModel>();
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Notification");
 
-                response.EnsureSuccessStatusCode();
-                notifications.ShouldBeOfType<NotificationsModel>();
-            }
+            string json = await response.Content.ReadAsStringAsync();
+            var notifications = json.DeserializeObjectFromJson<NotificationsModel>();
+
+            response.EnsureSuccessStatusCode();
+            notifications.ShouldBeOfType<NotificationsModel>();
         }
     }
 }
