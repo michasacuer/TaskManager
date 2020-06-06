@@ -9,21 +9,18 @@
     using TaskManager.Tests.WebFunctional.Infrastructure;
     using TaskManager.Application.Project.Queries.GetProject;
     using TaskManager.Domain.Entity;
+    using TaskManager.Tests.WebFunctional.TestData;
 
-    public class ProjectControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
+
+    public class ProjectControllerTests 
     {
-        private readonly HttpClient client;
-
-        public ProjectControllerTests(CustomWebApplicationFactory<TestStartup> factory)
-        {
-            this.client = factory.CreateClient();
-        }
-
         [Fact]
         public async Task ServerShouldReturnAllProjectsFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Project");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Project");
 
             string json = await response.Content.ReadAsStringAsync();
             var projects = json.DeserializeObjectFromJson<ProjectsListModel>();
@@ -36,8 +33,10 @@
         [Fact]
         public async Task ServerShouldReturnConcreteProjectFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Project/6");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Project/6");
 
             string json = await response.Content.ReadAsStringAsync();
             var project = json.DeserializeObjectFromJson<ProjectModel>();
@@ -50,8 +49,10 @@
         [Fact]
         public async Task ServerShouldReturnOkAfterAddingProjectToDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.PostAsJsonAsync("Project", new Project
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.PostAsJsonAsync("Project", new Project
             {
                 Name = "DDD",
                 Description = "ddd"
@@ -63,8 +64,10 @@
         [Fact]
         public async Task ServerShouldReturnOkAfterDeletingProjectFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.DeleteAsync("Project/1");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.DeleteAsync("Project/1");
 
             response.EnsureSuccessStatusCode();
         }
@@ -72,7 +75,9 @@
         [Fact]
         public async Task ServerShouldReturnOkAfterEditingProjectInDb()
         {
-            await this.client.GetMockManagerCredential();
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
             var project = new Project
             {
                 Id = 2,
@@ -80,7 +85,7 @@
                 Description = "ddd"
             };
 
-            var response = await this.client.PostAsJsonAsync("Project/Edit", new { data = project } );
+            var response = await testApp.Client.PostAsJsonAsync("Project/Edit", new { data = project } );
 
             response.EnsureSuccessStatusCode();
         }
