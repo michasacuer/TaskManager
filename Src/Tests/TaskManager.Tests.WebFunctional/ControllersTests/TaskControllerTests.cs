@@ -13,21 +13,17 @@
     using TaskManager.Domain.Enum;
     using TaskManager.Tests.WebFunctional.Extensions;
     using TaskManager.Tests.WebFunctional.Infrastructure;
+    using TaskManager.Tests.WebFunctional.TestData;
 
     public class TaskControllerTests : IClassFixture<CustomWebApplicationFactory<TestStartup>>
     {
-        private readonly HttpClient client;
-
-        public TaskControllerTests(CustomWebApplicationFactory<TestStartup> factory)
-        {
-            this.client = factory.CreateClient();
-        }
-
         [Fact]
         public async Task ServerShouldReturnAllTasksFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Task");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Task");
 
             string json = await response.Content.ReadAsStringAsync();
             var tasks = json.DeserializeObjectFromJson<TasksListModel>();
@@ -40,8 +36,10 @@
         [Fact]
         public async Task ServerShouldReturnConcreteTaskFromDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.GetAsync("Task/1");
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.GetAsync("Task/1");
 
             string json = await response.Content.ReadAsStringAsync();
             var task = json.DeserializeObjectFromJson<ToDoTask>();
@@ -54,8 +52,10 @@
         [Fact]
         public async Task ServerShouldReturnOkAfterAddingTaskToDb()
         {
-            await this.client.GetMockManagerCredential();
-            var response = await this.client.PostAsJsonAsync("Task", new ToDoTask
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            var response = await testApp.Client.PostAsJsonAsync("Task", new ToDoTask
             {
                 Name = "TaskTest",
                 Description = "TestTask",
@@ -69,8 +69,10 @@
         [Fact]
         public async Task ServerShouldReturnEntityNotFoundExceptionWhenWePassWrongProjectId()
         {
-            await this.client.GetMockManagerCredential();
-            await this.client.PostAsJsonAsync("Task", new ToDoTask
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
+            await testApp.Client.PostAsJsonAsync("Task", new ToDoTask
             {
                 Name = "DDD",
                 Description = "DD",
@@ -83,8 +85,10 @@
         [Fact]
         public async Task UserShouldTakeTaskAndEndItWithOkStatusCode()
         {
-            var user = await this.client.GetMockManagerCredentialWithUserInfo();
-            var response = await this.client.PostAsJsonAsync("Task/TakeTask", new TakeTaskByUserCommand
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            var user = await testApp.Client.GetMockManagerCredentialWithUserInfo();
+            var response = await testApp.Client.PostAsJsonAsync("Task/TakeTask", new TakeTaskByUserCommand
             {
                 ApplicationUserId = user.Id,
                 TaskId = 1
@@ -94,7 +98,7 @@
 
             Thread.Sleep(100);
 
-            response = await this.client.PostAsJsonAsync("Task/EndTask", new EndTaskByUserCommand
+            response = await testApp.Client.PostAsJsonAsync("Task/EndTask", new EndTaskByUserCommand
             {
                 ApplicationUserId = user.Id,
                 TaskId = 1
@@ -106,7 +110,9 @@
         [Fact]
         public async Task ServerShouldReturnOkWhenEditTask()
         {
-            await this.client.GetMockManagerCredential();
+            using var testApp = new TestAppClient(new TestSeed());
+            
+            await testApp.Client.GetMockManagerCredential();
             var task = new ToDoTask
             {
                 Id = 2,
@@ -114,7 +120,7 @@
                 Description = "AAAAAA"
             };
 
-            var response = await this.client.PostAsJsonAsync("Task/Edit", new { data = task });
+            var response = await testApp.Client.PostAsJsonAsync("Task/Edit", new { data = task });
 
             response.EnsureSuccessStatusCode();
         }
