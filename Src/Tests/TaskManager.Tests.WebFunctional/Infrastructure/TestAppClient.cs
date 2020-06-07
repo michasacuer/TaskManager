@@ -21,19 +21,18 @@ namespace TaskManager.Tests.WebFunctional.Infrastructure
                 builder.ConfigureServices(services =>
                 {
                     var sp = services.BuildServiceProvider();
-                    using (var scope = sp.CreateScope())
-                    {
-                        var scopedServices = scope.ServiceProvider;
+                    using var scope = sp.CreateScope();
+                    
+                    var scopedServices = scope.ServiceProvider;
 
-                        var context = scopedServices.GetRequiredService<TaskManagerDbContext>();
-                        var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
-                        var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
+                    var context = scopedServices.GetRequiredService<TaskManagerDbContext>();
+                    var userManager = scopedServices.GetRequiredService<UserManager<ApplicationUser>>();
+                    var roleManager = scopedServices.GetRequiredService<RoleManager<IdentityRole>>();
 
-                        context.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
 
-                        seed.Run(ref context);
-                        ContextDataSeeding.AddRolesToUsers(ref context, roleManager, userManager);
-                    }
+                    seed.Run(ref context, roleManager, userManager);
+                    context.SaveChanges();
                 });
             }).CreateClient();
         }
